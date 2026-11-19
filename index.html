@@ -185,6 +185,52 @@
                       <option>Referidos</option>
                     </select>
                   </label>
+                  <fieldset class="o_full" id="colores">
+                    <legend>¿Qué colores querés en la placa?</legend>
+                    <p class="hint">Podés elegir más de uno.</p>
+                    <div class="swatches">
+                      <label class="swatch" title="Bordó"><input type="checkbox" name="color" value="Bordó"><i style="background:#714B67"></i><span>Bordó</span></label>
+                      <label class="swatch" title="Azul"><input type="checkbox" name="color" value="Azul"><i style="background:#1F4E79"></i><span>Azul</span></label>
+                      <label class="swatch" title="Celeste"><input type="checkbox" name="color" value="Celeste"><i style="background:#7EB0C8"></i><span>Celeste</span></label>
+                      <label class="swatch" title="Verde"><input type="checkbox" name="color" value="Verde"><i style="background:#2F7A62"></i><span>Verde</span></label>
+                      <label class="swatch" title="Negro"><input type="checkbox" name="color" value="Negro"><i style="background:#1C1C1C"></i><span>Negro</span></label>
+                      <label class="swatch" title="Blanco"><input type="checkbox" name="color" value="Blanco"><i class="is-light" style="background:#ffffff"></i><span>Blanco</span></label>
+                      <label class="swatch" title="Gris"><input type="checkbox" name="color" value="Gris"><i style="background:#8A8F94"></i><span>Gris</span></label>
+                      <label class="swatch" title="Dorado"><input type="checkbox" name="color" value="Dorado"><i style="background:#C4A35A"></i><span>Dorado</span></label>
+                    </div>
+                  </fieldset>
+                  <fieldset class="o_full">
+                    <legend>¿Querés que aparezca una compañía de seguros?</legend>
+                    <label class="o_radio"><input type="radio" name="compania" value="no" checked> No. Solo BQB y mis datos</label>
+                    <label class="o_radio"><input type="radio" name="compania" value="si"> Sí, una compañía en particular</label>
+                  </fieldset>
+                  <div class="o_full" id="campo-compania" hidden>
+                    <label>
+                      ¿Cuál compañía?
+                      <input name="compania-nombre" type="text" class="o_input" placeholder="El nombre, tal como querés que figure">
+                    </label>
+                    <label>
+                      ¿Cómo tiene que aparecer?
+                      <select name="compania-modo" class="o_input">
+                        <option value="">Elegí uno</option>
+                        <option>Solo el nombre</option>
+                        <option>El logo, si lo tenemos</option>
+                        <option>Nombre y logo</option>
+                      </select>
+                    </label>
+                  </div>
+                  <fieldset class="o_full">
+                    <legend>¿Qué no puede faltar?</legend>
+                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
+                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
+                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
+                    <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
+                    <label class="o_radio"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
+                  </fieldset>
+                  <label class="o_full">
+                    Preferencias
+                    <textarea name="preferencias" class="o_input" rows="4" placeholder="Tono (cercano o formal), si querés tu foto, para quién es la placa y qué no querés que diga."></textarea>
+                  </label>
                   <label>
                     Matrícula
                     <input name="matricula" type="text" class="o_input" required>
@@ -219,8 +265,10 @@ const breadcrumb = document.getElementById("breadcrumb-actual");
 const pager = document.getElementById("pager");
 const campoMensaje = document.getElementById("campo-mensaje");
 const campoModelo = document.getElementById("campo-modelo");
+const campoCompania = document.getElementById("campo-compania");
 const mensaje = form.elements.mensaje;
 const modelo = form.elements.modelo;
+const companiaNombre = form.elements["compania-nombre"];
 
 function abrirCuestionario() {
   tablero.hidden = true;
@@ -252,6 +300,12 @@ function syncCamino() {
   campoModelo.hidden = !armar;
   mensaje.required = !armar;
   modelo.required = armar;
+}
+
+function syncCompania() {
+  const pide = form.elements.compania.value === "si";
+  campoCompania.hidden = !pide;
+  companiaNombre.required = pide;
 }
 
 function totalTickets() {
@@ -295,6 +349,7 @@ crear.addEventListener("click", abrirCuestionario);
 descartar.addEventListener("click", () => {
   form.reset();
   syncCamino();
+  syncCompania();
   cerrarCuestionario();
 });
 guardar.addEventListener("click", () => form.requestSubmit());
@@ -307,6 +362,7 @@ document.getElementById("ver-lista").addEventListener("click", () => {
   mostrarLista();
 });
 form.elements.camino.forEach((input) => input.addEventListener("change", syncCamino));
+form.elements.compania.forEach((input) => input.addEventListener("change", syncCompania));
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -335,6 +391,7 @@ form.addEventListener("submit", (event) => {
   pintarPager();
   form.reset();
   syncCamino();
+  syncCompania();
   cerrarCuestionario();
 });
 </script>
