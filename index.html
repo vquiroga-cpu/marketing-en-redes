@@ -46,7 +46,7 @@
             <div class="o_cp_bottom_left">
               <div class="o_cp_buttons">
                 <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
-                <button type="button" class="btn btn-primary" id="guardar" hidden>Guardar</button>
+                <button type="button" class="btn btn-primary" id="guardar" hidden disabled>Guardar</button>
                 <button type="button" class="btn btn-primary" id="tomar" hidden>Tomar pedido</button>
                 <button type="button" class="btn btn-secondary" id="volver" hidden>Volver</button>
                 <button type="button" class="btn btn-secondary" id="descartar" hidden>Descartar</button>
@@ -168,153 +168,176 @@
               <div class="o_form_sheet">
                 <p class="oe_kicker">Nuevo</p>
                 <h1 class="oe_title">Pedí tus placas publicitarias personalizadas</h1>
-                <div class="o_group">
-                  <label>
-                    ¿Cómo te llamás?
-                    <input name="nombre" type="text" class="o_input" required placeholder="Nombre y apellido">
-                  </label>
-                  <fieldset>
-                    <legend>¿Qué querés hacer?</legend>
-                    <label class="o_radio"><input type="radio" name="camino" value="Pedir" checked> Pedir una placa nueva</label>
-                    <label class="o_radio"><input type="radio" name="camino" value="Armar"> Armar una con un modelo ya aprobado</label>
-                  </fieldset>
-                  <label>
-                    ¿En qué formato la necesitás?
-                    <select name="formato" class="o_input" required>
-                      <option value="">Elegí uno</option>
-                      <option>Feed</option>
-                      <option>Historia</option>
-                      <option>Estado de WhatsApp</option>
-                    </select>
-                  </label>
-                  <label>
-                    ¿De qué seguro se trata?
-                    <select name="ramo" class="o_input" required>
-                      <option value="">Elegí uno</option>
-                      <option>Auto</option>
-                      <option>Moto</option>
-                      <option>Hogar</option>
-                      <option>Vida</option>
-                      <option>Comercio</option>
-                      <option>Referidos</option>
-                    </select>
-                  </label>
-                  <label>
-                    ¿Para qué fecha la necesitás?
-                    <input name="fecha" type="date" class="o_input" required>
-                  </label>
-                  <label id="campo-modelo" hidden>
-                    ¿Qué modelo aprobado usás?
-                    <select name="modelo" class="o_input">
-                      <option value="">Elegí uno</option>
-                      <option>Renovación</option>
-                      <option>Clientes con una sola póliza</option>
-                      <option>Ex clientes</option>
-                      <option>Campañas por el clima</option>
-                      <option>Referidos</option>
-                      <option>Presentación del productor</option>
-                    </select>
-                  </label>
-                  <label class="o_full" id="campo-mensaje">
-                    ¿Qué tiene que decir la placa?
-                    <textarea name="mensaje" class="o_input" rows="3" required placeholder="El mensaje, con tus palabras"></textarea>
-                  </label>
-                  <fieldset class="o_full">
-                    <legend>Plantillas de placas que más piden</legend>
-                    <p class="hint">Son las placas ya armadas. Elegí una si te sirve.</p>
-                    <div class="plantillas">
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Ofertas">
-                        <span class="plantilla-copy"><strong>Ofertas</strong><small>Promo o campaña con fecha.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Renovación">
-                        <span class="plantilla-copy"><strong>Renovación</strong><small>La póliza está por vencer.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Clientes con una sola póliza">
-                        <span class="plantilla-copy"><strong>Clientes con una sola póliza</strong><small>Para ofrecer otra cobertura.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Ex clientes">
-                        <span class="plantilla-copy"><strong>Ex clientes</strong><small>Para volver a escribirles.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Campañas por el clima">
-                        <span class="plantilla-copy"><strong>Campañas por el clima</strong><small>Granizo, viento o temporada.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Referidos">
-                        <span class="plantilla-copy"><strong>Referidos</strong><small>Para que te recomienden.</small></span>
-                      </label>
-                      <label class="plantilla plantilla-sola">
-                        <input type="radio" name="placa" value="Presentación del productor">
-                        <span class="plantilla-copy"><strong>Presentación del productor</strong><small>Para decir quién sos.</small></span>
+                <div class="pedido-layout">
+                  <div class="pedido-preguntas o_group" id="pasos-previos">
+                    <div class="paso" id="paso-nombre">
+                      <label>
+                        ¿Cómo te llamás?
+                        <input name="nombre" type="text" class="o_input" placeholder="Nombre y apellido">
                       </label>
                     </div>
-                  </fieldset>
-                  <fieldset class="o_full">
-                    <legend>Colores</legend>
-                    <p class="hint">Elegí los colores. Podés marcar más de uno.</p>
-                    <div class="swatches">
-                      <label class="swatch"><input type="checkbox" name="color" value="Negro" data-hex="#1c1c1c"><i style="background:#1c1c1c"></i><span>Negro</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Grafito" data-hex="#4d4d4d"><i style="background:#4d4d4d"></i><span>Grafito</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Gris" data-hex="#7a7a7a"><i style="background:#7a7a7a"></i><span>Gris</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Gris claro" data-hex="#bdbdbd"><i style="background:#bdbdbd"></i><span>Gris claro</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Hueso" data-hex="#efeae3"><i style="background:#efeae3"></i><span>Hueso</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Blanco" data-hex="#ffffff"><i class="is-light" style="background:#ffffff"></i><span>Blanco</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Arena" data-hex="#d4c4a8"><i style="background:#d4c4a8"></i><span>Arena</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Bordó" data-hex="#7a4550"><i style="background:#7a4550"></i><span>Bordó</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Terracota" data-hex="#c48778"><i style="background:#c48778"></i><span>Terracota</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Verde" data-hex="#3e6b5a"><i style="background:#3e6b5a"></i><span>Verde</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Verde gris" data-hex="#7fa396"><i style="background:#7fa396"></i><span>Verde gris</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Acero" data-hex="#6f8fa3"><i style="background:#6f8fa3"></i><span>Acero</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Azul" data-hex="#2f5270"><i style="background:#2f5270"></i><span>Azul</span></label>
-                      <label class="swatch"><input type="checkbox" name="color" value="Marino" data-hex="#1c3344"><i style="background:#1c3344"></i><span>Marino</span></label>
+                    <div class="paso" id="paso-camino" hidden>
+                      <fieldset>
+                        <legend>¿Qué querés hacer?</legend>
+                        <label class="o_radio"><input type="radio" name="camino" value="Pedir"> Pedir una placa nueva</label>
+                        <label class="o_radio"><input type="radio" name="camino" value="Armar"> Armar una con un modelo ya aprobado</label>
+                      </fieldset>
                     </div>
-                  </fieldset>
-                  <fieldset class="o_full">
-                    <legend>¿Querés que aparezca una compañía de seguros?</legend>
-                    <label class="o_radio"><input type="radio" name="compania" value="no" checked> No. Solo BQB y mis datos</label>
-                    <label class="o_radio"><input type="radio" name="compania" value="si"> Sí, una compañía en particular</label>
-                  </fieldset>
-                  <div class="o_full pair" id="campo-compania" hidden>
-                    <label>
-                      ¿Cuál compañía?
-                      <input name="compania-nombre" type="text" class="o_input" placeholder="El nombre, tal como querés que figure">
-                    </label>
-                    <label>
-                      ¿Cómo tiene que aparecer?
-                      <select name="compania-modo" class="o_input">
-                        <option value="">Elegí uno</option>
-                        <option>Solo el nombre</option>
-                        <option>El logo, si lo tenemos</option>
-                        <option>Nombre y logo</option>
-                      </select>
-                    </label>
+                    <div class="paso" id="paso-ramo" hidden>
+                      <label>
+                        ¿De qué seguro se trata?
+                        <select name="ramo" class="o_input">
+                          <option value="">Elegí uno</option>
+                          <option>Auto</option>
+                          <option>Moto</option>
+                          <option>Hogar</option>
+                          <option>Vida</option>
+                          <option>Comercio</option>
+                          <option>Referidos</option>
+                        </select>
+                      </label>
+                    </div>
+                    <div class="paso" id="paso-fecha" hidden>
+                      <label>
+                        ¿Para qué fecha la necesitás?
+                        <input name="fecha" type="date" class="o_input">
+                      </label>
+                    </div>
                   </div>
-                  <fieldset class="o_full">
-                    <legend>¿Qué no puede faltar?</legend>
-                    <div class="checks">
-                      <label class="o_radio"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
-                      <label class="o_radio"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
-                      <label class="o_radio"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
-                      <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
-                      <label class="o_radio"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
+
+                  <aside class="pedido-plantillas" id="paso-placa">
+                    <fieldset>
+                      <legend>Plantillas de placas que más piden</legend>
+                      <p class="hint" id="plantillas-bloqueo">Respondé las preguntas de la izquierda y se habilitan.</p>
+                      <p class="hint" id="plantillas-lista" hidden>Elegí una. Después te preguntamos qué decir y el formato.</p>
+                      <div class="plantillas is-locked" id="plantillas">
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Ofertas" disabled>
+                          <span class="plantilla-copy"><strong>Ofertas</strong><small>Promo o campaña con fecha.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Renovación" disabled>
+                          <span class="plantilla-copy"><strong>Renovación</strong><small>La póliza está por vencer.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Clientes con una sola póliza" disabled>
+                          <span class="plantilla-copy"><strong>Clientes con una sola póliza</strong><small>Para ofrecer otra cobertura.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Ex clientes" disabled>
+                          <span class="plantilla-copy"><strong>Ex clientes</strong><small>Para volver a escribirles.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Campañas por el clima" disabled>
+                          <span class="plantilla-copy"><strong>Campañas por el clima</strong><small>Granizo, viento o temporada.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Referidos" disabled>
+                          <span class="plantilla-copy"><strong>Referidos</strong><small>Para que te recomienden.</small></span>
+                        </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Presentación del productor" disabled>
+                          <span class="plantilla-copy"><strong>Presentación del productor</strong><small>Para decir quién sos.</small></span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </aside>
+
+                  <div class="pedido-preguntas o_group" id="pasos-siguientes">
+                    <div class="paso" id="paso-mensaje" hidden>
+                      <p class="recomendado" id="guia-mensaje"></p>
+                      <label>
+                        ¿Qué querés decir en la placa?
+                        <textarea name="mensaje" class="o_input" rows="3" placeholder="El mensaje, con tus palabras"></textarea>
+                      </label>
                     </div>
-                  </fieldset>
-                  <label class="o_full">
-                    Preferencias
-                    <textarea name="preferencias" class="o_input" rows="4" placeholder="Tono (cercano o formal), si querés tu foto, para quién es la placa y qué no querés que diga."></textarea>
-                  </label>
-                  <label>
-                    Matrícula
-                    <input name="matricula" type="text" class="o_input" required>
-                  </label>
-                  <label>
-                    Teléfono
-                    <input name="telefono" type="tel" class="o_input" required>
-                  </label>
+                    <div class="paso" id="paso-formato" hidden>
+                      <label>
+                        ¿En qué formato la necesitás?
+                        <select name="formato" class="o_input">
+                          <option value="">Elegí uno</option>
+                          <option value="Feed">Feed</option>
+                          <option value="Historia">Historia</option>
+                          <option value="Estado de WhatsApp">Estado de WhatsApp</option>
+                        </select>
+                      </label>
+                      <p class="recomendado" id="guia-formato"></p>
+                    </div>
+                    <div class="paso" id="paso-colores" hidden>
+                      <fieldset>
+                        <legend>Colores</legend>
+                        <p class="hint">Elegí los colores. Podés marcar más de uno.</p>
+                        <div class="swatches">
+                          <label class="swatch"><input type="checkbox" name="color" value="Negro" data-hex="#1c1c1c"><i style="background:#1c1c1c"></i><span>Negro</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Grafito" data-hex="#4d4d4d"><i style="background:#4d4d4d"></i><span>Grafito</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Gris" data-hex="#7a7a7a"><i style="background:#7a7a7a"></i><span>Gris</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Gris claro" data-hex="#bdbdbd"><i style="background:#bdbdbd"></i><span>Gris claro</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Hueso" data-hex="#efeae3"><i style="background:#efeae3"></i><span>Hueso</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Blanco" data-hex="#ffffff"><i class="is-light" style="background:#ffffff"></i><span>Blanco</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Arena" data-hex="#d4c4a8"><i style="background:#d4c4a8"></i><span>Arena</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Bordó" data-hex="#7a4550"><i style="background:#7a4550"></i><span>Bordó</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Terracota" data-hex="#c48778"><i style="background:#c48778"></i><span>Terracota</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Verde" data-hex="#3e6b5a"><i style="background:#3e6b5a"></i><span>Verde</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Verde gris" data-hex="#7fa396"><i style="background:#7fa396"></i><span>Verde gris</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Acero" data-hex="#6f8fa3"><i style="background:#6f8fa3"></i><span>Acero</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Azul" data-hex="#2f5270"><i style="background:#2f5270"></i><span>Azul</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Marino" data-hex="#1c3344"><i style="background:#1c3344"></i><span>Marino</span></label>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="paso" id="paso-compania" hidden>
+                      <fieldset>
+                        <legend>¿Querés que aparezca una compañía de seguros?</legend>
+                        <label class="o_radio"><input type="radio" name="compania" value="no"> No. Solo BQB y mis datos</label>
+                        <label class="o_radio"><input type="radio" name="compania" value="si"> Sí, una compañía en particular</label>
+                      </fieldset>
+                      <div class="pair" id="campo-compania" hidden>
+                        <label>
+                          ¿Cuál compañía?
+                          <input name="compania-nombre" type="text" class="o_input" placeholder="El nombre, tal como querés que figure">
+                        </label>
+                        <label>
+                          ¿Cómo tiene que aparecer?
+                          <select name="compania-modo" class="o_input">
+                            <option value="">Elegí uno</option>
+                            <option>Solo el nombre</option>
+                            <option>El logo, si lo tenemos</option>
+                            <option>Nombre y logo</option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="paso" id="paso-falta" hidden>
+                      <fieldset>
+                        <legend>¿Qué no puede faltar?</legend>
+                        <div class="checks">
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="paso" id="paso-preferencias" hidden>
+                      <label>
+                        Preferencias
+                        <textarea name="preferencias" class="o_input" rows="4" placeholder="Tono (cercano o formal), si querés tu foto, para quién es la placa y qué no querés que diga."></textarea>
+                      </label>
+                    </div>
+                    <div class="paso" id="paso-matricula" hidden>
+                      <label>
+                        Matrícula
+                        <input name="matricula" type="text" class="o_input">
+                      </label>
+                    </div>
+                    <div class="paso" id="paso-telefono" hidden>
+                      <label>
+                        Teléfono
+                        <input name="telefono" type="tel" class="o_input">
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="o_chatter">
@@ -339,9 +362,48 @@ const descartar = document.getElementById("descartar");
 const busqueda = document.getElementById("busqueda");
 const breadcrumb = document.getElementById("breadcrumb-actual");
 const pager = document.getElementById("pager");
-const campoMensaje = document.getElementById("campo-mensaje");
-const campoModelo = document.getElementById("campo-modelo");
 const campoCompania = document.getElementById("campo-compania");
+const plantillas = document.getElementById("plantillas");
+const guiaMensaje = document.getElementById("guia-mensaje");
+const guiaFormato = document.getElementById("guia-formato");
+const ordenPasos = ["nombre", "camino", "ramo", "fecha", "placa", "mensaje", "formato", "colores", "compania", "falta", "preferencias", "matricula", "telefono"];
+const guias = {
+  "Ofertas": {
+    formato: "Feed",
+    porque: "Una promo con fecha se lee mejor en el feed.",
+    decir: "La oferta, hasta cuándo, y qué tiene que hacer la persona."
+  },
+  "Renovación": {
+    formato: "Feed",
+    porque: "Queda en el perfil y se puede compartir.",
+    decir: "Que la póliza está por vencer y que te escriban para renovarla."
+  },
+  "Clientes con una sola póliza": {
+    formato: "Historia",
+    porque: "Es un mensaje directo, para gente que ya te conoce.",
+    decir: "Qué otra cobertura les podés sumar, en una frase."
+  },
+  "Ex clientes": {
+    formato: "Historia",
+    porque: "Es para volver a escribirles, no para dejarla fija en el perfil.",
+    decir: "Por qué les escribís de nuevo y qué pueden hacer."
+  },
+  "Campañas por el clima": {
+    formato: "Historia",
+    porque: "El clima es de un momento. La historia dura un día.",
+    decir: "Qué está pasando y qué cubre el seguro."
+  },
+  "Referidos": {
+    formato: "Historia",
+    porque: "Se la pueden reenviar a otra persona.",
+    decir: "Pediles que te recomienden y cómo tiene que escribirte esa persona."
+  },
+  "Presentación del productor": {
+    formato: "Feed",
+    porque: "Queda fija en el perfil para quien te busca.",
+    decir: "Quién sos, qué seguros asesorás y cómo te contactan."
+  }
+};
 const recibido = document.getElementById("recibido");
 const tomar = document.getElementById("tomar");
 const volver = document.getElementById("volver");
@@ -440,18 +502,92 @@ function fichaDe(card) {
   return fichas[titulo];
 }
 
-function syncCamino() {
-  const armar = form.elements.camino.value === "Armar";
-  campoMensaje.hidden = armar;
-  campoModelo.hidden = !armar;
-  form.elements.mensaje.required = !armar;
-  form.elements.modelo.required = armar;
+function placaElegida() {
+  return form.querySelector('input[name="placa"]:checked');
 }
 
-function syncCompania() {
-  const pide = form.elements.compania.value === "si";
+function pasoListo(id) {
+  if (id === "nombre") return form.elements.nombre.value.trim();
+  if (id === "camino") return form.elements.camino.value;
+  if (id === "ramo") return form.elements.ramo.value;
+  if (id === "fecha") return form.elements.fecha.value;
+  if (id === "placa") return placaElegida();
+  if (id === "mensaje") return form.elements.mensaje.value.trim();
+  if (id === "formato") return form.elements.formato.value;
+  if (id === "colores") return form.querySelector('input[name="color"]:checked');
+  if (id === "compania") {
+    const valor = form.elements.compania.value;
+    if (valor === "no") return true;
+    if (valor === "si") return form.elements["compania-nombre"].value.trim() && form.elements["compania-modo"].value;
+    return false;
+  }
+  if (id === "falta") return form.querySelector('input[name="falta"]:checked');
+  if (id === "preferencias") return form.elements.preferencias.value.trim();
+  if (id === "matricula") return form.elements.matricula.value.trim();
+  if (id === "telefono") return form.elements.telefono.value.trim();
+  return false;
+}
+
+function formularioCompleto() {
+  return ordenPasos.every(pasoListo);
+}
+
+function esTexto(origen) {
+  if (!origen) return false;
+  if (origen.tagName === "TEXTAREA") return true;
+  return origen.tagName === "INPUT" && origen.type !== "radio" && origen.type !== "checkbox";
+}
+
+function syncGuia() {
+  const placa = placaElegida();
+  const guia = placa ? guias[placa.value] : null;
+  [...form.elements.formato.options].forEach((opcion) => {
+    if (!opcion.value) return;
+    opcion.textContent = guia && opcion.value === guia.formato ? opcion.value + " (recomendado)" : opcion.value;
+  });
+  guiaMensaje.textContent = guia ? "En " + placa.value + " conviene decir: " + guia.decir : "";
+  guiaFormato.textContent = guia ? "Recomendamos " + guia.formato + ". " + guia.porque : "";
+}
+
+function syncPasos(evento) {
+  let abierto = true;
+  const origen = evento && evento.target;
+  const puedeEnfocar = origen && origen.type !== "checkbox" && !esTexto(origen);
+  ordenPasos.forEach((id) => {
+    if (id === "placa") {
+      const bloqueada = !abierto;
+      plantillas.classList.toggle("is-locked", bloqueada);
+      form.querySelectorAll('input[name="placa"]').forEach((input) => {
+        input.disabled = bloqueada;
+      });
+      document.getElementById("plantillas-bloqueo").hidden = !bloqueada;
+      document.getElementById("plantillas-lista").hidden = bloqueada;
+      if (abierto && !pasoListo("placa")) abierto = false;
+      return;
+    }
+    if (id === "formato") return;
+    const nodo = document.getElementById("paso-" + id);
+    const estabaOculto = nodo.hidden;
+    nodo.hidden = !abierto;
+    if (id === "mensaje") document.getElementById("paso-formato").hidden = !abierto;
+    if (abierto && estabaOculto && puedeEnfocar) {
+      const campo = nodo.querySelector("input, select, textarea");
+      if (campo) campo.focus();
+    }
+    const listo = id === "mensaje" ? pasoListo("mensaje") && pasoListo("formato") : pasoListo(id);
+    if (abierto && !listo) abierto = false;
+  });
+  guardar.disabled = !formularioCompleto();
+  syncCompania(puedeEnfocar);
+  syncGuia();
+}
+
+function syncCompania(enfocar) {
+  const visible = !document.getElementById("paso-compania").hidden;
+  const pide = visible && form.elements.compania.value === "si";
+  const estabaOculto = campoCompania.hidden;
   campoCompania.hidden = !pide;
-  form.elements["compania-nombre"].required = pide;
+  if (pide && estabaOculto && enfocar) form.elements["compania-nombre"].focus();
 }
 
 function contarColumnas() {
@@ -492,6 +628,7 @@ function abrirRecibido(card) {
     ["Modelo", ficha.modelo],
     ["Seguro", ficha.ramo],
     ["Formato", ficha.formato],
+    ["Formato recomendado", ficha.formatoRecomendado],
     ["Para cuándo", ficha.fecha],
     ["Plantilla de placa", ficha.placa],
     ["Mensaje", ficha.mensaje],
@@ -550,6 +687,7 @@ function abrirCuestionario() {
   descartar.hidden = false;
   breadcrumb.textContent = "Nuevo";
   pager.hidden = true;
+  syncPasos();
   form.elements.nombre.focus();
 }
 
@@ -622,8 +760,7 @@ crear.addEventListener("click", abrirCuestionario);
 guardar.addEventListener("click", () => form.requestSubmit());
 descartar.addEventListener("click", () => {
   form.reset();
-  syncCamino();
-  syncCompania();
+  syncPasos();
   cerrarCuestionario();
 });
 document.getElementById("ver-kanban").addEventListener("click", () => {
@@ -634,10 +771,14 @@ document.getElementById("ver-lista").addEventListener("click", () => {
   if (!form.hidden) return;
   mostrarLista();
 });
-form.elements.camino.forEach((input) => input.addEventListener("change", syncCamino));
-form.elements.compania.forEach((input) => input.addEventListener("change", syncCompania));
+form.addEventListener("input", syncPasos);
+form.addEventListener("change", syncPasos);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (!formularioCompleto()) {
+    syncPasos();
+    return;
+  }
   const data = new FormData(form);
   const titulo = data.get("camino") === "Armar" ? data.get("modelo") : data.get("ramo");
   const ticket = document.createElement("article");
@@ -668,10 +809,11 @@ form.addEventListener("submit", (event) => {
     nombre: String(data.get("nombre")),
     camino: String(data.get("camino")),
     formato: String(data.get("formato")),
+    formatoRecomendado: (guias[data.get("placa")] || {}).formato || "",
     ramo: String(data.get("ramo") || ""),
-    modelo: data.get("camino") === "Armar" ? String(data.get("modelo") || "") : "",
+    modelo: data.get("camino") === "Armar" ? String(data.get("placa") || "") : "",
     fecha: partes.length === 3 ? partes[2] + "/" + partes[1] + "/" + partes[0] : fecha,
-    mensaje: data.get("camino") === "Pedir" ? String(data.get("mensaje") || "") : "",
+    mensaje: String(data.get("mensaje") || ""),
     colores: colores,
     compania: data.get("compania") === "si" ? String(data.get("compania-nombre") || "") : "No. Solo BQB y sus datos",
     companiaModo: data.get("compania") === "si" ? String(data.get("compania-modo") || "") : "",
@@ -688,8 +830,7 @@ form.addEventListener("submit", (event) => {
   pintarPager();
   aviso.textContent = "Te llegó el pedido de " + data.get("nombre") + ". Está en Pedido. Tocá la tarjeta para verlo completo.";
   form.reset();
-  syncCamino();
-  syncCompania();
+  syncPasos();
   cerrarCuestionario();
 });
 </script>
