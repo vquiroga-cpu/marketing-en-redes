@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedí tus placas publicitarias personalizadas</title>
+  <meta name="description" content="Ejemplo de cómo se vería Marketing en redes dentro de Odoo.">
+  <meta name="theme-color" content="#714B67">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <p class="example-note">Ejemplo de cómo se vería en Odoo. Todavía no está creado en el sistema.</p>
+
+  <div class="o_web_client">
+    <header class="o_main_navbar">
+      <button type="button" class="o_menu_toggle" aria-label="Aplicaciones">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </button>
+      <span class="o_menu_brand">Marketing en redes</span>
+      <span class="o_navbar_spacer"></span>
+      <span class="o_user">V</span>
+    </header>
+
+    <div class="o_action_manager">
+      <div class="o_action o_view_controller">
+        <div class="o_control_panel">
+          <div class="o_cp_top">
+            <ol class="breadcrumb">
+              <li>Marketing en redes</li>
+              <li class="active" id="breadcrumb-actual">Pedí tus placas publicitarias personalizadas</li>
+            </ol>
+            <div class="o_cp_searchview" id="busqueda">
+              <span class="o_search_icon" aria-hidden="true"></span>
+              <input type="search" placeholder="Buscar..." aria-label="Buscar">
+              <div class="o_cp_switch_buttons" role="tablist" aria-label="Vistas">
+                <button type="button" class="is-active" id="ver-kanban" aria-label="Kanban" title="Kanban">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 1h6v6H1zM9 1h6v6H9zM1 9h6v6H1zM9 9h6v6H9z"/></svg>
+                </button>
+                <button type="button" id="ver-lista" aria-label="Lista" title="Lista">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2h14v2H1zM1 7h14v2H1zM1 12h14v2H1z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="o_cp_bottom">
+            <div class="o_cp_bottom_left">
+              <div class="o_cp_buttons">
+                <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
+                <button type="button" class="btn btn-primary" id="guardar" hidden>Guardar</button>
+                <button type="button" class="btn btn-secondary" id="descartar" hidden>Descartar</button>
+              </div>
+            </div>
+            <div class="o_cp_pager" id="pager">1-4 / 4</div>
+          </div>
+        </div>
+
+        <div class="o_content">
+          <div class="o_kanban_view o_kanban_small_column o_kanban_grouped" id="tablero">
+            <section class="o_kanban_group">
+              <header class="o_kanban_header">
+                <div class="o_column_title">Pedido <span class="o_kanban_counter" data-count="pedido">1</span></div>
+                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+              </header>
+              <div class="o_kanban_column_content" id="col-pedido">
+                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="Pedido">
+                  <strong class="o_kanban_record_title">Referidos abril</strong>
+                  <span class="o_kanban_record_subtitle">Carla Díaz</span>
+                  <span class="badge">Pedir</span>
+                </article>
+              </div>
+            </section>
+
+            <section class="o_kanban_group">
+              <header class="o_kanban_header">
+                <div class="o_column_title">En diseño <span class="o_kanban_counter">1</span></div>
+                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-doing"></i></div>
+              </header>
+              <div class="o_kanban_column_content">
+                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="En diseño">
+                  <strong class="o_kanban_record_title">Placa auto marzo</strong>
+                  <span class="o_kanban_record_subtitle">Ana Pérez</span>
+                  <span class="badge">Feed</span>
+                </article>
+              </div>
+            </section>
+
+            <section class="o_kanban_group">
+              <header class="o_kanban_header">
+                <div class="o_column_title">Hay que ajustar <span class="o_kanban_counter">1</span></div>
+                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-wait"></i></div>
+              </header>
+              <div class="o_kanban_column_content">
+                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="Hay que ajustar">
+                  <strong class="o_kanban_record_title">Estado moto</strong>
+                  <span class="o_kanban_record_subtitle">Martín Ruiz</span>
+                  <span class="badge">Falta matrícula</span>
+                </article>
+              </div>
+            </section>
+
+            <section class="o_kanban_group">
+              <header class="o_kanban_header">
+                <div class="o_column_title">Lista <span class="o_kanban_counter">1</span></div>
+                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-done"></i></div>
+              </header>
+              <div class="o_kanban_column_content">
+                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record oe_kanban_card_muted" tabindex="0" data-estado="Lista">
+                  <strong class="o_kanban_record_title">Historia hogar</strong>
+                  <span class="o_kanban_record_subtitle">Luis Gómez</span>
+                  <span class="badge">Modelo hogar</span>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <div class="o_list_view" id="lista" hidden>
+            <table>
+              <thead>
+                <tr>
+                  <th>Placa</th>
+                  <th>Productor</th>
+                  <th>Detalle</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="lista-cuerpo"></tbody>
+            </table>
+          </div>
+
+          <form class="o_form_view" id="cuestionario" hidden>
+            <div class="o_form_sheet_bg">
+              <div class="o_form_statusbar">
+                <span class="is-current">Pedido</span>
+                <span>En diseño</span>
+                <span>Hay que ajustar</span>
+                <span>Lista</span>
+              </div>
+              <div class="o_form_sheet">
+                <h1 class="oe_title">Pedí tus placas publicitarias personalizadas</h1>
+                <div class="o_group">
+                  <label>
+                    ¿Cómo te llamás?
+                    <input name="nombre" type="text" class="o_input" required placeholder="Nombre y apellido">
+                  </label>
+                  <fieldset>
+                    <legend>¿Qué querés hacer?</legend>
+                    <label class="o_radio"><input type="radio" name="camino" value="Pedir" checked> Pedir una placa nueva</label>
+                    <label class="o_radio"><input type="radio" name="camino" value="Armar"> Armar una con un modelo ya aprobado</label>
+                  </fieldset>
+                  <label>
+                    ¿En qué formato la necesitás?
+                    <select name="formato" class="o_input" required>
+                      <option value="">Elegí uno</option>
+                      <option>Feed</option>
+                      <option>Historia</option>
+                      <option>Estado de WhatsApp</option>
+                    </select>
+                  </label>
+                  <label>
+                    ¿De qué seguro se trata?
+                    <select name="ramo" class="o_input" required>
+                      <option value="">Elegí uno</option>
+                      <option>Auto</option>
+                      <option>Moto</option>
+                      <option>Hogar</option>
+                      <option>Vida</option>
+                      <option>Comercio</option>
+                      <option>Referidos</option>
+                    </select>
+                  </label>
+                  <label>
+                    ¿Para qué fecha la necesitás?
+                    <input name="fecha" type="date" class="o_input" required>
+                  </label>
+                  <label id="campo-mensaje">
+                    ¿Qué tiene que decir la placa?
+                    <textarea name="mensaje" class="o_input" rows="3" required placeholder="El mensaje, sin diseñar la pieza"></textarea>
+                  </label>
+                  <label id="campo-modelo" hidden>
+                    ¿Qué modelo aprobado usás?
+                    <select name="modelo" class="o_input">
+                      <option value="">Elegí uno</option>
+                      <option>Renová el auto</option>
+                      <option>Hogar</option>
+                      <option>Referidos</option>
+                    </select>
+                  </label>
+                  <label>
+                    Matrícula
+                    <input name="matricula" type="text" class="o_input" required>
+                  </label>
+                  <label>
+                    Teléfono
+                    <input name="telefono" type="tel" class="o_input" required>
+                  </label>
+                </div>
+              </div>
+              <div class="o_chatter">
+                <strong>Enviar mensaje</strong>
+                <p>Acá quedaría la nota interna de marketing. En este ejemplo no se guarda.</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const tablero = document.getElementById("tablero");
+const lista = document.getElementById("lista");
+const form = document.getElementById("cuestionario");
+const crear = document.getElementById("crear");
+const guardar = document.getElementById("guardar");
+const descartar = document.getElementById("descartar");
+const busqueda = document.getElementById("busqueda");
+const breadcrumb = document.getElementById("breadcrumb-actual");
+const pager = document.getElementById("pager");
+const campoMensaje = document.getElementById("campo-mensaje");
+const campoModelo = document.getElementById("campo-modelo");
+const mensaje = form.elements.mensaje;
+const modelo = form.elements.modelo;
+
+function abrirCuestionario() {
+  tablero.hidden = true;
+  lista.hidden = true;
+  form.hidden = false;
+  busqueda.hidden = true;
+  crear.hidden = true;
+  guardar.hidden = false;
+  descartar.hidden = false;
+  breadcrumb.textContent = "Nuevo";
+  pager.hidden = true;
+  form.elements.nombre.focus();
+}
+
+function cerrarCuestionario() {
+  form.hidden = true;
+  busqueda.hidden = false;
+  crear.hidden = false;
+  guardar.hidden = true;
+  descartar.hidden = true;
+  breadcrumb.textContent = "Pedí tus placas publicitarias personalizadas";
+  pager.hidden = false;
+  mostrarKanban();
+}
+
+function syncCamino() {
+  const armar = form.elements.camino.value === "Armar";
+  campoMensaje.hidden = armar;
+  campoModelo.hidden = !armar;
+  mensaje.required = !armar;
+  modelo.required = armar;
+}
+
+function totalTickets() {
+  return document.querySelectorAll(".o_kanban_record").length;
+}
+
+function pintarPager() {
+  const total = totalTickets();
+  pager.textContent = total ? "1-" + total + " / " + total : "0 / 0";
+}
+
+function mostrarKanban() {
+  lista.hidden = true;
+  tablero.hidden = false;
+  document.getElementById("ver-kanban").classList.add("is-active");
+  document.getElementById("ver-lista").classList.remove("is-active");
+}
+
+function mostrarLista() {
+  const cuerpo = document.getElementById("lista-cuerpo");
+  cuerpo.replaceChildren();
+  document.querySelectorAll(".o_kanban_record").forEach((card) => {
+    const fila = document.createElement("tr");
+    [".o_kanban_record_title", ".o_kanban_record_subtitle", ".badge"].forEach((selector) => {
+      const celda = document.createElement("td");
+      celda.textContent = card.querySelector(selector).textContent;
+      fila.append(celda);
+    });
+    const estado = document.createElement("td");
+    estado.textContent = card.dataset.estado;
+    fila.append(estado);
+    cuerpo.append(fila);
+  });
+  tablero.hidden = true;
+  lista.hidden = false;
+  document.getElementById("ver-lista").classList.add("is-active");
+  document.getElementById("ver-kanban").classList.remove("is-active");
+}
+
+crear.addEventListener("click", abrirCuestionario);
+descartar.addEventListener("click", () => {
+  form.reset();
+  syncCamino();
+  cerrarCuestionario();
+});
+guardar.addEventListener("click", () => form.requestSubmit());
+document.getElementById("ver-kanban").addEventListener("click", () => {
+  if (!form.hidden) return;
+  mostrarKanban();
+});
+document.getElementById("ver-lista").addEventListener("click", () => {
+  if (!form.hidden) return;
+  mostrarLista();
+});
+form.elements.camino.forEach((input) => input.addEventListener("change", syncCamino));
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const titulo = data.get("camino") === "Armar" ? data.get("modelo") : data.get("ramo");
+  const ticket = document.createElement("article");
+  ticket.className = "oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record";
+  ticket.tabIndex = 0;
+  ticket.dataset.estado = "Pedido";
+
+  const strong = document.createElement("strong");
+  strong.className = "o_kanban_record_title";
+  strong.textContent = String(titulo);
+  const who = document.createElement("span");
+  who.className = "o_kanban_record_subtitle";
+  who.textContent = String(data.get("nombre"));
+  const tag = document.createElement("span");
+  tag.className = "badge";
+  tag.textContent = String(data.get("formato"));
+
+  ticket.append(strong, who, tag);
+  document.getElementById("col-pedido").prepend(ticket);
+
+  const count = document.querySelector('[data-count="pedido"]');
+  count.textContent = String(document.querySelectorAll("#col-pedido .o_kanban_record").length);
+  pintarPager();
+  form.reset();
+  syncCamino();
+  cerrarCuestionario();
+});
+</script>
+</body>
+</html>
