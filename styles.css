@@ -356,6 +356,34 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
 .checks { display: flex; flex-wrap: wrap; gap: 0 18px; }
 .hint { margin: 4px 0 0; color: var(--muted); font-size: 12px; font-weight: 500; }
 
+.plantillas { display: grid; gap: 8px; margin-top: 12px; }
+
+.plantilla {
+  display: grid !important;
+  grid-template-columns: 16px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.plantilla input { margin: 0; accent-color: var(--odoo); }
+.plantilla-copy { display: grid; }
+.plantilla-copy strong { color: var(--ink); }
+.plantilla-copy small { color: var(--muted); font-weight: 500; }
+.plantilla-dots { display: flex; gap: 6px; }
+.plantilla-dots i {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.plantilla:has(input:checked) { border-color: var(--odoo); background: #f4f7f8; }
+
 .swatches {
   display: grid;
   grid-template-columns: repeat(7, 36px);
