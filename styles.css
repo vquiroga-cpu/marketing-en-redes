@@ -167,6 +167,38 @@ button, input, select, textarea { font: inherit; }
   background: var(--bg);
 }
 
+.llegada {
+  margin: 0 8px 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--odoo);
+  color: var(--ink);
+}
+
+.o_kanban_record { cursor: pointer; }
+
+.llegada-nota { margin: 0 0 16px; color: var(--muted); }
+
+.brief {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+.brief dt { color: var(--muted); font-weight: 600; }
+.brief dd { margin: 0; }
+
+.brief-dots { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.brief-dots i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.brief-dots span { margin-right: 8px; }
+
 .o_kanban_view {
   display: flex;
   gap: 8px;
@@ -389,6 +421,8 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
 }
 
 @media (max-width: 800px) {
+  .brief { grid-template-columns: 1fr; gap: 2px 0; }
+  .brief dt { margin-top: 10px; }
   .o_cp_top { align-items: flex-start; flex-direction: column; }
   .o_group { grid-template-columns: 1fr; }
   .oe_title { font-size: 22px; }

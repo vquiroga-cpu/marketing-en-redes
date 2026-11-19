@@ -47,6 +47,8 @@
               <div class="o_cp_buttons">
                 <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
                 <button type="button" class="btn btn-primary" id="guardar" hidden>Guardar</button>
+                <button type="button" class="btn btn-primary" id="tomar" hidden>Tomar pedido</button>
+                <button type="button" class="btn btn-secondary" id="volver" hidden>Volver</button>
                 <button type="button" class="btn btn-secondary" id="descartar" hidden>Descartar</button>
               </div>
             </div>
@@ -55,6 +57,7 @@
         </div>
 
         <div class="o_content">
+          <p class="llegada" id="aviso">Te llega así: el pedido entra en la columna Pedido. Tocá la tarjeta y ves todo lo que completó el productor.</p>
           <div class="o_kanban_view o_kanban_small_column o_kanban_grouped" id="tablero">
             <section class="o_kanban_group">
               <header class="o_kanban_header">
@@ -75,7 +78,7 @@
                 <div class="o_column_title">En diseño <span class="o_kanban_counter">2</span></div>
                 <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-doing"></i></div>
               </header>
-              <div class="o_kanban_column_content">
+              <div class="o_kanban_column_content" id="col-diseno">
                 <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="En diseño">
                   <strong class="o_kanban_record_title">Placa auto marzo</strong>
                   <span class="o_kanban_record_subtitle">Ana Pérez</span>
@@ -94,7 +97,7 @@
                 <div class="o_column_title">Hay que ajustar <span class="o_kanban_counter">1</span></div>
                 <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-wait"></i></div>
               </header>
-              <div class="o_kanban_column_content">
+              <div class="o_kanban_column_content" id="col-ajustar">
                 <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="Hay que ajustar">
                   <strong class="o_kanban_record_title">Estado moto</strong>
                   <span class="o_kanban_record_subtitle">Martín Ruiz</span>
@@ -108,7 +111,7 @@
                 <div class="o_column_title">Lista <span class="o_kanban_counter">1</span></div>
                 <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-done"></i></div>
               </header>
-              <div class="o_kanban_column_content">
+              <div class="o_kanban_column_content" id="col-lista">
                 <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record oe_kanban_card_muted" tabindex="0" data-estado="Lista">
                   <strong class="o_kanban_record_title">Historia renovación</strong>
                   <span class="o_kanban_record_subtitle">Luis Gómez</span>
@@ -131,6 +134,28 @@
               <tbody id="lista-cuerpo"></tbody>
             </table>
           </div>
+
+          <article class="o_form_view" id="recibido" hidden>
+            <div class="o_form_sheet_bg">
+              <div class="o_form_statusbar" id="recibido-estado">
+                <span data-paso="Pedido">Pedido</span>
+                <span data-paso="En diseño">En diseño</span>
+                <span data-paso="Hay que ajustar">Hay que ajustar</span>
+                <span data-paso="Lista">Lista</span>
+              </div>
+              <div class="o_form_sheet">
+                <p class="oe_kicker">Te llegó este pedido</p>
+                <h1 class="oe_title" id="recibido-titulo"></h1>
+                <p class="llegada-nota" id="recibido-nota"></p>
+                <dl class="brief" id="recibido-datos"></dl>
+              </div>
+              <div class="o_chatter">
+                <strong>Comunicate al privado</strong>
+                <p>Victoria Quiroga, Community Manager. Celular: +54 9 261 217-4132.</p>
+                <a class="btn btn-whatsapp" href="https://wa.me/5492612174132?text=Hola%20Victoria%2C%20te%20escribo%20por%20una%20placa%20publicitaria." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+              </div>
+            </div>
+          </article>
 
           <form class="o_form_view" id="cuestionario" hidden>
             <div class="o_form_sheet_bg">
@@ -283,6 +308,98 @@ const pager = document.getElementById("pager");
 const campoMensaje = document.getElementById("campo-mensaje");
 const campoModelo = document.getElementById("campo-modelo");
 const campoCompania = document.getElementById("campo-compania");
+const recibido = document.getElementById("recibido");
+const tomar = document.getElementById("tomar");
+const volver = document.getElementById("volver");
+const aviso = document.getElementById("aviso");
+let tarjetaAbierta = null;
+
+const fichas = {
+  "Referidos abril": {
+    titulo: "Referidos abril",
+    nombre: "Carla Díaz",
+    camino: "Pedir",
+    formato: "Feed",
+    ramo: "Referidos",
+    fecha: "15/04/2026",
+    mensaje: "Si conocés a alguien que necesite un seguro, recomendame. Que se note que lo atiendo yo.",
+    colores: [{ nombre: "Azul", hex: "#2f5270" }, { nombre: "Hueso", hex: "#efeae3" }],
+    compania: "No. Solo BQB y sus datos",
+    falta: "Su nombre, su teléfono y el logo de BQB",
+    preferencias: "Tono cercano. Sin foto. Es para clientes que pueden referir a otra persona.",
+    matricula: "Matrícula de ejemplo",
+    telefono: "261 555-0101",
+    estado: "Pedido"
+  },
+  "Placa auto marzo": {
+    titulo: "Placa auto marzo",
+    nombre: "Ana Pérez",
+    camino: "Pedir",
+    formato: "Feed",
+    ramo: "Auto",
+    fecha: "20/03/2026",
+    mensaje: "Tu auto, con alguien que te asesora.",
+    colores: [{ nombre: "Marino", hex: "#1c3344" }],
+    compania: "No. Solo BQB y sus datos",
+    falta: "Su nombre y el logo de BQB",
+    preferencias: "Tono formal. Para clientes que renuevan el auto.",
+    matricula: "Matrícula de ejemplo",
+    telefono: "261 555-0102",
+    estado: "En diseño"
+  },
+  "Campaña granizo": {
+    titulo: "Campaña granizo",
+    nombre: "Sofía Rojas",
+    camino: "Armar",
+    formato: "Historia",
+    modelo: "Campañas por el clima",
+    fecha: "01/11/2026",
+    colores: [{ nombre: "Acero", hex: "#6f8fa3" }, { nombre: "Gris claro", hex: "#bdbdbd" }],
+    compania: "No. Solo BQB y sus datos",
+    falta: "Su teléfono",
+    preferencias: "Que se entienda el granizo, sin asustar.",
+    matricula: "Matrícula de ejemplo",
+    telefono: "261 555-0103",
+    estado: "En diseño"
+  },
+  "Estado moto": {
+    titulo: "Estado moto",
+    nombre: "Martín Ruiz",
+    camino: "Pedir",
+    formato: "Estado de WhatsApp",
+    ramo: "Moto",
+    fecha: "10/05/2026",
+    mensaje: "Tu moto también se asegura.",
+    colores: [{ nombre: "Arena", hex: "#d4c4a8" }],
+    compania: "No. Solo BQB y sus datos",
+    falta: "Falta la matrícula",
+    preferencias: "Para el estado de WhatsApp. Todavía no pasó la matrícula.",
+    matricula: "",
+    telefono: "261 555-0104",
+    estado: "Hay que ajustar"
+  },
+  "Historia renovación": {
+    titulo: "Historia renovación",
+    nombre: "Luis Gómez",
+    camino: "Armar",
+    formato: "Historia",
+    modelo: "Renovación",
+    fecha: "02/06/2026",
+    colores: [{ nombre: "Verde", hex: "#3e6b5a" }],
+    compania: "No. Solo BQB y sus datos",
+    falta: "Su nombre y su matrícula",
+    preferencias: "Ya está lista para que la publique.",
+    matricula: "Matrícula de ejemplo",
+    telefono: "261 555-0105",
+    estado: "Lista"
+  }
+};
+
+function fichaDe(card) {
+  if (card.dataset.ficha) return JSON.parse(card.dataset.ficha);
+  const titulo = card.querySelector(".o_kanban_record_title").textContent;
+  return fichas[titulo];
+}
 
 function syncCamino() {
   const armar = form.elements.camino.value === "Armar";
@@ -298,9 +415,94 @@ function syncCompania() {
   form.elements["compania-nombre"].required = pide;
 }
 
+function contarColumnas() {
+  document.querySelectorAll(".o_kanban_group").forEach((group) => {
+    group.querySelector(".o_kanban_counter").textContent = String(group.querySelectorAll(".o_kanban_record").length);
+  });
+}
+
+function abrirRecibido(card) {
+  const ficha = fichaDe(card);
+  if (!ficha) return;
+  tarjetaAbierta = card;
+  tablero.hidden = true;
+  lista.hidden = true;
+  form.hidden = true;
+  recibido.hidden = false;
+  aviso.hidden = true;
+  busqueda.hidden = true;
+  crear.hidden = true;
+  guardar.hidden = true;
+  descartar.hidden = true;
+  volver.hidden = false;
+  tomar.hidden = ficha.estado !== "Pedido";
+  breadcrumb.textContent = ficha.titulo;
+  pager.hidden = true;
+
+  document.getElementById("recibido-titulo").textContent = ficha.titulo;
+  document.getElementById("recibido-nota").textContent = ficha.nombre + " lo envió. Quedó en " + ficha.estado + ".";
+  document.querySelectorAll("#recibido-estado span").forEach((paso) => {
+    paso.classList.toggle("is-current", paso.dataset.paso === ficha.estado);
+  });
+
+  const datos = document.getElementById("recibido-datos");
+  datos.replaceChildren();
+  const filas = [
+    ["Productor", ficha.nombre],
+    ["Camino", ficha.camino === "Armar" ? "Armar con un modelo" : "Pedir una placa nueva"],
+    ["Modelo", ficha.modelo],
+    ["Seguro", ficha.ramo],
+    ["Formato", ficha.formato],
+    ["Para cuándo", ficha.fecha],
+    ["Mensaje", ficha.mensaje],
+    ["Compañía", ficha.compania],
+    ["Cómo aparece", ficha.companiaModo],
+    ["No puede faltar", ficha.falta],
+    ["Preferencias", ficha.preferencias],
+    ["Matrícula", ficha.matricula],
+    ["Teléfono", ficha.telefono]
+  ];
+  filas.forEach(([titulo, valor]) => {
+    if (!valor) return;
+    const dt = document.createElement("dt");
+    dt.textContent = titulo;
+    const dd = document.createElement("dd");
+    dd.textContent = valor;
+    datos.append(dt, dd);
+  });
+  if (ficha.colores && ficha.colores.length) {
+    const dt = document.createElement("dt");
+    dt.textContent = "Colores";
+    const dd = document.createElement("dd");
+    const dots = document.createElement("span");
+    dots.className = "brief-dots";
+    ficha.colores.forEach((color) => {
+      const punto = document.createElement("i");
+      punto.style.background = color.hex;
+      punto.title = color.nombre;
+      const nombre = document.createElement("span");
+      nombre.textContent = color.nombre;
+      dots.append(punto, nombre);
+    });
+    dd.append(dots);
+    datos.append(dt, dd);
+  }
+}
+
+function cerrarRecibido() {
+  recibido.hidden = true;
+  aviso.hidden = false;
+  volver.hidden = true;
+  tomar.hidden = true;
+  tarjetaAbierta = null;
+  cerrarCuestionario();
+}
+
 function abrirCuestionario() {
   tablero.hidden = true;
   lista.hidden = true;
+  recibido.hidden = true;
+  aviso.hidden = true;
   form.hidden = false;
   busqueda.hidden = true;
   crear.hidden = true;
@@ -320,6 +522,7 @@ function mostrarKanban() {
 
 function cerrarCuestionario() {
   form.hidden = true;
+  aviso.hidden = false;
   busqueda.hidden = false;
   crear.hidden = false;
   guardar.hidden = true;
@@ -359,6 +562,22 @@ function mostrarLista() {
   document.getElementById("ver-kanban").classList.remove("is-active");
 }
 
+tablero.addEventListener("click", (event) => {
+  const card = event.target.closest(".o_kanban_record");
+  if (card) abrirRecibido(card);
+});
+volver.addEventListener("click", cerrarRecibido);
+tomar.addEventListener("click", () => {
+  if (!tarjetaAbierta) return;
+  const ficha = fichaDe(tarjetaAbierta);
+  ficha.estado = "En diseño";
+  tarjetaAbierta.dataset.estado = "En diseño";
+  tarjetaAbierta.dataset.ficha = JSON.stringify(ficha);
+  document.getElementById("col-diseno").prepend(tarjetaAbierta);
+  contarColumnas();
+  aviso.textContent = "Tomaste el pedido de " + ficha.nombre + ". Pasó a En diseño.";
+  cerrarRecibido();
+});
 crear.addEventListener("click", abrirCuestionario);
 guardar.addEventListener("click", () => form.requestSubmit());
 descartar.addEventListener("click", () => {
@@ -398,9 +617,36 @@ form.addEventListener("submit", (event) => {
   tag.textContent = String(data.get("formato"));
 
   ticket.append(strong, who, tag);
+  const colores = [...form.querySelectorAll('input[name="color"]:checked')].map((input) => ({
+    nombre: input.value,
+    hex: input.dataset.hex
+  }));
+  const falta = [...form.querySelectorAll('input[name="falta"]:checked')].map((input) => input.value);
+  const fecha = String(data.get("fecha") || "");
+  const partes = fecha.split("-");
+  ticket.dataset.ficha = JSON.stringify({
+    titulo: String(titulo),
+    nombre: String(data.get("nombre")),
+    camino: String(data.get("camino")),
+    formato: String(data.get("formato")),
+    ramo: String(data.get("ramo") || ""),
+    modelo: data.get("camino") === "Armar" ? String(data.get("modelo") || "") : "",
+    fecha: partes.length === 3 ? partes[2] + "/" + partes[1] + "/" + partes[0] : fecha,
+    mensaje: data.get("camino") === "Pedir" ? String(data.get("mensaje") || "") : "",
+    colores: colores,
+    compania: data.get("compania") === "si" ? String(data.get("compania-nombre") || "") : "No. Solo BQB y sus datos",
+    companiaModo: data.get("compania") === "si" ? String(data.get("compania-modo") || "") : "",
+    falta: falta.join(", "),
+    preferencias: String(data.get("preferencias") || ""),
+    matricula: String(data.get("matricula") || ""),
+    telefono: String(data.get("telefono") || ""),
+    estado: "Pedido"
+  });
+
   document.getElementById("col-pedido").prepend(ticket);
-  document.querySelector('[data-count="pedido"]').textContent = String(document.querySelectorAll("#col-pedido .o_kanban_record").length);
+  contarColumnas();
   pintarPager();
+  aviso.textContent = "Te llegó el pedido de " + data.get("nombre") + ". Está en Pedido. Tocá la tarjeta para verlo completo.";
   form.reset();
   syncCamino();
   syncCompania();
