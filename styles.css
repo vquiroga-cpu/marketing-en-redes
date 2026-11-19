@@ -383,6 +383,7 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .plantilla:has(input:checked) { border-color: var(--odoo); background: #f4f7f8; }
+.plantilla-sola { grid-template-columns: 16px 1fr; }
 
 .swatches {
   display: grid;
