@@ -3,400 +3,510 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pedí tus placas publicitarias personalizadas</title>
-  <meta name="description" content="Ejemplo de cómo se vería Marketing en redes dentro de Odoo.">
-  <meta name="theme-color" content="#714B67">
+  <title>Pedí tus placas publicitarias personalizadas · Marketing en redes</title>
+  <meta name="description" content="Modelo de Marketing en redes: el productor pide o arma su placa publicitaria personalizada.">
+  <meta name="theme-color" content="#e63a2e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <p class="example-note">Ejemplo de cómo se vería en Odoo. Todavía no está creado en el sistema.</p>
+  <p class="topline">Modelo para el equipo · Todavía no está dentro de Odoo</p>
 
-  <div class="o_web_client">
-    <header class="o_main_navbar">
-      <button type="button" class="o_menu_toggle" aria-label="Aplicaciones">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      </button>
-      <span class="o_menu_brand">Marketing en redes</span>
-      <span class="o_navbar_spacer"></span>
-      <span class="o_user">V</span>
-    </header>
+  <header class="header">
+    <div class="wrap header-in">
+      <a class="logo" href="#inicio">
+        <span>Marketing<br>en redes</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 8 3M11 8l1-6M16 9l4-5"/></svg>
+      </a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#modelos">Modelos</a>
+        <a href="#pedidos">Pedidos</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button type="button" class="btn btn-red o-kanban-button-new" data-crear accesskey="c" title="Crear registro">Crear</button>
+    </div>
+  </header>
 
-    <div class="o_action_manager">
-      <div class="o_action o_view_controller">
-        <div class="o_control_panel">
-          <div class="o_cp_top">
-            <ol class="breadcrumb">
-              <li>Marketing en redes</li>
-              <li class="active" id="breadcrumb-actual">Pedí tus placas publicitarias personalizadas</li>
-            </ol>
-            <div class="o_cp_searchview" id="busqueda">
-              <span class="o_search_icon" aria-hidden="true"></span>
-              <input type="search" placeholder="Buscar..." aria-label="Buscar">
-              <div class="o_cp_switch_buttons" role="tablist" aria-label="Vistas">
-                <button type="button" class="is-active" id="ver-kanban" aria-label="Kanban" title="Kanban">
-                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 1h6v6H1zM9 1h6v6H9zM1 9h6v6H1zM9 9h6v6H9z"/></svg>
-                </button>
-                <button type="button" id="ver-lista" aria-label="Lista" title="Lista">
-                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2h14v2H1zM1 7h14v2H1zM1 12h14v2H1z"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="o_cp_bottom">
-            <div class="o_cp_bottom_left">
-              <div class="o_cp_buttons">
-                <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
-                <button type="button" class="btn btn-primary" id="guardar" hidden>Guardar</button>
-                <button type="button" class="btn btn-secondary" id="descartar" hidden>Descartar</button>
-              </div>
-            </div>
-            <div class="o_cp_pager" id="pager">1-4 / 4</div>
-          </div>
+  <main id="inicio">
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <h1><span class="h-red">Pedí tus placas</span> <span class="h-blue">publicitarias personalizadas</span></h1>
+          <p class="lede">Contanos qué necesitás y marketing la arma con vos: tu nombre, tus colores y el mensaje justo para tu cartera.</p>
+          <button type="button" class="btn btn-red btn-lg" data-crear>
+            Crear tu placa
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
         </div>
 
-        <div class="o_content">
-          <div class="o_kanban_view o_kanban_small_column o_kanban_grouped" id="tablero">
-            <section class="o_kanban_group">
-              <header class="o_kanban_header">
-                <div class="o_column_title">Pedido <span class="o_kanban_counter" data-count="pedido">1</span></div>
-                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
-              </header>
-              <div class="o_kanban_column_content" id="col-pedido">
-                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="Pedido">
-                  <strong class="o_kanban_record_title">Referidos abril</strong>
-                  <span class="o_kanban_record_subtitle">Carla Díaz</span>
-                  <span class="badge">Pedir</span>
-                </article>
-              </div>
-            </section>
-
-            <section class="o_kanban_group">
-              <header class="o_kanban_header">
-                <div class="o_column_title">En diseño <span class="o_kanban_counter">1</span></div>
-                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-doing"></i></div>
-              </header>
-              <div class="o_kanban_column_content">
-                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="En diseño">
-                  <strong class="o_kanban_record_title">Placa auto marzo</strong>
-                  <span class="o_kanban_record_subtitle">Ana Pérez</span>
-                  <span class="badge">Feed</span>
-                </article>
-              </div>
-            </section>
-
-            <section class="o_kanban_group">
-              <header class="o_kanban_header">
-                <div class="o_column_title">Hay que ajustar <span class="o_kanban_counter">1</span></div>
-                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-wait"></i></div>
-              </header>
-              <div class="o_kanban_column_content">
-                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record" tabindex="0" data-estado="Hay que ajustar">
-                  <strong class="o_kanban_record_title">Estado moto</strong>
-                  <span class="o_kanban_record_subtitle">Martín Ruiz</span>
-                  <span class="badge">Falta matrícula</span>
-                </article>
-              </div>
-            </section>
-
-            <section class="o_kanban_group">
-              <header class="o_kanban_header">
-                <div class="o_column_title">Lista <span class="o_kanban_counter">1</span></div>
-                <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-done"></i></div>
-              </header>
-              <div class="o_kanban_column_content">
-                <article class="oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record oe_kanban_card_muted" tabindex="0" data-estado="Lista">
-                  <strong class="o_kanban_record_title">Historia hogar</strong>
-                  <span class="o_kanban_record_subtitle">Luis Gómez</span>
-                  <span class="badge">Renovación</span>
-                </article>
-              </div>
-            </section>
+        <div class="hero-art" aria-hidden="true">
+          <svg class="hero-wave" viewBox="0 0 600 120" preserveAspectRatio="none"><path d="M0 70c90-40 170-40 260 0s180 40 340-10v60H0Z"/></svg>
+          <span class="note note-a">Renovación</span>
+          <span class="note note-b">Clima</span>
+          <div class="placa">
+            <div class="placa-zone placa-brand"><b>BQB</b><em>Fijo</em></div>
+            <div class="placa-zone placa-msg"><b>Tu póliza vence pronto. Hablemos.</b><em>Lo pedís vos</em></div>
+            <div class="placa-zone placa-pas"><b>Nombre · Matrícula · Teléfono</b><em>Tus datos</em></div>
+            <div class="placa-zone placa-legal"><b>Pie legal</b><em>Fijo</em></div>
           </div>
-
-          <div class="o_list_view" id="lista" hidden>
-            <table>
-              <thead>
-                <tr>
-                  <th>Placa</th>
-                  <th>Productor</th>
-                  <th>Detalle</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody id="lista-cuerpo"></tbody>
-            </table>
-          </div>
-
-          <form class="o_form_view" id="cuestionario" hidden>
-            <div class="o_form_sheet_bg">
-              <div class="o_form_statusbar">
-                <span class="is-current">Pedido</span>
-                <span>En diseño</span>
-                <span>Hay que ajustar</span>
-                <span>Lista</span>
-              </div>
-              <div class="o_form_sheet">
-                <h1 class="oe_title">Pedí tus placas publicitarias personalizadas</h1>
-                <div class="o_group">
-                  <label>
-                    ¿Cómo te llamás?
-                    <input name="nombre" type="text" class="o_input" required placeholder="Nombre y apellido">
-                  </label>
-                  <fieldset>
-                    <legend>¿Qué querés hacer?</legend>
-                    <label class="o_radio"><input type="radio" name="camino" value="Pedir" checked> Pedir una placa nueva</label>
-                    <label class="o_radio"><input type="radio" name="camino" value="Armar"> Armar una con un modelo ya aprobado</label>
-                  </fieldset>
-                  <label>
-                    ¿En qué formato la necesitás?
-                    <select name="formato" class="o_input" required>
-                      <option value="">Elegí uno</option>
-                      <option>Feed</option>
-                      <option>Historia</option>
-                      <option>Estado de WhatsApp</option>
-                    </select>
-                  </label>
-                  <label>
-                    ¿De qué seguro se trata?
-                    <select name="ramo" class="o_input" required>
-                      <option value="">Elegí uno</option>
-                      <option>Auto</option>
-                      <option>Moto</option>
-                      <option>Hogar</option>
-                      <option>Vida</option>
-                      <option>Comercio</option>
-                      <option>Referidos</option>
-                    </select>
-                  </label>
-                  <label>
-                    ¿Para qué fecha la necesitás?
-                    <input name="fecha" type="date" class="o_input" required>
-                  </label>
-                  <label id="campo-mensaje">
-                    ¿Qué tiene que decir la placa?
-                    <textarea name="mensaje" class="o_input" rows="3" required placeholder="El mensaje, sin diseñar la pieza"></textarea>
-                  </label>
-                  <label id="campo-modelo" hidden>
-                    ¿Qué modelo aprobado usás?
-                    <select name="modelo" class="o_input">
-                      <option value="">Elegí uno</option>
-                      <option>Renovación</option>
-                      <option>Clientes con una sola póliza</option>
-                      <option>Ex clientes</option>
-                      <option>Campañas por el clima</option>
-                      <option>Referidos</option>
-                      <option>Presentación del productor</option>
-                    </select>
-                  </label>
-                  <fieldset class="o_full" id="colores">
-                    <legend>¿Qué colores querés en la placa?</legend>
-                    <p class="hint">Podés elegir más de uno.</p>
-                    <div class="swatches">
-                      <label class="swatch" title="Bordó"><input type="checkbox" name="color" value="Bordó"><i style="background:#714B67"></i><span>Bordó</span></label>
-                      <label class="swatch" title="Azul"><input type="checkbox" name="color" value="Azul"><i style="background:#1F4E79"></i><span>Azul</span></label>
-                      <label class="swatch" title="Celeste"><input type="checkbox" name="color" value="Celeste"><i style="background:#7EB0C8"></i><span>Celeste</span></label>
-                      <label class="swatch" title="Verde"><input type="checkbox" name="color" value="Verde"><i style="background:#2F7A62"></i><span>Verde</span></label>
-                      <label class="swatch" title="Negro"><input type="checkbox" name="color" value="Negro"><i style="background:#1C1C1C"></i><span>Negro</span></label>
-                      <label class="swatch" title="Blanco"><input type="checkbox" name="color" value="Blanco"><i class="is-light" style="background:#ffffff"></i><span>Blanco</span></label>
-                      <label class="swatch" title="Gris"><input type="checkbox" name="color" value="Gris"><i style="background:#8A8F94"></i><span>Gris</span></label>
-                      <label class="swatch" title="Dorado"><input type="checkbox" name="color" value="Dorado"><i style="background:#C4A35A"></i><span>Dorado</span></label>
-                    </div>
-                  </fieldset>
-                  <fieldset class="o_full">
-                    <legend>¿Querés que aparezca una compañía de seguros?</legend>
-                    <label class="o_radio"><input type="radio" name="compania" value="no" checked> No. Solo BQB y mis datos</label>
-                    <label class="o_radio"><input type="radio" name="compania" value="si"> Sí, una compañía en particular</label>
-                  </fieldset>
-                  <div class="o_full" id="campo-compania" hidden>
-                    <label>
-                      ¿Cuál compañía?
-                      <input name="compania-nombre" type="text" class="o_input" placeholder="El nombre, tal como querés que figure">
-                    </label>
-                    <label>
-                      ¿Cómo tiene que aparecer?
-                      <select name="compania-modo" class="o_input">
-                        <option value="">Elegí uno</option>
-                        <option>Solo el nombre</option>
-                        <option>El logo, si lo tenemos</option>
-                        <option>Nombre y logo</option>
-                      </select>
-                    </label>
-                  </div>
-                  <fieldset class="o_full">
-                    <legend>¿Qué no puede faltar?</legend>
-                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
-                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
-                    <label class="o_radio"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
-                    <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
-                    <label class="o_radio"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
-                  </fieldset>
-                  <label class="o_full">
-                    Preferencias
-                    <textarea name="preferencias" class="o_input" rows="4" placeholder="Tono (cercano o formal), si querés tu foto, para quién es la placa y qué no querés que diga."></textarea>
-                  </label>
-                  <label>
-                    Matrícula
-                    <input name="matricula" type="text" class="o_input" required>
-                  </label>
-                  <label>
-                    Teléfono
-                    <input name="telefono" type="tel" class="o_input" required>
-                  </label>
-                </div>
-              </div>
-              <div class="o_chatter">
-                <strong>Comunicate al privado</strong>
-                <p>Victoria Quiroga, Community Manager. Celular: +54 9 261 217-4132.</p>
-                <a class="btn btn-whatsapp" href="https://wa.me/5492612174132?text=Hola%20Victoria%2C%20te%20escribo%20por%20una%20placa%20publicitaria." target="_blank" rel="noopener">Escribir por WhatsApp</a>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
+    </section>
+
+    <section class="section" id="modelos">
+      <div class="wrap">
+        <ul class="models">
+          <li>
+            <button type="button" class="model" data-modelo="Renovación">
+              <span class="circle tint-red"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span>
+              <strong>Renovación</strong>
+              <small>Antes de que venza</small>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="model" data-modelo="Clientes con una sola póliza">
+              <span class="circle tint-blue"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 13h5M10 17h5"/></svg></span>
+              <strong>Una sola póliza</strong>
+              <small>Sumar otra cobertura</small>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="model" data-modelo="Ex clientes">
+              <span class="circle tint-lilac"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.5"/><path d="M4 20c.8-3.5 3.2-5.5 6-5.5"/><path d="M15 17h6"/><path d="m18 14 3 3-3 3"/></svg></span>
+              <strong>Ex clientes</strong>
+              <small>Volver a hablar</small>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="model" data-modelo="Campañas por el clima">
+              <span class="circle tint-sky"><svg viewBox="0 0 24 24"><path d="M7 15a4 4 0 0 1 .5-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 15z"/><path d="m9 18-1 2M13 18l-1 2M17 18l-1 2"/></svg></span>
+              <strong>Clima</strong>
+              <small>Granizo, viento, nieve</small>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="model" data-modelo="Referidos">
+              <span class="circle tint-pink"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3 19c.6-3 2.6-5 5-5s4.4 2 5 5"/><path d="M14 14.5c2.5-.5 5 1.2 6 4.5"/></svg></span>
+              <strong>Referidos</strong>
+              <small>Que te recomienden</small>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="model" data-modelo="Presentación del productor">
+              <span class="circle tint-yellow"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M6 16c.6-1.6 1.8-2.4 3-2.4s2.4.8 3 2.4"/><path d="M14 10h4M14 14h3"/></svg></span>
+              <strong>Presentación</strong>
+              <small>Quién sos vos</small>
+            </button>
+          </li>
+        </ul>
+        <p class="models-hint">Tocá un modelo y el cuestionario se abre con ese modelo elegido.</p>
+      </div>
+    </section>
+
+    <section class="section" id="pedidos">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Pedidos</h2>
+          <div class="filters" role="group" aria-label="Filtrar por estado">
+            <button type="button" class="filter is-on" data-filtro="Todos">Todos <span data-count="Todos"></span></button>
+            <button type="button" class="filter" data-filtro="Pedido">Pedido <span data-count="Pedido"></span></button>
+            <button type="button" class="filter" data-filtro="En diseño">En diseño <span data-count="En diseño"></span></button>
+            <button type="button" class="filter" data-filtro="Hay que ajustar">Hay que ajustar <span data-count="Hay que ajustar"></span></button>
+            <button type="button" class="filter" data-filtro="Lista">Lista <span data-count="Lista"></span></button>
+          </div>
+        </div>
+
+        <div class="tickets" id="tickets">
+          <article class="ticket o_kanban_record" data-estado="Pedido">
+            <div class="mini tint-pink">
+              <div class="mini-placa">
+                <i style="background:#714B67"></i>
+                <b>Si conocés a alguien, recomendame.</b>
+                <small>Carla Díaz · Productora</small>
+              </div>
+            </div>
+            <h3>Referidos abril</h3>
+            <p>Carla Díaz</p>
+            <div class="ticket-meta"><span class="estado is-pedido">Pedido</span><span class="formato">Feed</span></div>
+          </article>
+
+          <article class="ticket o_kanban_record" data-estado="En diseño">
+            <div class="mini tint-blue">
+              <div class="mini-placa">
+                <i style="background:#1F4E79"></i>
+                <b>Tu auto, con alguien que te asesora.</b>
+                <small>Ana Pérez · Productora</small>
+              </div>
+            </div>
+            <h3>Placa auto marzo</h3>
+            <p>Ana Pérez</p>
+            <div class="ticket-meta"><span class="estado is-diseno">En diseño</span><span class="formato">Feed</span></div>
+          </article>
+
+          <article class="ticket o_kanban_record" data-estado="En diseño">
+            <div class="mini tint-sky">
+              <div class="mini-placa">
+                <i style="background:#7EB0C8"></i>
+                <b>Antes del granizo, revisá tu póliza.</b>
+                <small>Sofía Rojas · Productora</small>
+              </div>
+            </div>
+            <h3>Campaña granizo</h3>
+            <p>Sofía Rojas</p>
+            <div class="ticket-meta"><span class="estado is-diseno">En diseño</span><span class="formato">Historia</span></div>
+          </article>
+
+          <article class="ticket o_kanban_record" data-estado="Hay que ajustar">
+            <div class="mini tint-yellow">
+              <div class="mini-placa">
+                <i style="background:#C4A35A"></i>
+                <b>Tu moto también se asegura.</b>
+                <small>Martín Ruiz · Productor</small>
+              </div>
+            </div>
+            <h3>Estado moto</h3>
+            <p>Martín Ruiz</p>
+            <div class="ticket-meta"><span class="estado is-ajustar">Hay que ajustar</span><span class="formato">Falta matrícula</span></div>
+          </article>
+
+          <article class="ticket o_kanban_record" data-estado="Lista">
+            <div class="mini tint-lilac">
+              <div class="mini-placa">
+                <i style="background:#2F7A62"></i>
+                <b>Tu póliza vence pronto. Hablemos.</b>
+                <small>Luis Gómez · Productor</small>
+              </div>
+            </div>
+            <h3>Historia renovación</h3>
+            <p>Luis Gómez</p>
+            <div class="ticket-meta"><span class="estado is-lista">Lista</span><span class="formato">Renovación</span></div>
+          </article>
+        </div>
+        <p class="tickets-note">Nombres de ejemplo para la reunión. No son pedidos reales.</p>
+      </div>
+    </section>
+
+    <section class="section" id="como">
+      <div class="wrap duo">
+        <article class="how">
+          <h2>Así se pide una placa</h2>
+          <ol class="steps">
+            <li><span>1</span><div><strong>Tocás Crear</strong><p>Se abre el cuestionario. Elegís si pedís una placa nueva o armás una con un modelo.</p></div></li>
+            <li><span>2</span><div><strong>Contás cómo la querés</strong><p>Formato, seguro, colores, si va una compañía y tus preferencias.</p></div></li>
+            <li><span>3</span><div><strong>Marketing la arma</strong><p>Tu pedido aparece en Pedidos y cambia de estado hasta que está lista.</p></div></li>
+          </ol>
+          <button type="button" class="btn btn-soft" data-crear>
+            Empezar
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </article>
+
+        <article class="contact" id="contacto">
+          <p class="contact-kicker">Comunicate al privado</p>
+          <p class="contact-quote">¿Preferís contarlo por mensaje? Escribime y lo vemos juntos.</p>
+          <p class="contact-name">Victoria Quiroga</p>
+          <p class="contact-role">Community Manager · +54 9 261 217-4132</p>
+          <a class="btn btn-whatsapp" href="https://wa.me/5492612174132?text=Hola%20Victoria%2C%20te%20escribo%20por%20una%20placa%20publicitaria." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          <svg class="contact-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11Z"/></svg>
+        </article>
+      </div>
+    </section>
+
+    <section class="band">
+      <svg class="band-wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C200 0 400 0 600 30s400 40 600 0V60H0Z"/></svg>
+      <div class="wrap band-in">
+        <h2>¿Tenés una idea para tu placa?</h2>
+        <p>Contanos qué necesitás. El diseño lo resuelve marketing.</p>
+        <button type="button" class="btn btn-white" data-crear>Crear</button>
+        <span class="band-script" aria-hidden="true">Placas a tu medida</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <span class="logo logo-sm"><span>Marketing<br>en redes</span></span>
+      <nav class="nav nav-foot" aria-label="Pie">
+        <a href="#modelos">Modelos</a>
+        <a href="#pedidos">Pedidos</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <p>Modelo para el equipo de BQB.</p>
     </div>
-  </div>
+  </footer>
+
+  <dialog class="dialog" id="cuestionario" aria-labelledby="cuestionario-titulo">
+    <form class="sheet" id="form-placa">
+      <header class="sheet-head">
+        <div>
+          <p class="sheet-kicker">Nuevo pedido</p>
+          <h2 id="cuestionario-titulo">Pedí tu placa personalizada</h2>
+        </div>
+        <button type="button" class="close" id="cerrar" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
+
+      <div class="grid">
+        <label>
+          ¿Cómo te llamás?
+          <input name="nombre" type="text" required placeholder="Nombre y apellido">
+        </label>
+
+        <fieldset>
+          <legend>¿Qué querés hacer?</legend>
+          <label class="choice"><input type="radio" name="camino" value="Pedir" checked> Pedir una placa nueva</label>
+          <label class="choice"><input type="radio" name="camino" value="Armar"> Armar una con un modelo ya aprobado</label>
+        </fieldset>
+
+        <label>
+          ¿En qué formato la necesitás?
+          <select name="formato" required>
+            <option value="">Elegí uno</option>
+            <option>Feed</option>
+            <option>Historia</option>
+            <option>Estado de WhatsApp</option>
+          </select>
+        </label>
+
+        <label>
+          ¿De qué seguro se trata?
+          <select name="ramo" required>
+            <option value="">Elegí uno</option>
+            <option>Auto</option>
+            <option>Moto</option>
+            <option>Hogar</option>
+            <option>Vida</option>
+            <option>Comercio</option>
+            <option>Referidos</option>
+          </select>
+        </label>
+
+        <label>
+          ¿Para qué fecha la necesitás?
+          <input name="fecha" type="date" required>
+        </label>
+
+        <label id="campo-modelo" hidden>
+          ¿Qué modelo aprobado usás?
+          <select name="modelo">
+            <option value="">Elegí uno</option>
+            <option>Renovación</option>
+            <option>Clientes con una sola póliza</option>
+            <option>Ex clientes</option>
+            <option>Campañas por el clima</option>
+            <option>Referidos</option>
+            <option>Presentación del productor</option>
+          </select>
+        </label>
+
+        <label class="full" id="campo-mensaje">
+          ¿Qué tiene que decir la placa?
+          <textarea name="mensaje" rows="3" required placeholder="El mensaje, con tus palabras"></textarea>
+        </label>
+
+        <fieldset class="full">
+          <legend>¿Qué colores querés en la placa?</legend>
+          <p class="hint">Podés elegir más de uno.</p>
+          <div class="swatches">
+            <label class="swatch"><input type="checkbox" name="color" value="Bordó" data-hex="#714B67"><i style="background:#714B67"></i><span>Bordó</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Azul" data-hex="#1F4E79"><i style="background:#1F4E79"></i><span>Azul</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Celeste" data-hex="#7EB0C8"><i style="background:#7EB0C8"></i><span>Celeste</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Verde" data-hex="#2F7A62"><i style="background:#2F7A62"></i><span>Verde</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Rojo" data-hex="#E63A2E"><i style="background:#E63A2E"></i><span>Rojo</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Negro" data-hex="#1C1C1C"><i style="background:#1C1C1C"></i><span>Negro</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Blanco" data-hex="#FFFFFF"><i class="is-light" style="background:#FFFFFF"></i><span>Blanco</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Gris" data-hex="#8A8F94"><i style="background:#8A8F94"></i><span>Gris</span></label>
+            <label class="swatch"><input type="checkbox" name="color" value="Dorado" data-hex="#C4A35A"><i style="background:#C4A35A"></i><span>Dorado</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="full">
+          <legend>¿Querés que aparezca una compañía de seguros?</legend>
+          <label class="choice"><input type="radio" name="compania" value="no" checked> No. Solo BQB y mis datos</label>
+          <label class="choice"><input type="radio" name="compania" value="si"> Sí, una compañía en particular</label>
+        </fieldset>
+
+        <div class="full pair" id="campo-compania" hidden>
+          <label>
+            ¿Cuál compañía?
+            <input name="compania-nombre" type="text" placeholder="El nombre, tal como querés que figure">
+          </label>
+          <label>
+            ¿Cómo tiene que aparecer?
+            <select name="compania-modo">
+              <option value="">Elegí uno</option>
+              <option>Solo el nombre</option>
+              <option>El logo, si lo tenemos</option>
+              <option>Nombre y logo</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset class="full">
+          <legend>¿Qué no puede faltar?</legend>
+          <div class="checks">
+            <label class="choice"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
+            <label class="choice"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
+            <label class="choice"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
+            <label class="choice"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
+            <label class="choice"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
+          </div>
+        </fieldset>
+
+        <label class="full">
+          Preferencias
+          <textarea name="preferencias" rows="4" placeholder="Tono (cercano o formal), si querés tu foto, para quién es la placa y qué no querés que diga."></textarea>
+        </label>
+
+        <label>
+          Matrícula
+          <input name="matricula" type="text" required>
+        </label>
+
+        <label>
+          Teléfono
+          <input name="telefono" type="tel" required>
+        </label>
+      </div>
+
+      <footer class="sheet-foot">
+        <button type="submit" class="btn btn-red">Guardar pedido</button>
+        <button type="button" class="btn btn-ghost" id="descartar">Descartar</button>
+        <a class="sheet-wa" href="https://wa.me/5492612174132?text=Hola%20Victoria%2C%20te%20escribo%20por%20una%20placa%20publicitaria." target="_blank" rel="noopener">¿Dudas? Escribile a Victoria por WhatsApp</a>
+      </footer>
+    </form>
+  </dialog>
 
 <script>
-const tablero = document.getElementById("tablero");
-const lista = document.getElementById("lista");
-const form = document.getElementById("cuestionario");
-const crear = document.getElementById("crear");
-const guardar = document.getElementById("guardar");
-const descartar = document.getElementById("descartar");
-const busqueda = document.getElementById("busqueda");
-const breadcrumb = document.getElementById("breadcrumb-actual");
-const pager = document.getElementById("pager");
+const dialog = document.getElementById("cuestionario");
+const form = document.getElementById("form-placa");
+const tickets = document.getElementById("tickets");
 const campoMensaje = document.getElementById("campo-mensaje");
 const campoModelo = document.getElementById("campo-modelo");
 const campoCompania = document.getElementById("campo-compania");
-const mensaje = form.elements.mensaje;
-const modelo = form.elements.modelo;
-const companiaNombre = form.elements["compania-nombre"];
-
-function abrirCuestionario() {
-  tablero.hidden = true;
-  lista.hidden = true;
-  form.hidden = false;
-  busqueda.hidden = true;
-  crear.hidden = true;
-  guardar.hidden = false;
-  descartar.hidden = false;
-  breadcrumb.textContent = "Nuevo";
-  pager.hidden = true;
-  form.elements.nombre.focus();
-}
-
-function cerrarCuestionario() {
-  form.hidden = true;
-  busqueda.hidden = false;
-  crear.hidden = false;
-  guardar.hidden = true;
-  descartar.hidden = true;
-  breadcrumb.textContent = "Pedí tus placas publicitarias personalizadas";
-  pager.hidden = false;
-  mostrarKanban();
-}
+const tints = ["tint-pink", "tint-blue", "tint-sky", "tint-yellow", "tint-lilac"];
+let filtro = "Todos";
 
 function syncCamino() {
   const armar = form.elements.camino.value === "Armar";
   campoMensaje.hidden = armar;
   campoModelo.hidden = !armar;
-  mensaje.required = !armar;
-  modelo.required = armar;
+  form.elements.mensaje.required = !armar;
+  form.elements.modelo.required = armar;
 }
 
 function syncCompania() {
   const pide = form.elements.compania.value === "si";
   campoCompania.hidden = !pide;
-  companiaNombre.required = pide;
+  form.elements["compania-nombre"].required = pide;
 }
 
-function totalTickets() {
-  return document.querySelectorAll(".o_kanban_record").length;
-}
-
-function pintarPager() {
-  const total = totalTickets();
-  pager.textContent = total ? "1-" + total + " / " + total : "0 / 0";
-}
-
-function mostrarKanban() {
-  lista.hidden = true;
-  tablero.hidden = false;
-  document.getElementById("ver-kanban").classList.add("is-active");
-  document.getElementById("ver-lista").classList.remove("is-active");
-}
-
-function mostrarLista() {
-  const cuerpo = document.getElementById("lista-cuerpo");
-  cuerpo.replaceChildren();
-  document.querySelectorAll(".o_kanban_record").forEach((card) => {
-    const fila = document.createElement("tr");
-    [".o_kanban_record_title", ".o_kanban_record_subtitle", ".badge"].forEach((selector) => {
-      const celda = document.createElement("td");
-      celda.textContent = card.querySelector(selector).textContent;
-      fila.append(celda);
-    });
-    const estado = document.createElement("td");
-    estado.textContent = card.dataset.estado;
-    fila.append(estado);
-    cuerpo.append(fila);
-  });
-  tablero.hidden = true;
-  lista.hidden = false;
-  document.getElementById("ver-lista").classList.add("is-active");
-  document.getElementById("ver-kanban").classList.remove("is-active");
-}
-
-crear.addEventListener("click", abrirCuestionario);
-descartar.addEventListener("click", () => {
+function abrir(modeloElegido) {
   form.reset();
+  if (modeloElegido) {
+    form.elements.camino.value = "Armar";
+    form.elements.modelo.value = modeloElegido;
+  }
   syncCamino();
   syncCompania();
-  cerrarCuestionario();
+  dialog.showModal();
+  form.elements.nombre.focus();
+}
+
+function contar() {
+  const cards = [...tickets.querySelectorAll(".ticket")];
+  document.querySelectorAll("[data-count]").forEach((span) => {
+    const estado = span.dataset.count;
+    span.textContent = estado === "Todos" ? cards.length : cards.filter((c) => c.dataset.estado === estado).length;
+  });
+}
+
+function aplicarFiltro() {
+  tickets.querySelectorAll(".ticket").forEach((card) => {
+    card.hidden = filtro !== "Todos" && card.dataset.estado !== filtro;
+  });
+  document.querySelectorAll("[data-filtro]").forEach((btn) => {
+    btn.classList.toggle("is-on", btn.dataset.filtro === filtro);
+  });
+}
+
+function crearTicket(data) {
+  const armar = data.get("camino") === "Armar";
+  const titulo = armar ? data.get("modelo") : data.get("ramo");
+  const nombre = String(data.get("nombre"));
+  const color = form.querySelector('input[name="color"]:checked');
+
+  const card = document.createElement("article");
+  card.className = "ticket o_kanban_record is-new";
+  card.dataset.estado = "Pedido";
+
+  const mini = document.createElement("div");
+  mini.className = "mini " + tints[tickets.children.length % tints.length];
+  const placa = document.createElement("div");
+  placa.className = "mini-placa";
+  const barra = document.createElement("i");
+  barra.style.background = color ? color.dataset.hex : "#E63A2E";
+  const msg = document.createElement("b");
+  msg.textContent = armar ? "Modelo: " + titulo : String(data.get("mensaje"));
+  const pie = document.createElement("small");
+  pie.textContent = nombre;
+  placa.append(barra, msg, pie);
+  mini.append(placa);
+
+  const h3 = document.createElement("h3");
+  h3.textContent = String(titulo);
+  const p = document.createElement("p");
+  p.textContent = nombre;
+  const meta = document.createElement("div");
+  meta.className = "ticket-meta";
+  const estado = document.createElement("span");
+  estado.className = "estado is-pedido";
+  estado.textContent = "Pedido";
+  const formato = document.createElement("span");
+  formato.className = "formato";
+  formato.textContent = String(data.get("formato"));
+  meta.append(estado, formato);
+
+  card.append(mini, h3, p, meta);
+  tickets.prepend(card);
+}
+
+document.querySelectorAll("[data-crear]").forEach((btn) => btn.addEventListener("click", () => abrir()));
+document.querySelectorAll("[data-modelo]").forEach((btn) => {
+  btn.addEventListener("click", () => abrir(btn.dataset.modelo));
 });
-guardar.addEventListener("click", () => form.requestSubmit());
-document.getElementById("ver-kanban").addEventListener("click", () => {
-  if (!form.hidden) return;
-  mostrarKanban();
+document.querySelectorAll("[data-filtro]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    filtro = btn.dataset.filtro;
+    aplicarFiltro();
+  });
 });
-document.getElementById("ver-lista").addEventListener("click", () => {
-  if (!form.hidden) return;
-  mostrarLista();
+
+document.getElementById("cerrar").addEventListener("click", () => dialog.close());
+document.getElementById("descartar").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", (event) => {
+  if (event.target === dialog) dialog.close();
 });
+
 form.elements.camino.forEach((input) => input.addEventListener("change", syncCamino));
 form.elements.compania.forEach((input) => input.addEventListener("change", syncCompania));
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const data = new FormData(form);
-  const titulo = data.get("camino") === "Armar" ? data.get("modelo") : data.get("ramo");
-  const ticket = document.createElement("article");
-  ticket.className = "oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record";
-  ticket.tabIndex = 0;
-  ticket.dataset.estado = "Pedido";
-
-  const strong = document.createElement("strong");
-  strong.className = "o_kanban_record_title";
-  strong.textContent = String(titulo);
-  const who = document.createElement("span");
-  who.className = "o_kanban_record_subtitle";
-  who.textContent = String(data.get("nombre"));
-  const tag = document.createElement("span");
-  tag.className = "badge";
-  tag.textContent = String(data.get("formato"));
-
-  ticket.append(strong, who, tag);
-  document.getElementById("col-pedido").prepend(ticket);
-
-  const count = document.querySelector('[data-count="pedido"]');
-  count.textContent = String(document.querySelectorAll("#col-pedido .o_kanban_record").length);
-  pintarPager();
-  form.reset();
-  syncCamino();
-  syncCompania();
-  cerrarCuestionario();
+  crearTicket(new FormData(form));
+  dialog.close();
+  filtro = "Todos";
+  aplicarFiltro();
+  contar();
+  document.getElementById("pedidos").scrollIntoView({ behavior: "smooth" });
 });
+
+contar();
 </script>
 </body>
 </html>
