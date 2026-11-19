@@ -221,7 +221,7 @@
                   </label>
                   <fieldset class="o_full">
                     <legend>Plantillas de placas que más piden</legend>
-                    <p class="hint">Son las placas ya armadas. Elegí una si te sirve. No define los colores.</p>
+                    <p class="hint">Son las placas ya armadas. Elegí una si te sirve.</p>
                     <div class="plantillas">
                       <label class="plantilla plantilla-sola">
                         <input type="radio" name="placa" value="Ofertas">
@@ -254,36 +254,8 @@
                     </div>
                   </fieldset>
                   <fieldset class="o_full">
-                    <legend>Paletas de colores sugeridas</legend>
-                    <p class="hint">Son combinaciones de color. No son la placa.</p>
-                    <div class="plantillas">
-                      <label class="plantilla">
-                        <input type="radio" name="paleta" value="Bordó y arena" data-colores="Bordó,Arena,Hueso">
-                        <span class="plantilla-copy"><strong>Bordó y arena</strong><small>Bordó, arena y hueso.</small></span>
-                        <span class="plantilla-dots" aria-hidden="true"><i style="background:#7a4550"></i><i style="background:#d4c4a8"></i><i style="background:#efeae3"></i></span>
-                      </label>
-                      <label class="plantilla">
-                        <input type="radio" name="paleta" value="Marino" data-colores="Marino,Azul,Blanco">
-                        <span class="plantilla-copy"><strong>Marino</strong><small>Azules y blanco.</small></span>
-                        <span class="plantilla-dots" aria-hidden="true"><i style="background:#1c3344"></i><i style="background:#2f5270"></i><i style="background:#ffffff"></i></span>
-                      </label>
-                      <label class="plantilla">
-                        <input type="radio" name="paleta" value="Acero" data-colores="Acero,Gris claro,Blanco">
-                        <span class="plantilla-copy"><strong>Acero</strong><small>Grises fríos.</small></span>
-                        <span class="plantilla-dots" aria-hidden="true"><i style="background:#6f8fa3"></i><i style="background:#bdbdbd"></i><i style="background:#ffffff"></i></span>
-                      </label>
-                      <label class="plantilla">
-                        <input type="radio" name="paleta" value="Verde y hueso" data-colores="Verde,Verde gris,Hueso">
-                        <span class="plantilla-copy"><strong>Verde y hueso</strong><small>Verde apagado con un claro.</small></span>
-                        <span class="plantilla-dots" aria-hidden="true"><i style="background:#3e6b5a"></i><i style="background:#7fa396"></i><i style="background:#efeae3"></i></span>
-                      </label>
-                      <label class="plantilla">
-                        <input type="radio" name="paleta" value="Grafito" data-colores="Marino,Grafito,Blanco">
-                        <span class="plantilla-copy"><strong>Grafito</strong><small>Oscura, sin color de promo.</small></span>
-                        <span class="plantilla-dots" aria-hidden="true"><i style="background:#1c3344"></i><i style="background:#4d4d4d"></i><i style="background:#ffffff"></i></span>
-                      </label>
-                    </div>
-                    <p class="hint">O elegí los colores vos. Podés marcar más de uno.</p>
+                    <legend>Colores</legend>
+                    <p class="hint">Elegí los colores. Podés marcar más de uno.</p>
                     <div class="swatches">
                       <label class="swatch"><input type="checkbox" name="color" value="Negro" data-hex="#1c1c1c"><i style="background:#1c1c1c"></i><span>Negro</span></label>
                       <label class="swatch"><input type="checkbox" name="color" value="Grafito" data-hex="#4d4d4d"><i style="background:#4d4d4d"></i><span>Grafito</span></label>
@@ -386,7 +358,6 @@ const fichas = {
     fecha: "15/04/2026",
     mensaje: "Si conocés a alguien que necesite un seguro, recomendame. Que se note que lo atiendo yo.",
     placa: "Referidos",
-    paleta: "Verde y hueso",
     colores: [{ nombre: "Verde", hex: "#3e6b5a" }, { nombre: "Verde gris", hex: "#7fa396" }, { nombre: "Hueso", hex: "#efeae3" }],
     compania: "No. Solo BQB y sus datos",
     falta: "Su nombre, su teléfono y el logo de BQB",
@@ -404,7 +375,6 @@ const fichas = {
     fecha: "20/03/2026",
     mensaje: "Tu auto, con alguien que te asesora.",
     placa: "Renovación",
-    paleta: "Marino",
     colores: [{ nombre: "Marino", hex: "#1c3344" }, { nombre: "Azul", hex: "#2f5270" }, { nombre: "Blanco", hex: "#ffffff" }],
     compania: "No. Solo BQB y sus datos",
     falta: "Su nombre y el logo de BQB",
@@ -420,7 +390,6 @@ const fichas = {
     formato: "Historia",
     modelo: "Campañas por el clima",
     placa: "Campañas por el clima",
-    paleta: "Acero",
     fecha: "01/11/2026",
     colores: [{ nombre: "Acero", hex: "#6f8fa3" }, { nombre: "Gris claro", hex: "#bdbdbd" }],
     compania: "No. Solo BQB y sus datos",
@@ -439,7 +408,6 @@ const fichas = {
     fecha: "10/05/2026",
     mensaje: "Tu moto también se asegura.",
     placa: "Ofertas",
-    paleta: "Bordó y arena",
     colores: [{ nombre: "Arena", hex: "#d4c4a8" }],
     compania: "No. Solo BQB y sus datos",
     falta: "Falta la matrícula",
@@ -455,7 +423,6 @@ const fichas = {
     formato: "Historia",
     modelo: "Renovación",
     placa: "Renovación",
-    paleta: "Marino",
     fecha: "02/06/2026",
     colores: [{ nombre: "Verde", hex: "#3e6b5a" }],
     compania: "No. Solo BQB y sus datos",
@@ -527,7 +494,6 @@ function abrirRecibido(card) {
     ["Formato", ficha.formato],
     ["Para cuándo", ficha.fecha],
     ["Plantilla de placa", ficha.placa],
-    ["Paleta", ficha.paleta],
     ["Mensaje", ficha.mensaje],
     ["Compañía", ficha.compania],
     ["Cómo aparece", ficha.companiaModo],
@@ -670,24 +636,6 @@ document.getElementById("ver-lista").addEventListener("click", () => {
 });
 form.elements.camino.forEach((input) => input.addEventListener("change", syncCamino));
 form.elements.compania.forEach((input) => input.addEventListener("change", syncCompania));
-form.querySelectorAll('input[name="paleta"]').forEach((input) => {
-  input.addEventListener("change", () => {
-    const nombres = input.dataset.colores ? input.dataset.colores.split(",") : [];
-    form.querySelectorAll('input[name="color"]').forEach((color) => {
-      color.checked = nombres.includes(color.value);
-    });
-  });
-});
-form.querySelectorAll('input[name="color"]').forEach((color) => {
-  color.addEventListener("change", () => {
-    const elegidos = [...form.querySelectorAll('input[name="color"]:checked')].map((item) => item.value).sort().join(",");
-    form.querySelectorAll('input[name="paleta"]').forEach((input) => {
-      const paleta = input.dataset.colores.split(",").sort().join(",");
-      if (paleta !== elegidos) input.checked = false;
-    });
-  });
-});
-
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(form);
@@ -729,7 +677,6 @@ form.addEventListener("submit", (event) => {
     companiaModo: data.get("compania") === "si" ? String(data.get("compania-modo") || "") : "",
     falta: falta.join(", "),
     placa: String(data.get("placa") || ""),
-    paleta: String(data.get("paleta") || ""),
     preferencias: String(data.get("preferencias") || ""),
     matricula: String(data.get("matricula") || ""),
     telefono: String(data.get("telefono") || ""),
