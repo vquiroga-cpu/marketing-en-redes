@@ -388,6 +388,8 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
 }
 
 .o_radio input { width: auto; margin: 0; accent-color: var(--odoo); }
+.o_radio:has(input:disabled) { cursor: default; }
+.o_radio input:disabled { accent-color: var(--odoo); opacity: 1; }
 .checks { display: flex; flex-wrap: wrap; gap: 0 18px; }
 .hint { margin: 4px 0 0; color: var(--muted); font-size: 12px; font-weight: 500; }
 

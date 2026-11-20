@@ -293,6 +293,13 @@
                           <label class="swatch"><input type="checkbox" name="color" value="Acero" data-hex="#6f8fa3"><i style="background:#6f8fa3"></i><span>Acero</span></label>
                           <label class="swatch"><input type="checkbox" name="color" value="Azul" data-hex="#2f5270"><i style="background:#2f5270"></i><span>Azul</span></label>
                           <label class="swatch"><input type="checkbox" name="color" value="Marino" data-hex="#1c3344"><i style="background:#1c3344"></i><span>Marino</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Rojo" data-hex="#e23b32"><i style="background:#e23b32"></i><span>Rojo</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Naranja" data-hex="#f26b1d"><i style="background:#f26b1d"></i><span>Naranja</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Amarillo" data-hex="#f5c400"><i class="is-light" style="background:#f5c400"></i><span>Amarillo</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Verde vivo" data-hex="#19a463"><i style="background:#19a463"></i><span>Verde vivo</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Celeste" data-hex="#19b4e0"><i style="background:#19b4e0"></i><span>Celeste</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Azul vivo" data-hex="#2f62f6"><i style="background:#2f62f6"></i><span>Azul vivo</span></label>
+                          <label class="swatch"><input type="checkbox" name="color" value="Fucsia" data-hex="#e21878"><i style="background:#e21878"></i><span>Fucsia</span></label>
                         </div>
                       </fieldset>
                     </div>
@@ -321,11 +328,12 @@
                     <div class="paso" id="paso-falta" hidden>
                       <fieldset>
                         <legend>¿Qué no puede faltar?</legend>
+                        <p class="hint">El logo de BQB va en todas las placas.</p>
                         <div class="checks">
                           <label class="o_radio"><input type="checkbox" name="falta" value="Mi nombre"> Mi nombre</label>
                           <label class="o_radio"><input type="checkbox" name="falta" value="Mi teléfono"> Mi teléfono</label>
                           <label class="o_radio"><input type="checkbox" name="falta" value="Mi matrícula"> Mi matrícula</label>
-                          <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB"> Logo de BQB</label>
+                          <label class="o_radio"><input type="checkbox" name="falta" value="Logo de BQB" checked disabled> Logo de BQB</label>
                           <label class="o_radio"><input type="checkbox" name="falta" value="Fecha límite"> Una fecha límite</label>
                         </div>
                       </fieldset>
@@ -580,7 +588,7 @@ function syncGuia() {
 function syncPasos(evento) {
   let abierto = true;
   const origen = evento && evento.target;
-  const puedeEnfocar = origen && origen.type !== "checkbox" && !esTexto(origen);
+  let puedeEnfocar = origen && origen.type !== "checkbox" && !esTexto(origen);
   ordenPasos.forEach((id) => {
     if (id === "placa") {
       const bloqueada = !abierto;
@@ -606,8 +614,9 @@ function syncPasos(evento) {
     nodo.hidden = !abierto;
     if (id === "mensaje") document.getElementById("paso-formato").hidden = !abierto;
     if (abierto && estabaOculto && puedeEnfocar) {
-      const campo = nodo.querySelector("input, select, textarea");
+      const campo = nodo.querySelector("input:not(:disabled), select, textarea");
       if (campo) campo.focus();
+      puedeEnfocar = false;
     }
     const listo = id === "mensaje" ? pasoListo("mensaje") && pasoListo("formato") : pasoListo(id);
     if (abierto && !listo) abierto = false;
