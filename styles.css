@@ -33,17 +33,16 @@ button, input, select, textarea { font: inherit; }
 .o_main_navbar {
   display: flex;
   align-items: center;
-  gap: 12px;
   position: relative;
   height: 46px;
-  padding: 0 12px;
+  padding: 0 16px 0 0;
   background: var(--odoo);
   color: #fff;
 }
 
 .o_navbar_apps_menu { display: flex; align-items: center; }
 
-.o-dropdown--menu {
+.o_navbar_apps_menu .o-dropdown--menu {
   display: none;
   position: absolute;
   top: 100%;
@@ -105,19 +104,40 @@ button, input, select, textarea { font: inherit; }
 
 .o_menu_toggle {
   display: grid;
-  grid-template-columns: repeat(3, 4px);
-  gap: 3px;
-  width: 28px;
-  height: 28px;
-  padding: 5px;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
   border: 0;
   background: transparent;
+  color: #fff;
 }
 
-.o_menu_toggle i { width: 4px; height: 4px; border-radius: 1px; background: #fff; }
+.o_menu_toggle:hover,
+.o_navbar_apps_menu.show .o_menu_toggle { background: rgba(0, 0, 0, 0.15); }
 
-.o_menu_brand { font-size: 18px; font-weight: 500; }
+.fa-th-large { display: block; width: 28px; height: 28px; }
+.fa-th-large svg { display: block; width: 28px; height: 28px; }
+
+.o_menu_sections { display: flex; align-items: stretch; height: 46px; }
+
+.o_menu_sections .dropdown-toggle {
+  height: 46px;
+  padding: 0 16px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  line-height: 46px;
+  white-space: nowrap;
+}
+
+.o_menu_sections .dropdown-toggle:hover,
+.o_menu_sections .dropdown-toggle.is-active { background: rgba(0, 0, 0, 0.15); }
+
+.o_menu_brand { margin-left: 12px; font-size: 18px; font-weight: 500; }
 .o_navbar_spacer { flex: 1; }
+.o_menu_logo { height: 32px; width: auto; margin-right: 12px; }
 
 .o_user {
   display: grid;
@@ -666,5 +686,6 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
   .o_form_statusbar { flex-wrap: wrap; justify-content: flex-start; }
   .swatches { grid-template-columns: repeat(7, 32px); gap: 12px; }
   .swatch i { width: 32px; height: 32px; }
-  .o-dropdown--menu { grid-template-columns: 1fr; }
+  .o_navbar_apps_menu .o-dropdown--menu { grid-template-columns: 1fr; }
+  .o_main_navbar { overflow-x: auto; }
 }

@@ -14,8 +14,8 @@
   <div class="o_web_client">
     <header class="o_main_navbar">
       <div class="o-dropdown dropdown o-dropdown--no-caret o_navbar_apps_menu">
-        <button type="button" class="o_menu_toggle" aria-label="Aplicaciones" aria-expanded="false" aria-controls="apps-menu">
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <button type="button" class="dropdown-toggle o_menu_toggle" aria-label="Aplicaciones" aria-expanded="false" aria-controls="apps-menu">
+          <i class="fa fa-th-large" aria-hidden="true"><svg viewBox="0 0 32 32"><path fill="currentColor" d="M2 2h12v12H2zm16 0h12v12H18zM2 18h12v12H2zm16 0h12v12H18z"/></svg></i>
         </button>
         <div class="o-dropdown--menu dropdown-menu o-popper-position o-popper-position--bs" id="apps-menu" role="menu">
           <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="BQB"><span class="o_app_icon" style="background:#2c4554"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial, sans-serif" font-weight="700">BQB</text></svg></span>BQB</a></span>
@@ -29,8 +29,25 @@
           <p class="apps-nota" id="apps-nota" hidden></p>
         </div>
       </div>
-      <span class="o_menu_brand">CRM &amp; Email Marketing</span>
+      <div class="o_menu_sections">
+        <div class="o-dropdown dropdown o-dropdown--no-caret">
+          <button type="button" class="dropdown-toggle is-active" title="Segmentación" data-hotkey="shift+1" data-vista="vista-segmentacion" data-pager="0 / 0" aria-expanded="false">Segmentación</button>
+        </div>
+        <div class="o-dropdown dropdown o-dropdown--no-caret">
+          <button type="button" class="dropdown-toggle" title="Destinatarios" data-hotkey="shift+2" data-vista="vista-destinatarios" data-pager="0 / 0" aria-expanded="false">Destinatarios</button>
+        </div>
+        <div class="o-dropdown dropdown o-dropdown--no-caret">
+          <button type="button" class="dropdown-toggle" title="Campañas" data-hotkey="shift+3" data-vista="vista-campanas" data-pager="1-7 / 7" aria-expanded="false">Campañas</button>
+        </div>
+        <div class="o-dropdown dropdown o-dropdown--no-caret">
+          <button type="button" class="dropdown-toggle" title="Herramientas" data-hotkey="shift+4" data-vista="vista-herramientas" data-pager="0 / 0" aria-expanded="false">Herramientas</button>
+        </div>
+        <div class="o-dropdown dropdown o-dropdown--no-caret">
+          <button type="button" class="dropdown-toggle" title="Configuración" data-hotkey="shift+5" data-vista="vista-configuracion" data-pager="0 / 0" aria-expanded="false">Configuración</button>
+        </div>
+      </div>
       <span class="o_navbar_spacer"></span>
+      <img class="o_menu_logo" src="logo-bqb.svg" alt="BQB">
       <span class="o_user" title="Victoria Quiroga">V</span>
     </header>
 
@@ -40,12 +57,8 @@
           <div class="o_cp_top">
             <ol class="breadcrumb">
               <li>CRM &amp; Email Marketing</li>
-              <li class="active" id="breadcrumb-actual">CRM</li>
+              <li class="active" id="breadcrumb-actual">Segmentación</li>
             </ol>
-          </div>
-          <div class="o_cp_tabs" role="tablist" aria-label="Secciones">
-            <button type="button" class="is-active" id="pestana-crm" data-vista="vista-crm" role="tab" aria-selected="true">CRM</button>
-            <button type="button" id="pestana-emails" data-vista="vista-emails" role="tab" aria-selected="false">Emails</button>
           </div>
           <div class="o_cp_bottom">
             <div class="o_cp_bottom_left"></div>
@@ -54,20 +67,33 @@
         </div>
 
         <div class="o_content">
-          <section id="vista-crm">
-            <p class="llegada">El CRM abre acá. En el próximo paso definimos las columnas y qué se ve en cada contacto.</p>
+          <section id="vista-segmentacion">
+            <p class="llegada">La segmentación abre acá. En el próximo paso definimos cómo se arman los grupos.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Segmentos <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">Todavía no hay segmentos.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-destinatarios" hidden>
+            <p class="llegada">Los destinatarios abren acá. En el próximo paso definimos qué se ve en cada contacto.</p>
             <div class="o_kanban_view">
               <section class="o_kanban_group">
                 <header class="o_kanban_header">
                   <div class="o_column_title">Contactos <span class="o_kanban_counter">0</span></div>
                   <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
                 </header>
-                <p class="disenos-vacio">Todavía no hay contactos.</p>
+                <p class="disenos-vacio">Todavía no hay destinatarios.</p>
               </section>
             </div>
           </section>
 
-          <section id="vista-emails" hidden>
+          <section id="vista-campanas" hidden>
             <p class="llegada">Estas plantillas ya están escritas. Las podemos ordenar en campañas.</p>
             <div class="o_kanban_view">
               <section class="o_kanban_group">
@@ -106,6 +132,14 @@
               </section>
             </div>
           </section>
+
+          <section id="vista-herramientas" hidden>
+            <p class="llegada">Las herramientas abren acá. Las sumamos en el próximo paso.</p>
+          </section>
+
+          <section id="vista-configuracion" hidden>
+            <p class="llegada">La configuración abre acá. La armamos en el próximo paso.</p>
+          </section>
         </div>
       </div>
     </div>
@@ -123,7 +157,7 @@
           document.getElementById(otra.dataset.vista).hidden = !activa;
         });
         breadcrumb.textContent = pestana.textContent;
-        pager.textContent = pestana.dataset.vista === "vista-emails" ? "1-7 / 7" : "0 / 0";
+        pager.textContent = pestana.dataset.pager;
       });
     });
   </script>
