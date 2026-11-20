@@ -374,34 +374,49 @@
           </form>
 
           <section id="vista-disenos" hidden>
-            <p class="llegada">Buscá una palabra, por ejemplo auto, y ves las placas de ese seguro. Subir imágenes queda solo para Victoria Quiroga.</p>
+            <p class="llegada">Buscá auto, ofertas o renovación y ves esas placas. Subir imágenes queda solo para Victoria Quiroga.</p>
             <p class="disenos-vacio" id="disenos-vacio" hidden>Todavía no subiste diseños.</p>
             <p class="disenos-vacio" id="disenos-nada" hidden>No hay placas con esa palabra.</p>
             <div class="disenos" id="disenos">
-              <article class="diseno" data-tema="Auto">
-                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
-                <p>Renová tu póliza</p>
-                <span class="badge">Auto</span>
+              <article class="diseno" data-tema="Auto Ofertas">
+                <img src="placas/oferta.png" alt="Oferta de auto">
+                <p>Oferta de auto</p>
+                <span class="badge">Ofertas</span>
               </article>
-              <article class="diseno" data-tema="Auto">
-                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
-                <p>Cobertura del auto</p>
-                <span class="badge">Auto</span>
+              <article class="diseno" data-tema="Hogar Nuevas coberturas">
+                <img src="placas/nuevas.png" alt="Nuevas coberturas de hogar">
+                <p>Nuevas coberturas de hogar</p>
+                <span class="badge">Nuevas coberturas</span>
               </article>
-              <article class="diseno" data-tema="Auto">
-                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
-                <p>Promo marzo</p>
-                <span class="badge">Auto</span>
+              <article class="diseno" data-tema="Auto Renovación">
+                <img src="placas/renovacion.png" alt="Renovación de auto">
+                <p>Renovación de auto</p>
+                <span class="badge">Renovación</span>
               </article>
-              <article class="diseno" data-tema="Moto">
-                <div class="diseno-muestra is-moto" aria-hidden="true"><span>Moto</span></div>
-                <p>Moto urbana</p>
-                <span class="badge">Moto</span>
+              <article class="diseno" data-tema="Referidos">
+                <img src="placas/referidos.png" alt="Recomendame">
+                <p>Recomendame</p>
+                <span class="badge">Referidos</span>
               </article>
-              <article class="diseno" data-tema="Hogar">
-                <div class="diseno-muestra is-hogar" aria-hidden="true"><span>Hogar</span></div>
-                <p>Tranquilidad en casa</p>
-                <span class="badge">Hogar</span>
+              <article class="diseno" data-tema="Auto Campañas por el clima Granizo">
+                <img src="placas/granizo.png" alt="Campaña granizo">
+                <p>Campaña granizo</p>
+                <span class="badge">Clima</span>
+              </article>
+              <article class="diseno" data-tema="Ex clientes">
+                <img src="placas/volve.png" alt="Volvé, ex clientes">
+                <p>Volvé</p>
+                <span class="badge">Ex clientes</span>
+              </article>
+              <article class="diseno" data-tema="Auto Hogar Vida Clientes con una sola póliza">
+                <img src="placas/bento.png" alt="Clientes con una sola póliza">
+                <p>Una sola póliza</p>
+                <span class="badge">Una sola póliza</span>
+              </article>
+              <article class="diseno" data-tema="Presentación del productor">
+                <img src="placas/presentacion.png" alt="Presentación del productor">
+                <p>Presentación del productor</p>
+                <span class="badge">Presentación</span>
               </article>
             </div>
           </section>
@@ -806,8 +821,12 @@ function abrirCuestionario() {
   form.elements.nombre.focus();
 }
 
+function normalizar(texto) {
+  return texto.toLocaleLowerCase("es").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function textoBusqueda() {
-  return buscar.value.trim().toLocaleLowerCase("es");
+  return normalizar(buscar.value.trim());
 }
 
 function ponerQuitar(tarjeta) {
@@ -831,7 +850,7 @@ function filtrarDisenos() {
   [...disenos.children].forEach((tarjeta) => {
     const tema = tarjeta.dataset.tema || "";
     const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent : "";
-    const coincide = !consulta || (tema + " " + titulo).toLocaleLowerCase("es").includes(consulta);
+    const coincide = !consulta || normalizar(tema + " " + titulo).includes(consulta);
     tarjeta.hidden = !coincide;
     if (coincide) visibles += 1;
   });
@@ -843,7 +862,7 @@ function filtrarDisenos() {
 function filtrarPedidos() {
   const consulta = textoBusqueda();
   document.querySelectorAll(".o_kanban_record").forEach((tarjeta) => {
-    tarjeta.hidden = Boolean(consulta) && !tarjeta.textContent.toLocaleLowerCase("es").includes(consulta);
+    tarjeta.hidden = Boolean(consulta) && !normalizar(tarjeta.textContent).includes(consulta);
   });
   contarColumnas();
   pintarPager();

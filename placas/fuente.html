@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Placas de ejemplo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; }
+    .placa {
+      width: 1080px;
+      height: 1350px;
+      overflow: hidden;
+      position: relative;
+      font-family: "Arial Black", Arial, Helvetica, sans-serif;
+      color: #fff;
+    }
+    .marca {
+      position: absolute;
+      top: 54px;
+      left: 64px;
+      font-size: 28px;
+      letter-spacing: 0.18em;
+    }
+    .pie {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 56px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .oferta { background: #19b4e0; }
+    .oferta h1 { position: absolute; top: 150px; left: 64px; right: 64px; font-size: 132px; line-height: 0.9; letter-spacing: -0.03em; }
+    .oferta h1 span { color: #f5e400; }
+    .oferta .sub { position: absolute; top: 460px; left: 64px; font-family: Arial, Helvetica, sans-serif; font-size: 40px; font-weight: 700; }
+    .auto { position: absolute; left: 120px; bottom: 250px; width: 840px; height: 340px; }
+    .auto .cuerpo { position: absolute; left: 70px; right: 40px; bottom: 70px; height: 150px; background: #14242e; border-radius: 28px 70px 24px 24px; }
+    .auto .techo { position: absolute; left: 230px; bottom: 200px; width: 360px; height: 120px; background: #14242e; border-radius: 80px 90px 0 0; }
+    .auto .rueda { position: absolute; bottom: 28px; width: 110px; height: 110px; background: #14242e; border-radius: 50%; border: 16px solid #f5e400; }
+    .auto .rueda.izq { left: 150px; }
+    .auto .rueda.der { right: 120px; }
+
+    .nuevas { background: #d7f6f1; color: #14343a; }
+    .nuevas h1 { position: absolute; top: 140px; left: 64px; right: 64px; font-size: 108px; line-height: 0.9; letter-spacing: -0.03em; }
+    .nuevas h1 span { display: block; font-size: 64px; letter-spacing: 0; margin-top: 12px; }
+    .pills { position: absolute; left: 80px; right: 80px; top: 520px; display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
+    .pills span {
+      display: inline-block;
+      padding: 22px 36px;
+      border-radius: 999px;
+      background: #fff;
+      color: #14343a;
+      font-size: 36px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 0 rgba(20, 52, 58, 0.08);
+    }
+    .pills span.lleno { background: #12c4b8; color: #08343a; }
+    .nuevas .pie { color: #14343a; }
+
+    .renovacion { background: #f4efe6; color: #1c1c1c; }
+    .renovacion h1 { position: absolute; top: 180px; left: 48px; right: 48px; font-size: 168px; line-height: 0.82; letter-spacing: -0.045em; }
+    .renovacion h1 span { color: #e23b32; }
+    .renovacion .sub { position: absolute; top: 620px; left: 72px; right: 72px; font-family: Arial, Helvetica, sans-serif; font-size: 48px; font-weight: 700; line-height: 1.25; }
+    .renovacion .caja { position: absolute; left: 72px; bottom: 180px; padding: 28px 36px; background: #1c3344; color: #fff; font-size: 40px; border-radius: 18px; }
+    .renovacion .pie { color: #1c1c1c; }
+
+    .referidos { background: #2f62f6; }
+    .referidos h1 { position: absolute; top: 200px; left: 64px; right: 64px; font-size: 118px; line-height: 0.88; letter-spacing: -0.04em; }
+    .referidos .sub { position: absolute; top: 620px; left: 72px; right: 120px; font-family: Arial, Helvetica, sans-serif; font-size: 46px; font-weight: 700; line-height: 1.3; }
+    .referidos .flecha { position: absolute; right: 80px; bottom: 220px; font-size: 180px; line-height: 1; }
+
+    .granizo { background: #1c3344; }
+    .granizo .bolas i { position: absolute; width: 28px; height: 28px; border-radius: 50%; background: #fff; opacity: 0.9; }
+    .granizo h1 { position: absolute; top: 280px; left: 64px; right: 64px; font-size: 150px; line-height: 0.85; letter-spacing: -0.04em; }
+    .granizo .sub { position: absolute; top: 640px; left: 72px; right: 72px; font-family: Arial, Helvetica, sans-serif; font-size: 48px; font-weight: 700; line-height: 1.25; }
+    .granizo .etiqueta { position: absolute; left: 72px; bottom: 190px; color: #f5e400; font-size: 36px; letter-spacing: 0.08em; }
+
+    .volve { background: #7a4550; }
+    .volve h1 { position: absolute; top: 240px; left: 64px; font-size: 210px; line-height: 0.8; letter-spacing: -0.05em; color: #f4efe6; }
+    .volve .sub { position: absolute; top: 560px; left: 72px; right: 80px; font-family: Arial, Helvetica, sans-serif; font-size: 52px; font-weight: 700; line-height: 1.25; color: #f4efe6; }
+
+    .bento { background: #f7d7df; color: #2a1c16; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 340px 1fr 300px; gap: 22px; }
+    .bento article { border-radius: 36px; padding: 40px; }
+    .bento h1 { font-size: 72px; line-height: 0.92; letter-spacing: -0.03em; }
+    .bento p { margin-top: 16px; font-family: Arial, Helvetica, sans-serif; font-size: 30px; font-weight: 700; line-height: 1.3; }
+    .bento .ancha { grid-column: 1 / -1; background: #2a1c16; color: #fff; }
+    .bento .ramo { background: #e23b32; color: #fff; position: static; width: auto; height: auto; left: auto; bottom: auto; }
+    .bento .hogar { background: #fff4e8; }
+    .bento .vida { grid-column: 1 / -1; background: #2a1c16; color: #fff; }
+    .bento .marca-bento { font-size: 22px; letter-spacing: 0.16em; margin-bottom: 18px; }
+
+    .presentacion { background: #efeae3; color: #1c3344; }
+    .presentacion .bloque { position: absolute; left: 0; right: 0; top: 220px; padding: 72px 72px 80px; background: #1c3344; color: #fff; }
+    .presentacion h1 { font-size: 108px; line-height: 0.88; letter-spacing: -0.04em; }
+    .presentacion .sub { margin-top: 28px; font-family: Arial, Helvetica, sans-serif; font-size: 40px; font-weight: 700; }
+    .presentacion .datos { position: absolute; left: 72px; right: 72px; bottom: 120px; font-family: Arial, Helvetica, sans-serif; font-size: 36px; font-weight: 700; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <section class="placa oferta" id="oferta">
+    <p class="marca">BQB</p>
+    <h1><span>OFERTA</span><br>DE AUTO</h1>
+    <p class="sub">Este mes, con alguien que te asesora.</p>
+    <div class="auto" aria-hidden="true"><div class="techo"></div><div class="cuerpo"></div><div class="rueda izq"></div><div class="rueda der"></div></div>
+    <p class="pie">Hasta el 30 de abril<br>Tu nombre · Matrícula</p>
+  </section>
+
+  <section class="placa nuevas" id="nuevas">
+    <p class="marca">BQB</p>
+    <h1>NUEVAS<span>COBERTURAS PARA TU HOGAR</span></h1>
+    <div class="pills">
+      <span>INCENDIO</span>
+      <span class="lleno">ROBO</span>
+      <span>CRISTALES</span>
+      <span class="lleno">RESPONSABILIDAD CIVIL</span>
+    </div>
+    <p class="pie">Tu nombre · Matrícula</p>
+  </section>
+
+  <section class="placa renovacion" id="renovacion">
+    <p class="marca">BQB</p>
+    <h1>RENOVÁ<br><span>TU AUTO</span></h1>
+    <p class="sub">La póliza está por vencer. La renovamos juntos.</p>
+    <p class="caja">Escribime y lo vemos</p>
+    <p class="pie">Tu nombre · Matrícula</p>
+  </section>
+
+  <section class="placa referidos" id="referidos">
+    <p class="marca">BQB</p>
+    <h1>RECOMENDAME</h1>
+    <p class="sub">Si conocés a alguien que necesite un seguro, que me escriba.</p>
+    <p class="flecha" aria-hidden="true">→</p>
+    <p class="pie">Tu nombre · Matrícula · Teléfono</p>
+  </section>
+
+  <section class="placa granizo" id="granizo">
+    <div class="bolas" aria-hidden="true">
+      <i style="left:80px;top:90px"></i><i style="left:180px;top:160px"></i><i style="left:300px;top:80px"></i>
+      <i style="left:460px;top:140px"></i><i style="left:640px;top:90px"></i><i style="left:820px;top:170px"></i>
+      <i style="left:120px;top:980px"></i><i style="left:860px;top:1040px"></i><i style="left:700px;top:1120px"></i>
+    </div>
+    <p class="marca">BQB</p>
+    <h1>GRANIZO</h1>
+    <p class="sub">Tu auto también se puede cubrir cuando llega el clima.</p>
+    <p class="etiqueta">CAMPAÑA POR EL CLIMA</p>
+    <p class="pie">Tu nombre · Matrícula</p>
+  </section>
+
+  <section class="placa volve" id="volve">
+    <p class="marca">BQB</p>
+    <h1>VOLVÉ</h1>
+    <p class="sub">Hace tiempo que no hablamos. Te puedo asesorar de nuevo.</p>
+    <p class="pie">Ex clientes · Tu nombre · Matrícula</p>
+  </section>
+
+  <section class="placa bento" id="bento">
+    <article class="ancha">
+      <p class="marca-bento">BQB</p>
+      <h1>TENÉS UNA SOLA PÓLIZA</h1>
+      <p>Se puede sumar otra cobertura.</p>
+    </article>
+    <article class="ramo"><h1>AUTO</h1><p>La que ya tenés.</p></article>
+    <article class="hogar"><h1>HOGAR</h1><p>La que podés sumar.</p></article>
+    <article class="vida" style="grid-column: 1 / -1;"><h1>VIDA</h1><p>Tu nombre · Matrícula</p></article>
+  </section>
+
+  <section class="placa presentacion" id="presentacion">
+    <p class="marca">BQB</p>
+    <div class="bloque">
+      <h1>SOY TU PRODUCTOR</h1>
+      <p class="sub">Te asesoro para que elijas con calma.</p>
+    </div>
+    <p class="datos">Tu nombre<br>Matrícula<br>Teléfono</p>
+  </section>
+</body>
+</html>
