@@ -79,6 +79,8 @@ button, input, select, textarea { font: inherit; }
   align-items: center;
 }
 
+.o_cp_buttons { flex-wrap: wrap; gap: 6px; }
+
 .o_cp_top, .o_cp_bottom { justify-content: space-between; gap: 12px; }
 
 .breadcrumb {

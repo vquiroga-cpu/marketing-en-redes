@@ -48,6 +48,9 @@
                 <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
                 <button type="button" class="btn btn-primary" id="guardar" hidden disabled>Guardar</button>
                 <button type="button" class="btn btn-primary" id="tomar" hidden>Tomar pedido</button>
+                <button type="button" class="btn btn-primary" id="a-lista" hidden>Pasar a lista</button>
+                <button type="button" class="btn btn-secondary" id="a-ajustar" hidden>Hay que ajustar</button>
+                <button type="button" class="btn btn-secondary" id="a-diseno" hidden>Volver a En diseño</button>
                 <button type="button" class="btn btn-secondary" id="volver" hidden>Volver</button>
                 <button type="button" class="btn btn-secondary" id="descartar" hidden>Descartar</button>
               </div>
@@ -419,6 +422,9 @@ const guias = {
 };
 const recibido = document.getElementById("recibido");
 const tomar = document.getElementById("tomar");
+const aLista = document.getElementById("a-lista");
+const aAjustar = document.getElementById("a-ajustar");
+const aDiseno = document.getElementById("a-diseno");
 const volver = document.getElementById("volver");
 const aviso = document.getElementById("aviso");
 let tarjetaAbierta = null;
@@ -639,7 +645,7 @@ function abrirRecibido(card) {
   guardar.hidden = true;
   descartar.hidden = true;
   volver.hidden = false;
-  tomar.hidden = ficha.estado !== "Pedido";
+  mostrarAcciones(ficha.estado);
   breadcrumb.textContent = ficha.titulo;
   pager.hidden = true;
 
@@ -695,11 +701,31 @@ function abrirRecibido(card) {
   }
 }
 
+function mostrarAcciones(estado) {
+  tomar.hidden = estado !== "Pedido";
+  aAjustar.hidden = estado !== "En diseño";
+  aLista.hidden = estado !== "En diseño" && estado !== "Hay que ajustar";
+  aDiseno.hidden = estado !== "Hay que ajustar";
+}
+
+function moverTarjeta(estado, columnaId, mensaje) {
+  if (!tarjetaAbierta) return;
+  const ficha = fichaDe(tarjetaAbierta);
+  ficha.estado = estado;
+  tarjetaAbierta.dataset.estado = estado;
+  tarjetaAbierta.dataset.ficha = JSON.stringify(ficha);
+  tarjetaAbierta.classList.toggle("oe_kanban_card_muted", estado === "Lista");
+  document.getElementById(columnaId).prepend(tarjetaAbierta);
+  contarColumnas();
+  aviso.textContent = mensaje;
+  cerrarRecibido();
+}
+
 function cerrarRecibido() {
   recibido.hidden = true;
   aviso.hidden = false;
   volver.hidden = true;
-  tomar.hidden = true;
+  mostrarAcciones("");
   tarjetaAbierta = null;
   cerrarCuestionario();
 }
@@ -775,15 +801,24 @@ tablero.addEventListener("click", (event) => {
 });
 volver.addEventListener("click", cerrarRecibido);
 tomar.addEventListener("click", () => {
-  if (!tarjetaAbierta) return;
-  const ficha = fichaDe(tarjetaAbierta);
-  ficha.estado = "En diseño";
-  tarjetaAbierta.dataset.estado = "En diseño";
-  tarjetaAbierta.dataset.ficha = JSON.stringify(ficha);
-  document.getElementById("col-diseno").prepend(tarjetaAbierta);
-  contarColumnas();
-  aviso.textContent = "Tomaste el pedido de " + ficha.nombre + ". Pasó a En diseño.";
-  cerrarRecibido();
+  const ficha = tarjetaAbierta ? fichaDe(tarjetaAbierta) : null;
+  if (!ficha) return;
+  moverTarjeta("En diseño", "col-diseno", "Tomaste el pedido de " + ficha.nombre + ". Pasó a En diseño.");
+});
+aAjustar.addEventListener("click", () => {
+  const ficha = tarjetaAbierta ? fichaDe(tarjetaAbierta) : null;
+  if (!ficha) return;
+  moverTarjeta("Hay que ajustar", "col-ajustar", "El pedido de " + ficha.nombre + " pasó a Hay que ajustar.");
+});
+aLista.addEventListener("click", () => {
+  const ficha = tarjetaAbierta ? fichaDe(tarjetaAbierta) : null;
+  if (!ficha) return;
+  moverTarjeta("Lista", "col-lista", "El pedido de " + ficha.nombre + " pasó a Lista.");
+});
+aDiseno.addEventListener("click", () => {
+  const ficha = tarjetaAbierta ? fichaDe(tarjetaAbierta) : null;
+  if (!ficha) return;
+  moverTarjeta("En diseño", "col-diseno", "El pedido de " + ficha.nombre + " volvió a En diseño.");
 });
 crear.addEventListener("click", abrirCuestionario);
 guardar.addEventListener("click", () => form.requestSubmit());
