@@ -239,6 +239,14 @@
                           <input type="radio" name="placa" value="Presentación del productor" disabled>
                           <span class="plantilla-copy"><strong>Presentación del productor</strong><small>Para decir quién sos.</small></span>
                         </label>
+                        <label class="plantilla plantilla-sola">
+                          <input type="radio" name="placa" value="Otras" disabled>
+                          <span class="plantilla-copy"><strong>Otras</strong><small>Si la placa es distinta, contame cuál.</small></span>
+                        </label>
+                        <label class="plantilla-otra" id="campo-placa-otra" hidden>
+                          ¿Cuál?
+                          <input name="placa-otra" type="text" class="o_input" placeholder="La placa que necesitás" disabled>
+                        </label>
                       </div>
                     </fieldset>
                   </aside>
@@ -402,6 +410,11 @@ const guias = {
     formato: "Feed",
     porque: "Queda fija en el perfil para quien te busca.",
     decir: "Quién sos, qué seguros asesorás y cómo te contactan."
+  },
+  "Otras": {
+    formato: "",
+    porque: "",
+    decir: "Contame qué placa es y qué tiene que decir."
   }
 };
 const recibido = document.getElementById("recibido");
@@ -506,12 +519,20 @@ function placaElegida() {
   return form.querySelector('input[name="placa"]:checked');
 }
 
+function nombrePlaca() {
+  const placa = placaElegida();
+  if (!placa) return "";
+  if (placa.value !== "Otras") return placa.value;
+  const detalle = form.elements["placa-otra"].value.trim();
+  return detalle ? "Otras: " + detalle : "";
+}
+
 function pasoListo(id) {
   if (id === "nombre") return form.elements.nombre.value.trim();
   if (id === "camino") return form.elements.camino.value;
   if (id === "ramo") return form.elements.ramo.value;
   if (id === "fecha") return form.elements.fecha.value;
-  if (id === "placa") return placaElegida();
+  if (id === "placa") return nombrePlaca();
   if (id === "mensaje") return form.elements.mensaje.value.trim();
   if (id === "formato") return form.elements.formato.value;
   if (id === "colores") return form.querySelector('input[name="color"]:checked');
@@ -545,8 +566,9 @@ function syncGuia() {
     if (!opcion.value) return;
     opcion.textContent = guia && opcion.value === guia.formato ? opcion.value + " (recomendado)" : opcion.value;
   });
-  guiaMensaje.textContent = guia ? "En " + placa.value + " conviene decir: " + guia.decir : "";
-  guiaFormato.textContent = guia ? "Recomendamos " + guia.formato + ". " + guia.porque : "";
+  if (guia && placa.value === "Otras") guiaMensaje.textContent = guia.decir;
+  else guiaMensaje.textContent = guia ? "En " + placa.value + " conviene decir: " + guia.decir : "";
+  guiaFormato.textContent = guia && guia.formato ? "Recomendamos " + guia.formato + ". " + guia.porque : "";
 }
 
 function syncPasos(evento) {
@@ -560,6 +582,13 @@ function syncPasos(evento) {
       form.querySelectorAll('input[name="placa"]').forEach((input) => {
         input.disabled = bloqueada;
       });
+      const campoOtra = document.getElementById("campo-placa-otra");
+      const otra = form.elements["placa-otra"];
+      otra.disabled = bloqueada;
+      const esOtra = !bloqueada && placaElegida() && placaElegida().value === "Otras";
+      const otraOculta = campoOtra.hidden;
+      campoOtra.hidden = !esOtra;
+      if (esOtra && otraOculta && origen && origen.name === "placa") otra.focus();
       document.getElementById("plantillas-bloqueo").hidden = !bloqueada;
       document.getElementById("plantillas-lista").hidden = bloqueada;
       if (abierto && !pasoListo("placa")) abierto = false;
@@ -811,14 +840,14 @@ form.addEventListener("submit", (event) => {
     formato: String(data.get("formato")),
     formatoRecomendado: (guias[data.get("placa")] || {}).formato || "",
     ramo: String(data.get("ramo") || ""),
-    modelo: data.get("camino") === "Armar" ? String(data.get("placa") || "") : "",
+    modelo: data.get("camino") === "Armar" ? nombrePlaca() : "",
     fecha: partes.length === 3 ? partes[2] + "/" + partes[1] + "/" + partes[0] : fecha,
     mensaje: String(data.get("mensaje") || ""),
     colores: colores,
     compania: data.get("compania") === "si" ? String(data.get("compania-nombre") || "") : "No. Solo BQB y sus datos",
     companiaModo: data.get("compania") === "si" ? String(data.get("compania-modo") || "") : "",
     falta: falta.join(", "),
-    placa: String(data.get("placa") || ""),
+    placa: nombrePlaca(),
     preferencias: String(data.get("preferencias") || ""),
     matricula: String(data.get("matricula") || ""),
     telefono: String(data.get("telefono") || ""),

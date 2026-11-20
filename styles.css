@@ -352,6 +352,7 @@ button, input, select, textarea { font: inherit; }
   border-left: 3px solid var(--odoo);
   color: var(--ink);
 }
+.recomendado:empty { display: none; }
 
 .o_group label, .o_group legend {
   display: block;
@@ -409,6 +410,7 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
 .plantilla-copy small { color: var(--muted); font-weight: 500; }
 .plantilla:has(input:checked) { border-color: var(--odoo); background: #f4f7f8; }
 .plantilla-sola { grid-template-columns: 16px 1fr; }
+.plantilla-otra { display: block; margin: 4px 2px 0; color: #495057; font-weight: 600; }
 
 .swatches {
   display: grid;
