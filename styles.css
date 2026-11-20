@@ -185,12 +185,28 @@ button, input, select, textarea { font: inherit; }
 .diseno img {
   display: block;
   width: 100%;
-  height: 180px;
+  height: 140px;
   object-fit: cover;
   background: #f4f7f8;
 }
 
+.diseno-muestra {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 140px;
+  background: #1c3344;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.diseno-muestra.is-moto { background: #3e6b5a; }
+.diseno-muestra.is-hogar { background: #7a4550; }
+.diseno-tema { margin: 8px 10px 0; }
 .diseno p { margin: 8px 10px 0; font-weight: 600; word-break: break-word; }
+.diseno .badge { margin: 8px 10px 0; }
 .diseno .btn { justify-self: start; margin: 8px 10px 10px; }
 .disenos-vacio { margin: 8px 16px 16px; color: var(--muted); }
 

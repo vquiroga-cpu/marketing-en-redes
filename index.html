@@ -31,8 +31,8 @@
             </ol>
             <div class="o_cp_searchview" id="busqueda">
               <span class="o_search_icon" aria-hidden="true"></span>
-              <input type="search" placeholder="Buscar..." aria-label="Buscar">
-              <div class="o_cp_switch_buttons" role="tablist" aria-label="Vistas">
+              <input type="search" id="buscar" placeholder="Buscar placas..." aria-label="Buscar placas">
+              <div class="o_cp_switch_buttons" id="vistas" role="tablist" aria-label="Vistas">
                 <button type="button" class="is-active" id="ver-kanban" aria-label="Kanban" title="Kanban">
                   <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 1h6v6H1zM9 1h6v6H9zM1 9h6v6H1zM9 9h6v6H9z"/></svg>
                 </button>
@@ -374,9 +374,36 @@
           </form>
 
           <section id="vista-disenos" hidden>
-            <p class="llegada">Los productores ven estos diseños. Subir imágenes queda solo para Victoria Quiroga.</p>
-            <p class="disenos-vacio" id="disenos-vacio">Todavía no subiste diseños.</p>
-            <div class="disenos" id="disenos"></div>
+            <p class="llegada">Buscá una palabra, por ejemplo auto, y ves las placas de ese seguro. Subir imágenes queda solo para Victoria Quiroga.</p>
+            <p class="disenos-vacio" id="disenos-vacio" hidden>Todavía no subiste diseños.</p>
+            <p class="disenos-vacio" id="disenos-nada" hidden>No hay placas con esa palabra.</p>
+            <div class="disenos" id="disenos">
+              <article class="diseno" data-tema="Auto">
+                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
+                <p>Renová tu póliza</p>
+                <span class="badge">Auto</span>
+              </article>
+              <article class="diseno" data-tema="Auto">
+                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
+                <p>Cobertura del auto</p>
+                <span class="badge">Auto</span>
+              </article>
+              <article class="diseno" data-tema="Auto">
+                <div class="diseno-muestra" aria-hidden="true"><span>Auto</span></div>
+                <p>Promo marzo</p>
+                <span class="badge">Auto</span>
+              </article>
+              <article class="diseno" data-tema="Moto">
+                <div class="diseno-muestra is-moto" aria-hidden="true"><span>Moto</span></div>
+                <p>Moto urbana</p>
+                <span class="badge">Moto</span>
+              </article>
+              <article class="diseno" data-tema="Hogar">
+                <div class="diseno-muestra is-hogar" aria-hidden="true"><span>Hogar</span></div>
+                <p>Tranquilidad en casa</p>
+                <span class="badge">Hogar</span>
+              </article>
+            </div>
           </section>
         </div>
       </div>
@@ -450,6 +477,9 @@ const aviso = document.getElementById("aviso");
 const vistaDisenos = document.getElementById("vista-disenos");
 const disenos = document.getElementById("disenos");
 const disenosVacio = document.getElementById("disenos-vacio");
+const disenosNada = document.getElementById("disenos-nada");
+const buscar = document.getElementById("buscar");
+const vistas = document.getElementById("vistas");
 const subir = document.getElementById("subir");
 const archivoDiseno = document.getElementById("archivo-diseno");
 const pestanaPedidos = document.getElementById("pestana-pedidos");
@@ -657,7 +687,7 @@ function syncCompania(enfocar) {
 
 function contarColumnas() {
   document.querySelectorAll(".o_kanban_group").forEach((group) => {
-    group.querySelector(".o_kanban_counter").textContent = String(group.querySelectorAll(".o_kanban_record").length);
+    group.querySelector(".o_kanban_counter").textContent = String(group.querySelectorAll(".o_kanban_record:not([hidden])").length);
   });
 }
 
@@ -776,8 +806,53 @@ function abrirCuestionario() {
   form.elements.nombre.focus();
 }
 
-function syncDisenosVacio() {
-  disenosVacio.hidden = disenos.children.length > 0;
+function textoBusqueda() {
+  return buscar.value.trim().toLocaleLowerCase("es");
+}
+
+function ponerQuitar(tarjeta) {
+  if (!puedeSubir || tarjeta.querySelector(".btn")) return;
+  const quitar = document.createElement("button");
+  quitar.type = "button";
+  quitar.className = "btn btn-secondary";
+  quitar.textContent = "Quitar";
+  quitar.addEventListener("click", () => {
+    const imagen = tarjeta.querySelector("img");
+    if (imagen && imagen.src.startsWith("blob:")) URL.revokeObjectURL(imagen.src);
+    tarjeta.remove();
+    filtrarDisenos();
+  });
+  tarjeta.append(quitar);
+}
+
+function filtrarDisenos() {
+  const consulta = textoBusqueda();
+  let visibles = 0;
+  [...disenos.children].forEach((tarjeta) => {
+    const tema = tarjeta.dataset.tema || "";
+    const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent : "";
+    const coincide = !consulta || (tema + " " + titulo).toLocaleLowerCase("es").includes(consulta);
+    tarjeta.hidden = !coincide;
+    if (coincide) visibles += 1;
+  });
+  const hay = disenos.children.length > 0;
+  disenosVacio.hidden = hay;
+  disenosNada.hidden = !consulta || !hay || visibles > 0;
+}
+
+function filtrarPedidos() {
+  const consulta = textoBusqueda();
+  document.querySelectorAll(".o_kanban_record").forEach((tarjeta) => {
+    tarjeta.hidden = Boolean(consulta) && !tarjeta.textContent.toLocaleLowerCase("es").includes(consulta);
+  });
+  contarColumnas();
+  pintarPager();
+  if (!lista.hidden) mostrarLista();
+}
+
+function filtrar() {
+  filtrarDisenos();
+  filtrarPedidos();
 }
 
 function agregarDisenos(archivos) {
@@ -786,27 +861,34 @@ function agregarDisenos(archivos) {
     const url = URL.createObjectURL(archivo);
     const tarjeta = document.createElement("article");
     tarjeta.className = "diseno";
+    tarjeta.dataset.tema = "Auto";
     const imagen = document.createElement("img");
     imagen.src = url;
     imagen.alt = archivo.name;
     const titulo = document.createElement("p");
     titulo.textContent = archivo.name.replace(/\.[^.]+$/, "");
-    tarjeta.append(imagen, titulo);
-    if (puedeSubir) {
-      const quitar = document.createElement("button");
-      quitar.type = "button";
-      quitar.className = "btn btn-secondary";
-      quitar.textContent = "Quitar";
-      quitar.addEventListener("click", () => {
-        URL.revokeObjectURL(url);
-        tarjeta.remove();
-        syncDisenosVacio();
-      });
-      tarjeta.append(quitar);
-    }
+    const tema = document.createElement("select");
+    tema.className = "o_input diseno-tema";
+    ["Auto", "Moto", "Hogar", "Vida", "Comercio", "Referidos"].forEach((opcion) => {
+      const item = document.createElement("option");
+      item.value = opcion;
+      item.textContent = opcion;
+      tema.append(item);
+    });
+    tema.value = "Auto";
+    tema.addEventListener("change", () => {
+      tarjeta.dataset.tema = tema.value;
+      tarjeta.querySelector(".badge").textContent = tema.value;
+      filtrarDisenos();
+    });
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "badge";
+    etiqueta.textContent = "Auto";
+    tarjeta.append(imagen, titulo, tema, etiqueta);
+    ponerQuitar(tarjeta);
     disenos.prepend(tarjeta);
   });
-  syncDisenosVacio();
+  filtrarDisenos();
 }
 
 function mostrarPestana(nombre) {
@@ -827,7 +909,8 @@ function mostrarPestana(nombre) {
   form.hidden = true;
   recibido.hidden = true;
   aviso.hidden = true;
-  busqueda.hidden = true;
+  busqueda.hidden = false;
+  vistas.hidden = true;
   crear.hidden = true;
   guardar.hidden = true;
   descartar.hidden = true;
@@ -835,6 +918,7 @@ function mostrarPestana(nombre) {
   volver.hidden = true;
   pager.hidden = true;
   breadcrumb.textContent = "Mis diseños";
+  buscar.focus();
 }
 
 function mostrarKanban() {
@@ -848,6 +932,7 @@ function cerrarCuestionario() {
   form.hidden = true;
   aviso.hidden = false;
   busqueda.hidden = false;
+  vistas.hidden = false;
   crear.hidden = false;
   guardar.hidden = true;
   descartar.hidden = true;
@@ -857,7 +942,7 @@ function cerrarCuestionario() {
 }
 
 function totalTickets() {
-  return document.querySelectorAll(".o_kanban_record").length;
+  return document.querySelectorAll(".o_kanban_record:not([hidden])").length;
 }
 
 function pintarPager() {
@@ -868,7 +953,7 @@ function pintarPager() {
 function mostrarLista() {
   const cuerpo = document.getElementById("lista-cuerpo");
   cuerpo.replaceChildren();
-  document.querySelectorAll(".o_kanban_record").forEach((card) => {
+  document.querySelectorAll(".o_kanban_record:not([hidden])").forEach((card) => {
     const fila = document.createElement("tr");
     [".o_kanban_record_title", ".o_kanban_record_subtitle", ".badge"].forEach((selector) => {
       const celda = document.createElement("td");
@@ -930,6 +1015,8 @@ pestanaPedidos.addEventListener("click", () => {
   if (pestanaActual !== "pedidos") mostrarPestana("pedidos");
 });
 pestanaDisenos.addEventListener("click", () => mostrarPestana("disenos"));
+document.querySelectorAll("#disenos .diseno").forEach(ponerQuitar);
+buscar.addEventListener("input", filtrar);
 subir.addEventListener("click", () => archivoDiseno.click());
 archivoDiseno.addEventListener("change", () => {
   agregarDisenos(archivoDiseno.files);
