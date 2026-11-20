@@ -327,6 +327,8 @@ button, input, select, textarea { font: inherit; }
 }
 
 .o_kanban_record { cursor: pointer; }
+a.o_kanban_record { color: inherit; text-decoration: none; }
+a.o_kanban_record:hover { border-color: var(--odoo); }
 
 .llegada-nota { margin: 0 0 16px; color: var(--muted); }
 

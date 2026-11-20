@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM &amp; Email Marketing</title>
+  <meta name="description" content="Portal de CRM y Email Marketing de BQB, con la estructura de Odoo.">
+  <meta name="theme-color" content="#2c4554">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <p class="example-note">Ejemplo con la estructura de Odoo. Todavía no está creado en el sistema.</p>
+
+  <div class="o_web_client">
+    <header class="o_main_navbar">
+      <div class="o-dropdown dropdown o-dropdown--no-caret o_navbar_apps_menu">
+        <button type="button" class="o_menu_toggle" aria-label="Aplicaciones" aria-expanded="false" aria-controls="apps-menu">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </button>
+        <div class="o-dropdown--menu dropdown-menu o-popper-position o-popper-position--bs" id="apps-menu" role="menu">
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="BQB"><span class="o_app_icon" style="background:#2c4554"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial, sans-serif" font-weight="700">BQB</text></svg></span>BQB</a></span>
+          <span class="dropdown-item o_app o_dropdown_active" role="none"><a role="menuitem" href="crm.html"><span class="o_app_icon" style="background:#3d6b8a"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3" fill="#fff"/><circle cx="16" cy="9" r="2.3" fill="#fff"/><path fill="#fff" d="M3.5 18.2c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6H3.5zm8.2 0c.2-2 1.5-3.2 3.4-3.2 1.9 0 3.2 1.2 3.6 3.2h-7z"/></svg></span>CRM &amp; Email Marketing</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="Multicotizador"><span class="o_app_icon" style="background:#4f6f5b"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 6h18v3.2H3zM5.5 11h15v3.2h-15zM8 16h13v3.2H8z"/></svg></span>Multicotizador</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="Reseñas Google"><span class="o_app_icon" style="background:#b0893e"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 3.2 14.5 8.6l5.8.7-4.3 3.9 1.2 5.7L12 16.2 6.8 19l1.2-5.7L3.7 9.3l5.8-.7z"/></svg></span>Reseñas Google</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="BQB - Sitio Web"><span class="o_app_icon" style="background:#3e5f73"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="#fff" stroke-width="1.8"/><path fill="none" stroke="#fff" stroke-width="1.6" d="M4 12h16M12 4c2.3 2.2 3.5 4.9 3.5 8s-1.2 5.8-3.5 8c-2.3-2.2-3.5-4.9-3.5-8s1.2-5.8 3.5-8z"/></svg></span>BQB - Sitio Web</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="Recotización de Cartera"><span class="o_app_icon" style="background:#6b5344"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 5.2a6.8 6.8 0 0 1 6.3 4.3H16v2h6V5.4h-2v2A8.8 8.8 0 0 0 3.4 12h2.1A6.8 6.8 0 0 1 12 5.2zm0 13.6a6.8 6.8 0 0 1-6.3-4.3H8v-2H2v6.1h2v-2A8.8 8.8 0 0 0 20.6 12h-2.1a6.8 6.8 0 0 1-6.5 6.8z"/></svg></span>Recotización de Cartera</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="#" data-odoo="Marketing por email"><span class="o_app_icon" style="background:#3e6b5a"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 6.2h18v2.4L12 14.6 3 8.6z"/><path fill="#fff" d="M3 9.8V18h18V9.8l-9 6z"/></svg></span>Marketing por email</a></span>
+          <span class="dropdown-item o_app" role="none"><a role="menuitem" href="redes.html"><span class="o_app_icon" style="background:#2c4554"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M4 4h16v12H4z"/><path fill="#2c4554" d="M6.2 13.4 9.2 10l2.2 2.1 2.5-2.8 3.9 4.1v1.2H6.2z"/><path fill="#fff" d="M8 18.2h8V20H8z"/></svg></span>Marketing en redes</a></span>
+          <p class="apps-nota" id="apps-nota" hidden></p>
+        </div>
+      </div>
+      <span class="o_menu_brand">CRM &amp; Email Marketing</span>
+      <span class="o_navbar_spacer"></span>
+      <span class="o_user" title="Victoria Quiroga">V</span>
+    </header>
+
+    <div class="o_action_manager">
+      <div class="o_action o_view_controller">
+        <div class="o_control_panel">
+          <div class="o_cp_top">
+            <ol class="breadcrumb">
+              <li>CRM &amp; Email Marketing</li>
+              <li class="active" id="breadcrumb-actual">CRM</li>
+            </ol>
+          </div>
+          <div class="o_cp_tabs" role="tablist" aria-label="Secciones">
+            <button type="button" class="is-active" id="pestana-crm" data-vista="vista-crm" role="tab" aria-selected="true">CRM</button>
+            <button type="button" id="pestana-emails" data-vista="vista-emails" role="tab" aria-selected="false">Emails</button>
+          </div>
+          <div class="o_cp_bottom">
+            <div class="o_cp_bottom_left"></div>
+            <div class="o_cp_pager" id="pager">0 / 0</div>
+          </div>
+        </div>
+
+        <div class="o_content">
+          <section id="vista-crm">
+            <p class="llegada">El CRM abre acá. En el próximo paso definimos las columnas y qué se ve en cada contacto.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Contactos <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">Todavía no hay contactos.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-emails" hidden>
+            <p class="llegada">Estas plantillas ya están escritas. Las podemos ordenar en campañas.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Plantillas <span class="o_kanban_counter">7</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-doing"></i></div>
+                </header>
+                <a class="o_kanban_record" href="Marketing-emails/oferta.html">
+                  <strong class="o_kanban_record_title">Oferta de auto</strong>
+                  <span class="o_kanban_record_subtitle">Hay una oferta de auto, con fecha</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/renovacion.html">
+                  <strong class="o_kanban_record_title">Renová tu auto</strong>
+                  <span class="o_kanban_record_subtitle">Tu póliza de auto está por vencer</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/una-sola-poliza.html">
+                  <strong class="o_kanban_record_title">Sumá otra cobertura</strong>
+                  <span class="o_kanban_record_subtitle">Tenés una sola póliza</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/granizo.html">
+                  <strong class="o_kanban_record_title">Granizo</strong>
+                  <span class="o_kanban_record_subtitle">Cuando hay granizo, revisemos el auto</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/referidos.html">
+                  <strong class="o_kanban_record_title">Recomendame</strong>
+                  <span class="o_kanban_record_subtitle">Si conocés a alguien, recomendame</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/presentacion.html">
+                  <strong class="o_kanban_record_title">Soy tu productor</strong>
+                  <span class="o_kanban_record_subtitle">Soy tu productor en BQB</span>
+                </a>
+                <a class="o_kanban_record" href="Marketing-emails/nuevas-coberturas.html">
+                  <strong class="o_kanban_record_title">Coberturas para tu hogar</strong>
+                  <span class="o_kanban_record_subtitle">Coberturas para revisar en tu hogar</span>
+                </a>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="apps.js"></script>
+  <script>
+    const pager = document.getElementById("pager");
+    const breadcrumb = document.getElementById("breadcrumb-actual");
+    document.querySelectorAll("[data-vista]").forEach((pestana) => {
+      pestana.addEventListener("click", () => {
+        document.querySelectorAll("[data-vista]").forEach((otra) => {
+          const activa = otra === pestana;
+          otra.classList.toggle("is-active", activa);
+          otra.setAttribute("aria-selected", String(activa));
+          document.getElementById(otra.dataset.vista).hidden = !activa;
+        });
+        breadcrumb.textContent = pestana.textContent;
+        pager.textContent = pestana.dataset.vista === "vista-emails" ? "1-7 / 7" : "0 / 0";
+      });
+    });
+  </script>
+</body>
+</html>
