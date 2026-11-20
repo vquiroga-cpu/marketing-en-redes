@@ -135,6 +135,39 @@ button, input, select, textarea { font: inherit; }
 .o_menu_sections .dropdown-toggle:hover,
 .o_menu_sections .dropdown-toggle.is-active { background: rgba(0, 0, 0, 0.15); }
 
+.o_menu_sections .o-dropdown { position: relative; }
+
+.o_menu_sections .o-dropdown--menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  padding: 6px 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(29, 48, 59, 0.18);
+}
+
+.o_menu_sections .o-dropdown.is-open .o-dropdown--menu { display: block; }
+
+.o_menu_sections .dropdown-item {
+  display: block;
+  height: 26px;
+  padding: 0 16px 0 20px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 26px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.o_menu_sections .dropdown-item:hover { background: #f0eeee; }
+.o_menu_sections .dropdown-item.is-current { font-weight: 700; }
+
 .o_menu_brand { margin-left: 12px; font-size: 18px; font-weight: 500; }
 .o_navbar_spacer { flex: 1; }
 .o_menu_logo { height: 32px; width: auto; margin-right: 12px; }
@@ -687,5 +720,6 @@ fieldset { margin: 8px 0 0; padding: 0; border: 0; min-width: 0; }
   .swatches { grid-template-columns: repeat(7, 32px); gap: 12px; }
   .swatch i { width: 32px; height: 32px; }
   .o_navbar_apps_menu .o-dropdown--menu { grid-template-columns: 1fr; }
-  .o_main_navbar { overflow-x: auto; }
+  .o_menu_sections .dropdown-toggle { padding: 0 8px; font-size: 12px; }
+  .o_menu_brand { display: none; }
 }

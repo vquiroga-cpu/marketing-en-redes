@@ -29,23 +29,42 @@
           <p class="apps-nota" id="apps-nota" hidden></p>
         </div>
       </div>
-      <div class="o_menu_sections">
+      <nav class="o_menu_sections" aria-label="Secciones de CRM">
         <div class="o-dropdown dropdown o-dropdown--no-caret">
-          <button type="button" class="dropdown-toggle is-active" title="Segmentación" data-hotkey="shift+1" data-vista="vista-segmentacion" data-pager="0 / 0" aria-expanded="false">Segmentación</button>
+          <button type="button" class="dropdown-toggle is-active" title="Segmentación" data-hotkey="shift+1" aria-expanded="false">Segmentación</button>
+          <div class="o-dropdown--menu dropdown-menu" role="menu">
+            <a class="dropdown-item is-current" role="menuitem" href="#" data-vista="vista-segmentacion" data-crumb="Nueva Segmentación" data-pager="0 / 0">Nueva Segmentación</a>
+          </div>
         </div>
         <div class="o-dropdown dropdown o-dropdown--no-caret">
-          <button type="button" class="dropdown-toggle" title="Destinatarios" data-hotkey="shift+2" data-vista="vista-destinatarios" data-pager="0 / 0" aria-expanded="false">Destinatarios</button>
+          <button type="button" class="dropdown-toggle" title="Destinatarios" data-hotkey="shift+2" aria-expanded="false">Destinatarios</button>
+          <div class="o-dropdown--menu dropdown-menu" role="menu">
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-listas" data-crumb="Listas de Destinatarios" data-pager="0 / 0">Listas de Destinatarios</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-importar" data-crumb="Importar Listado" data-pager="0 / 0">Importar Listado</a>
+          </div>
         </div>
         <div class="o-dropdown dropdown o-dropdown--no-caret">
-          <button type="button" class="dropdown-toggle" title="Campañas" data-hotkey="shift+3" data-vista="vista-campanas" data-pager="1-7 / 7" aria-expanded="false">Campañas</button>
+          <button type="button" class="dropdown-toggle" title="Campañas" data-hotkey="shift+3" aria-expanded="false">Campañas</button>
+          <div class="o-dropdown--menu dropdown-menu" role="menu">
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-mailings" data-crumb="Mailings por Productor (obsoleto)" data-pager="0 / 0">Mailings por Productor (obsoleto)</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-campanas" data-crumb="Todas las Campañas" data-pager="0 / 0">Todas las Campañas</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-asignar" data-crumb="Asignar Productor (obsoleto)" data-pager="0 / 0">Asignar Productor (obsoleto)</a>
+          </div>
         </div>
         <div class="o-dropdown dropdown o-dropdown--no-caret">
-          <button type="button" class="dropdown-toggle" title="Herramientas" data-hotkey="shift+4" data-vista="vista-herramientas" data-pager="0 / 0" aria-expanded="false">Herramientas</button>
+          <button type="button" class="dropdown-toggle" title="Herramientas" data-hotkey="shift+4" aria-expanded="false">Herramientas</button>
+          <div class="o-dropdown--menu dropdown-menu" role="menu">
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-plantillas" data-crumb="Plantillas de Email" data-pager="1-7 / 7">Plantillas de Email</a>
+          </div>
         </div>
         <div class="o-dropdown dropdown o-dropdown--no-caret">
-          <button type="button" class="dropdown-toggle" title="Configuración" data-hotkey="shift+5" data-vista="vista-configuracion" data-pager="0 / 0" aria-expanded="false">Configuración</button>
+          <button type="button" class="dropdown-toggle" title="Configuración" data-hotkey="shift+5" aria-expanded="false">Configuración</button>
+          <div class="o-dropdown--menu dropdown-menu" role="menu">
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-productores" data-crumb="Productores" data-pager="0 / 0">Productores</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-webhook" data-crumb="Webhook Brevo" data-pager="0 / 0">Webhook Brevo</a>
+          </div>
         </div>
-      </div>
+      </nav>
       <span class="o_navbar_spacer"></span>
       <img class="o_menu_logo" src="logo-bqb.svg" alt="BQB">
       <span class="o_user" title="Victoria Quiroga">V</span>
@@ -57,7 +76,7 @@
           <div class="o_cp_top">
             <ol class="breadcrumb">
               <li>CRM &amp; Email Marketing</li>
-              <li class="active" id="breadcrumb-actual">Segmentación</li>
+              <li class="active" id="breadcrumb-actual">Nueva Segmentación</li>
             </ol>
           </div>
           <div class="o_cp_bottom">
@@ -80,20 +99,72 @@
             </div>
           </section>
 
-          <section id="vista-destinatarios" hidden>
-            <p class="llegada">Los destinatarios abren acá. En el próximo paso definimos qué se ve en cada contacto.</p>
+          <section id="vista-listas" hidden>
+            <p class="llegada">Las listas de destinatarios abren acá. En el próximo paso definimos qué se ve en cada lista.</p>
             <div class="o_kanban_view">
               <section class="o_kanban_group">
                 <header class="o_kanban_header">
-                  <div class="o_column_title">Contactos <span class="o_kanban_counter">0</span></div>
+                  <div class="o_column_title">Listas <span class="o_kanban_counter">0</span></div>
                   <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
                 </header>
-                <p class="disenos-vacio">Todavía no hay destinatarios.</p>
+                <p class="disenos-vacio">Todavía no hay listas.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-importar" hidden>
+            <p class="llegada">Desde acá se sube un listado de contactos. Lo armamos en el próximo paso.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Importaciones <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">Todavía no se importó ningún listado.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-mailings" hidden>
+            <p class="llegada">Esta pantalla ya no se usa. Queda por si hay mailings viejos.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Mailings <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">No hay mailings.</p>
               </section>
             </div>
           </section>
 
           <section id="vista-campanas" hidden>
+            <p class="llegada">Las campañas abren acá. En el próximo paso definimos cómo se arman.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Campañas <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">Todavía no hay campañas.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-asignar" hidden>
+            <p class="llegada">Esta pantalla ya no se usa. Queda por si hay asignaciones viejas.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Asignaciones <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">No hay asignaciones.</p>
+              </section>
+            </div>
+          </section>
+
+          <section id="vista-plantillas" hidden>
             <p class="llegada">Estas plantillas ya están escritas. Las podemos ordenar en campañas.</p>
             <div class="o_kanban_view">
               <section class="o_kanban_group">
@@ -133,12 +204,21 @@
             </div>
           </section>
 
-          <section id="vista-herramientas" hidden>
-            <p class="llegada">Las herramientas abren acá. Las sumamos en el próximo paso.</p>
+          <section id="vista-productores" hidden>
+            <p class="llegada">Los productores abren acá. En el próximo paso definimos qué datos se ven.</p>
+            <div class="o_kanban_view">
+              <section class="o_kanban_group">
+                <header class="o_kanban_header">
+                  <div class="o_column_title">Productores <span class="o_kanban_counter">0</span></div>
+                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
+                </header>
+                <p class="disenos-vacio">Todavía no hay productores cargados.</p>
+              </section>
+            </div>
           </section>
 
-          <section id="vista-configuracion" hidden>
-            <p class="llegada">La configuración abre acá. La armamos en el próximo paso.</p>
+          <section id="vista-webhook" hidden>
+            <p class="llegada">La configuración del webhook de Brevo abre acá. La armamos en el próximo paso.</p>
           </section>
         </div>
       </div>
@@ -148,16 +228,49 @@
   <script>
     const pager = document.getElementById("pager");
     const breadcrumb = document.getElementById("breadcrumb-actual");
-    document.querySelectorAll("[data-vista]").forEach((pestana) => {
-      pestana.addEventListener("click", () => {
-        document.querySelectorAll("[data-vista]").forEach((otra) => {
-          const activa = otra === pestana;
-          otra.classList.toggle("is-active", activa);
-          otra.setAttribute("aria-selected", String(activa));
-          document.getElementById(otra.dataset.vista).hidden = !activa;
+    const secciones = [...document.querySelectorAll(".o_menu_sections > .o-dropdown")];
+    const opciones = [...document.querySelectorAll(".o_menu_sections .dropdown-item")];
+
+    function cerrarMenus() {
+      secciones.forEach((seccion) => {
+        seccion.classList.remove("is-open");
+        seccion.querySelector(".dropdown-toggle").setAttribute("aria-expanded", "false");
+      });
+    }
+
+    secciones.forEach((seccion) => {
+      const boton = seccion.querySelector(".dropdown-toggle");
+      boton.addEventListener("click", () => {
+        const estaba = seccion.classList.contains("is-open");
+        cerrarMenus();
+        if (!estaba) {
+          seccion.classList.add("is-open");
+          boton.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".o_menu_sections")) cerrarMenus();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") cerrarMenus();
+    });
+
+    opciones.forEach((opcion) => {
+      opcion.addEventListener("click", (event) => {
+        event.preventDefault();
+        const seccion = opcion.closest(".o_menu_sections > .o-dropdown");
+        cerrarMenus();
+        secciones.forEach((otra) => {
+          otra.querySelector(".dropdown-toggle").classList.toggle("is-active", otra === seccion);
         });
-        breadcrumb.textContent = pestana.textContent;
-        pager.textContent = pestana.dataset.pager;
+        opciones.forEach((otra) => otra.classList.toggle("is-current", otra === opcion));
+        document.querySelectorAll(".o_content > section").forEach((vista) => {
+          vista.hidden = vista.id !== opcion.dataset.vista;
+        });
+        breadcrumb.textContent = opcion.dataset.crumb;
+        pager.textContent = opcion.dataset.pager;
       });
     });
   </script>
