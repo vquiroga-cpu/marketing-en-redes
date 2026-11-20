@@ -47,7 +47,7 @@
           <button type="button" class="dropdown-toggle" title="Campañas" data-hotkey="shift+3" aria-expanded="false">Campañas</button>
           <div class="o-dropdown--menu dropdown-menu" role="menu">
             <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-mailings" data-crumb="Mailings por Productor (obsoleto)" data-pager="0 / 0">Mailings por Productor (obsoleto)</a>
-            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-campanas" data-crumb="Todas las Campañas" data-pager="0 / 0">Todas las Campañas</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-campanas" data-crumb="Todas las Campañas" data-pager="1-3 / 3">Todas las Campañas</a>
             <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-asignar" data-crumb="Asignar Productor (obsoleto)" data-pager="0 / 0">Asignar Productor (obsoleto)</a>
           </div>
         </div>
@@ -80,7 +80,9 @@
             </ol>
           </div>
           <div class="o_cp_bottom">
-            <div class="o_cp_bottom_left"></div>
+            <div class="o_cp_bottom_left">
+              <button type="button" class="btn btn-primary" id="crear-campana" hidden>Crear</button>
+            </div>
             <div class="o_cp_pager" id="pager">0 / 0</div>
           </div>
         </div>
@@ -140,15 +142,46 @@
           </section>
 
           <section id="vista-campanas" hidden>
-            <p class="llegada">Las campañas abren acá. En el próximo paso definimos cómo se arman.</p>
-            <div class="o_kanban_view">
-              <section class="o_kanban_group">
-                <header class="o_kanban_header">
-                  <div class="o_column_title">Campañas <span class="o_kanban_counter">0</span></div>
-                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
-                </header>
-                <p class="disenos-vacio">Todavía no hay campañas.</p>
-              </section>
+            <p class="llegada">Todas las campañas. Los números son de prueba, para ver cómo queda el listado.</p>
+            <div class="o_list_view">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Campaña</th>
+                    <th>Asunto</th>
+                    <th>Audiencia</th>
+                    <th>Estado</th>
+                    <th>Enviados</th>
+                    <th>Aperturas</th>
+                  </tr>
+                </thead>
+                <tbody id="campanas-cuerpo">
+                  <tr>
+                    <td>Oferta de auto</td>
+                    <td>Hay una oferta de auto, con fecha</td>
+                    <td>Autos de Joaquín</td>
+                    <td><span class="badge estado-enviada">Enviada</span></td>
+                    <td>120</td>
+                    <td>48</td>
+                  </tr>
+                  <tr>
+                    <td>Renová tu auto</td>
+                    <td>Tu póliza de auto está por vencer</td>
+                    <td>Renovaciones de mayo</td>
+                    <td><span class="badge estado-borrador">Borrador</span></td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Granizo</td>
+                    <td>Cuando hay granizo, revisemos el auto</td>
+                    <td>Clientes con auto</td>
+                    <td><span class="badge estado-programada">Programada</span></td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
@@ -293,6 +326,51 @@
       </div>
     </div>
   </div>
+  <div class="o_dialog_container" id="dialogo-campana" hidden>
+    <div class="o_dialog" role="dialog" aria-modal="true" aria-labelledby="titulo-campana">
+      <div class="modal o_technical_modal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2 id="titulo-campana">Nueva Campaña</h2>
+              <button type="button" class="modal-cerrar" id="cerrar-campana" aria-label="Cerrar">×</button>
+            </header>
+            <main class="modal-body">
+              <form class="o_form_view o_form_nosheet" id="form-campana">
+                <p class="modal-seccion">Configurar Campaña</p>
+                <label>
+                  Nombre de la campaña
+                  <input name="nombre" type="text" class="o_input" placeholder="Por ejemplo, Oferta de abril">
+                </label>
+                <label>
+                  Plantilla de email
+                  <select name="plantilla" class="o_input">
+                    <option value="">Elegí una plantilla</option>
+                    <option value="Hay una oferta de auto, con fecha">Oferta de auto</option>
+                    <option value="Tu póliza de auto está por vencer">Renová tu auto</option>
+                    <option value="Tenés una sola póliza">Sumá otra cobertura</option>
+                    <option value="Cuando hay granizo, revisemos el auto">Granizo</option>
+                    <option value="Si conocés a alguien, recomendame">Recomendame</option>
+                    <option value="Soy tu productor en BQB">Soy tu productor</option>
+                    <option value="Coberturas para revisar en tu hogar">Coberturas para tu hogar</option>
+                  </select>
+                </label>
+                <p class="llegada-nota" id="asunto-campana" hidden></p>
+                <label>
+                  Audiencia
+                  <select name="audiencia" class="o_input" id="audiencia-campana"></select>
+                </label>
+              </form>
+            </main>
+            <footer class="modal-footer">
+              <button type="button" class="btn btn-primary" id="guardar-campana" disabled>Crear</button>
+              <button type="button" class="btn btn-secondary" id="descartar-campana">Descartar</button>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="apps.js"></script>
   <script>
     const pager = document.getElementById("pager");
@@ -413,9 +491,102 @@
       cerrarDialogo();
     });
 
+    const dialogoCampana = document.getElementById("dialogo-campana");
+    const formCampana = document.getElementById("form-campana");
+    const guardarCampana = document.getElementById("guardar-campana");
+    const asuntoCampana = document.getElementById("asunto-campana");
+    const crearCampana = document.getElementById("crear-campana");
+    const audienciasDemo = ["Autos de Joaquín", "Renovaciones de mayo", "Clientes con auto"];
+
+    function cerrarCampana() {
+      dialogoCampana.hidden = true;
+    }
+
+    function audienciasDisponibles() {
+      const creadas = [...listas.querySelectorAll(".o_kanban_record_title")].map((titulo) => titulo.textContent);
+      return creadas.length ? creadas : audienciasDemo;
+    }
+
+    function abrirCampana() {
+      formCampana.reset();
+      asuntoCampana.hidden = true;
+      guardarCampana.disabled = true;
+      const select = document.getElementById("audiencia-campana");
+      select.replaceChildren();
+      const vacio = document.createElement("option");
+      vacio.value = "";
+      vacio.textContent = "Elegí una audiencia";
+      select.append(vacio);
+      audienciasDisponibles().forEach((nombre) => {
+        const opcion = document.createElement("option");
+        opcion.value = nombre;
+        opcion.textContent = nombre;
+        select.append(opcion);
+      });
+      dialogoCampana.hidden = false;
+      formCampana.elements.nombre.focus();
+    }
+
+    function campanaLista() {
+      return formCampana.elements.nombre.value.trim() && formCampana.elements.plantilla.value && formCampana.elements.audiencia.value;
+    }
+
+    function actualizarCampana() {
+      const plantilla = formCampana.elements.plantilla;
+      const asunto = plantilla.value;
+      asuntoCampana.hidden = !asunto;
+      asuntoCampana.textContent = asunto ? "Asunto: " + asunto : "";
+      guardarCampana.disabled = !campanaLista();
+    }
+
+    function contarCampanas() {
+      const total = document.getElementById("campanas-cuerpo").children.length;
+      const texto = total ? "1-" + total + " / " + total : "0 / 0";
+      const item = document.querySelector('[data-vista="vista-campanas"]');
+      item.dataset.pager = texto;
+      if (!document.getElementById("vista-campanas").hidden) pager.textContent = texto;
+    }
+
+    function celda(texto) {
+      const td = document.createElement("td");
+      td.textContent = texto;
+      return td;
+    }
+
+    formCampana.addEventListener("input", actualizarCampana);
+    formCampana.addEventListener("change", actualizarCampana);
+    crearCampana.addEventListener("click", abrirCampana);
+    document.getElementById("cerrar-campana").addEventListener("click", cerrarCampana);
+    document.getElementById("descartar-campana").addEventListener("click", cerrarCampana);
+    dialogoCampana.addEventListener("click", (event) => {
+      if (event.target === dialogoCampana) cerrarCampana();
+    });
+    guardarCampana.addEventListener("click", () => {
+      if (guardarCampana.disabled) return;
+      const plantilla = formCampana.elements.plantilla.selectedOptions[0];
+      const fila = document.createElement("tr");
+      const estado = document.createElement("td");
+      const marca = document.createElement("span");
+      marca.className = "badge estado-borrador";
+      marca.textContent = "Borrador";
+      estado.append(marca);
+      fila.append(
+        celda(formCampana.elements.nombre.value.trim()),
+        celda(plantilla.value),
+        celda(formCampana.elements.audiencia.value),
+        estado,
+        celda("0"),
+        celda("0")
+      );
+      document.getElementById("campanas-cuerpo").prepend(fila);
+      contarCampanas();
+      cerrarCampana();
+    });
+
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (!dialogo.hidden) cerrarDialogo();
+      else if (!dialogoCampana.hidden) cerrarCampana();
       else cerrarMenus();
     });
 
@@ -432,9 +603,8 @@
           vista.hidden = vista.id !== opcion.dataset.vista;
         });
         breadcrumb.textContent = opcion.dataset.crumb;
-        pager.textContent = opcion.dataset.vista === "vista-segmentacion"
-          ? document.querySelector('[data-vista="vista-segmentacion"]').dataset.pager
-          : opcion.dataset.pager;
+        pager.textContent = opcion.dataset.pager;
+        crearCampana.hidden = opcion.dataset.vista !== "vista-campanas";
         if (opcion.dataset.dialogo) abrirDialogo();
       });
     });

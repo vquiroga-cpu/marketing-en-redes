@@ -539,6 +539,10 @@ a.o_kanban_record:hover { border-color: var(--odoo); }
 .o_kanban_record_title { font-size: 13px; font-weight: 700; text-transform: uppercase; }
 .o_kanban_record_subtitle { color: #495057; }
 
+.estado-enviada { background: #e7f2ec; color: #1f6b45; }
+.estado-borrador { background: #f1f3f5; color: #495057; }
+.estado-programada { background: #f4efe6; color: #6b5344; }
+
 .badge {
   justify-self: start;
   margin-top: 2px;
