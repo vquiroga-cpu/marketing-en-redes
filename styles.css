@@ -267,6 +267,26 @@ button, input, select, textarea { font: inherit; }
 
 .llegada-nota { margin: 0 0 16px; color: var(--muted); }
 
+.placa-pedida { margin: 0 0 18px; }
+.placa-pedida img {
+  width: min(280px, 100%);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.placa-pedida figcaption { margin-top: 6px; color: var(--muted); font-size: 12px; }
+
+.pedido-placa {
+  width: 72px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 8px;
+  border-radius: 3px;
+}
+
 .brief {
   display: grid;
   grid-template-columns: 180px 1fr;

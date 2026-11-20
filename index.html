@@ -156,6 +156,10 @@
                 <p class="oe_kicker">Te llegó este pedido</p>
                 <h1 class="oe_title" id="recibido-titulo"></h1>
                 <p class="llegada-nota" id="recibido-nota"></p>
+                <figure class="placa-pedida" id="recibido-placa" hidden>
+                  <img id="recibido-imagen" alt="">
+                  <figcaption>La placa que quiere renovar</figcaption>
+                </figure>
                 <dl class="brief" id="recibido-datos"></dl>
               </div>
               <div class="o_chatter">
@@ -812,6 +816,16 @@ function abrirRecibido(card) {
 
   document.getElementById("recibido-titulo").textContent = ficha.titulo;
   document.getElementById("recibido-nota").textContent = ficha.nombre + " lo envió. Quedó en " + ficha.estado + ".";
+  const figura = document.getElementById("recibido-placa");
+  const imagen = document.getElementById("recibido-imagen");
+  if (ficha.imagen) {
+    imagen.src = ficha.imagen;
+    imagen.alt = ficha.titulo;
+    figura.hidden = false;
+  } else {
+    figura.hidden = true;
+    imagen.removeAttribute("src");
+  }
   document.querySelectorAll("#recibido-estado span").forEach((paso) => {
     paso.classList.toggle("is-current", paso.dataset.paso === ficha.estado);
   });
@@ -820,7 +834,7 @@ function abrirRecibido(card) {
   datos.replaceChildren();
   const filas = [
     ["Productor", ficha.nombre],
-    ["Camino", ficha.camino === "Armar" ? "Armar con un modelo" : "Pedir una placa nueva"],
+    ["Camino", ficha.camino === "Armar" ? "Armar con un modelo" : ficha.camino === "Renovar la misma placa" ? "Renovar la misma placa" : "Pedir una placa nueva"],
     ["Modelo", ficha.modelo],
     ["Seguro", ficha.ramo],
     ["Formato", ficha.formato],
@@ -990,9 +1004,11 @@ function syncRenovacion(evento) {
 
 function abrirRenovacion(tarjeta) {
   const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent.trim() : "esta placa";
+  const foto = tarjeta.querySelector("img");
   renovacion.dataset.titulo = titulo;
   renovacion.dataset.placa = tarjeta.dataset.placa || titulo;
   renovacion.dataset.tema = tarjeta.dataset.tema || "";
+  renovacion.dataset.imagen = foto ? foto.getAttribute("src") || "" : "";
   renovacion.reset();
   document.getElementById("renovacion-titulo").textContent = titulo;
   vistaDisenos.hidden = true;
@@ -1288,6 +1304,13 @@ renovacion.addEventListener("submit", (event) => {
   const tag = document.createElement("span");
   tag.className = "badge";
   tag.textContent = renovacion.elements["reno-formato"].value || "Renovación";
+  if (renovacion.dataset.imagen) {
+    const mini = document.createElement("img");
+    mini.className = "pedido-placa";
+    mini.src = renovacion.dataset.imagen;
+    mini.alt = titulo;
+    ticket.append(mini);
+  }
   ticket.append(strong, who, tag);
   ticket.dataset.ficha = JSON.stringify({
     titulo: "Renovación: " + titulo,
@@ -1306,6 +1329,7 @@ renovacion.addEventListener("submit", (event) => {
     preferencias: partes.join(". "),
     matricula: renovacion.elements["reno-matricula"].value.trim(),
     telefono: renovacion.elements["reno-telefono"].value.trim(),
+    imagen: renovacion.dataset.imagen || "",
     estado: "Pedido"
   });
   document.getElementById("col-pedido").prepend(ticket);
