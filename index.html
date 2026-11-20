@@ -177,6 +177,7 @@
               <div class="o_form_sheet">
                 <p class="oe_kicker">Nuevo</p>
                 <h1 class="oe_title">Pedí tus placas publicitarias personalizadas</h1>
+                <p class="recomendado" id="nota-otra" hidden></p>
                 <div class="pedido-layout">
                   <div class="pedido-preguntas o_group" id="pasos-previos">
                     <div class="paso" id="paso-nombre">
@@ -378,42 +379,42 @@
             <p class="disenos-vacio" id="disenos-vacio" hidden>Todavía no subiste diseños.</p>
             <p class="disenos-vacio" id="disenos-nada" hidden>No hay placas con esa palabra.</p>
             <div class="disenos" id="disenos">
-              <article class="diseno" data-tema="Auto Ofertas">
+              <article class="diseno" data-tema="Auto Ofertas" data-placa="Ofertas">
                 <img src="placas/oferta.png" alt="Oferta de auto">
                 <p>Oferta de auto</p>
                 <span class="badge">Ofertas</span>
               </article>
-              <article class="diseno" data-tema="Hogar Nuevas coberturas">
+              <article class="diseno" data-tema="Hogar Nuevas coberturas" data-placa="Otras" data-otra="Nuevas coberturas de hogar">
                 <img src="placas/nuevas.png" alt="Nuevas coberturas de hogar">
                 <p>Nuevas coberturas de hogar</p>
                 <span class="badge">Nuevas coberturas</span>
               </article>
-              <article class="diseno" data-tema="Auto Renovación">
+              <article class="diseno" data-tema="Auto Renovación" data-placa="Renovación">
                 <img src="placas/renovacion.png" alt="Renovación de auto">
                 <p>Renovación de auto</p>
                 <span class="badge">Renovación</span>
               </article>
-              <article class="diseno" data-tema="Referidos">
+              <article class="diseno" data-tema="Referidos" data-placa="Referidos">
                 <img src="placas/referidos.png" alt="Recomendame">
                 <p>Recomendame</p>
                 <span class="badge">Referidos</span>
               </article>
-              <article class="diseno" data-tema="Auto Campañas por el clima Granizo">
+              <article class="diseno" data-tema="Auto Campañas por el clima Granizo" data-placa="Campañas por el clima">
                 <img src="placas/granizo.png" alt="Campaña granizo">
                 <p>Campaña granizo</p>
                 <span class="badge">Clima</span>
               </article>
-              <article class="diseno" data-tema="Ex clientes">
+              <article class="diseno" data-tema="Ex clientes" data-placa="Ex clientes">
                 <img src="placas/volve.png" alt="Volvé, ex clientes">
                 <p>Volvé</p>
                 <span class="badge">Ex clientes</span>
               </article>
-              <article class="diseno" data-tema="Auto Hogar Vida Clientes con una sola póliza">
+              <article class="diseno" data-tema="Auto Hogar Vida Clientes con una sola póliza" data-placa="Clientes con una sola póliza">
                 <img src="placas/bento.png" alt="Clientes con una sola póliza">
                 <p>Una sola póliza</p>
                 <span class="badge">Una sola póliza</span>
               </article>
-              <article class="diseno" data-tema="Presentación del productor">
+              <article class="diseno" data-tema="Presentación del productor" data-placa="Presentación del productor">
                 <img src="placas/presentacion.png" alt="Presentación del productor">
                 <p>Presentación del productor</p>
                 <span class="badge">Presentación</span>
@@ -500,8 +501,10 @@ const archivoDiseno = document.getElementById("archivo-diseno");
 const pestanaPedidos = document.getElementById("pestana-pedidos");
 const pestanaDisenos = document.getElementById("pestana-disenos");
 const puedeSubir = true;
+const notaOtra = document.getElementById("nota-otra");
 let pestanaActual = "pedidos";
 let tarjetaAbierta = null;
+let placaPendiente = null;
 
 const fichas = {
   "Referidos abril": {
@@ -665,6 +668,14 @@ function syncPasos(evento) {
       const campoOtra = document.getElementById("campo-placa-otra");
       const otra = form.elements["placa-otra"];
       otra.disabled = bloqueada;
+      if (!bloqueada && placaPendiente && !placaElegida()) {
+        const elegido = [...form.querySelectorAll('input[name="placa"]')].find((input) => input.value === placaPendiente.placa);
+        if (elegido) {
+          elegido.checked = true;
+          if (placaPendiente.placa === "Otras") otra.value = placaPendiente.otra || placaPendiente.titulo;
+          placaPendiente = null;
+        }
+      }
       const esOtra = !bloqueada && placaElegida() && placaElegida().value === "Otras";
       const otraOculta = campoOtra.hidden;
       campoOtra.hidden = !esOtra;
@@ -829,11 +840,50 @@ function textoBusqueda() {
   return normalizar(buscar.value.trim());
 }
 
+function ponerAcciones(tarjeta) {
+  if (tarjeta.querySelector(".diseno-acciones")) return;
+  const acciones = document.createElement("div");
+  acciones.className = "diseno-acciones";
+  acciones.innerHTML = '<button type="button" class="icono" data-accion="descargar" title="Descargar" aria-label="Descargar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.3-3.3 1.4 1.4L12 16.9 7.3 11.3l1.4-1.4 3.3 3.3V3h2zM5 19h14v2H5z"/></svg><span>Descargar</span></button><button type="button" class="icono" data-accion="otra" title="Quiero otra" aria-label="Quiero otra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg><span>Quiero otra</span></button>';
+  tarjeta.append(acciones);
+}
+
+function descargarPlaca(tarjeta) {
+  const imagen = tarjeta.querySelector("img");
+  if (!imagen) return;
+  const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent.trim() : "placa";
+  const enlace = document.createElement("a");
+  enlace.href = imagen.src;
+  enlace.download = titulo.replace(/\s+/g, "-") + ".png";
+  document.body.append(enlace);
+  enlace.click();
+  enlace.remove();
+}
+
+function quieroOtra(tarjeta) {
+  const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent.trim() : "esta placa";
+  placaPendiente = {
+    placa: tarjeta.dataset.placa || "Otras",
+    otra: tarjeta.dataset.otra || titulo,
+    titulo: titulo
+  };
+  mostrarPestana("pedidos");
+  abrirCuestionario();
+  notaOtra.hidden = false;
+  notaOtra.textContent = "Pedís otra de: " + titulo + ". Cuando llegues a las plantillas, queda elegida.";
+}
+
+function limpiarPedidoOtra() {
+  placaPendiente = null;
+  notaOtra.hidden = true;
+  notaOtra.textContent = "";
+}
+
 function ponerQuitar(tarjeta) {
-  if (!puedeSubir || tarjeta.querySelector(".btn")) return;
+  if (!puedeSubir || tarjeta.querySelector(".quitar")) return;
   const quitar = document.createElement("button");
   quitar.type = "button";
-  quitar.className = "btn btn-secondary";
+  quitar.className = "btn btn-secondary quitar";
   quitar.textContent = "Quitar";
   quitar.addEventListener("click", () => {
     const imagen = tarjeta.querySelector("img");
@@ -904,6 +954,7 @@ function agregarDisenos(archivos) {
     etiqueta.className = "badge";
     etiqueta.textContent = "Auto";
     tarjeta.append(imagen, titulo, tema, etiqueta);
+    ponerAcciones(tarjeta);
     ponerQuitar(tarjeta);
     disenos.prepend(tarjeta);
   });
@@ -1019,6 +1070,7 @@ crear.addEventListener("click", abrirCuestionario);
 guardar.addEventListener("click", () => form.requestSubmit());
 descartar.addEventListener("click", () => {
   form.reset();
+  limpiarPedidoOtra();
   syncPasos();
   cerrarCuestionario();
 });
@@ -1034,7 +1086,18 @@ pestanaPedidos.addEventListener("click", () => {
   if (pestanaActual !== "pedidos") mostrarPestana("pedidos");
 });
 pestanaDisenos.addEventListener("click", () => mostrarPestana("disenos"));
-document.querySelectorAll("#disenos .diseno").forEach(ponerQuitar);
+document.querySelectorAll("#disenos .diseno").forEach((tarjeta) => {
+  ponerAcciones(tarjeta);
+  ponerQuitar(tarjeta);
+});
+disenos.addEventListener("click", (event) => {
+  const boton = event.target.closest("[data-accion]");
+  if (!boton) return;
+  const tarjeta = boton.closest(".diseno");
+  if (!tarjeta) return;
+  if (boton.dataset.accion === "descargar") descargarPlaca(tarjeta);
+  if (boton.dataset.accion === "otra") quieroOtra(tarjeta);
+});
 buscar.addEventListener("input", filtrar);
 subir.addEventListener("click", () => archivoDiseno.click());
 archivoDiseno.addEventListener("change", () => {
@@ -1100,6 +1163,7 @@ form.addEventListener("submit", (event) => {
   pintarPager();
   aviso.textContent = "Te llegó el pedido de " + data.get("nombre") + ". Está en Pedido. Tocá la tarjeta para verlo completo.";
   form.reset();
+  limpiarPedidoOtra();
   syncPasos();
   cerrarCuestionario();
 });

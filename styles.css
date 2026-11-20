@@ -209,6 +209,25 @@ button, input, select, textarea { font: inherit; }
 .diseno p { margin: 8px 10px 0; font-weight: 600; word-break: break-word; }
 .diseno .badge { margin: 8px 10px 0; }
 .diseno .btn { justify-self: start; margin: 8px 10px 10px; }
+
+.diseno-acciones { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 10px 4px; }
+
+.icono {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--odoo);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.icono svg { width: 16px; height: 16px; fill: currentColor; }
+.icono:hover { background: #f4f7f8; }
 .disenos-vacio { margin: 8px 16px 16px; color: var(--muted); }
 
 .btn {
