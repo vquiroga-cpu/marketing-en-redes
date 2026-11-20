@@ -42,10 +42,16 @@
               </div>
             </div>
           </div>
+          <div class="o_cp_tabs" role="tablist" aria-label="Secciones">
+            <button type="button" class="is-active" id="pestana-pedidos" role="tab" aria-selected="true">Pedidos</button>
+            <button type="button" id="pestana-disenos" role="tab" aria-selected="false">Mis diseños</button>
+          </div>
           <div class="o_cp_bottom">
             <div class="o_cp_bottom_left">
               <div class="o_cp_buttons">
                 <button type="button" class="btn btn-primary o-kanban-button-new" id="crear" accesskey="c" title="Crear registro">Crear</button>
+                <button type="button" class="btn btn-primary" id="subir" hidden>Subir imagen</button>
+                <input type="file" id="archivo-diseno" accept="image/*" multiple hidden>
                 <button type="button" class="btn btn-primary" id="guardar" hidden disabled>Guardar</button>
                 <button type="button" class="btn btn-primary" id="tomar" hidden>Tomar pedido</button>
                 <button type="button" class="btn btn-primary" id="a-lista" hidden>Pasar a lista</button>
@@ -366,6 +372,12 @@
               </div>
             </div>
           </form>
+
+          <section id="vista-disenos" hidden>
+            <p class="llegada">Los productores ven estos diseños. Subir imágenes queda solo para Victoria Quiroga.</p>
+            <p class="disenos-vacio" id="disenos-vacio">Todavía no subiste diseños.</p>
+            <div class="disenos" id="disenos"></div>
+          </section>
         </div>
       </div>
     </div>
@@ -435,6 +447,15 @@ const aAjustar = document.getElementById("a-ajustar");
 const aDiseno = document.getElementById("a-diseno");
 const volver = document.getElementById("volver");
 const aviso = document.getElementById("aviso");
+const vistaDisenos = document.getElementById("vista-disenos");
+const disenos = document.getElementById("disenos");
+const disenosVacio = document.getElementById("disenos-vacio");
+const subir = document.getElementById("subir");
+const archivoDiseno = document.getElementById("archivo-diseno");
+const pestanaPedidos = document.getElementById("pestana-pedidos");
+const pestanaDisenos = document.getElementById("pestana-disenos");
+const puedeSubir = true;
+let pestanaActual = "pedidos";
 let tarjetaAbierta = null;
 
 const fichas = {
@@ -755,6 +776,67 @@ function abrirCuestionario() {
   form.elements.nombre.focus();
 }
 
+function syncDisenosVacio() {
+  disenosVacio.hidden = disenos.children.length > 0;
+}
+
+function agregarDisenos(archivos) {
+  [...archivos].forEach((archivo) => {
+    if (!archivo.type.startsWith("image/")) return;
+    const url = URL.createObjectURL(archivo);
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "diseno";
+    const imagen = document.createElement("img");
+    imagen.src = url;
+    imagen.alt = archivo.name;
+    const titulo = document.createElement("p");
+    titulo.textContent = archivo.name.replace(/\.[^.]+$/, "");
+    tarjeta.append(imagen, titulo);
+    if (puedeSubir) {
+      const quitar = document.createElement("button");
+      quitar.type = "button";
+      quitar.className = "btn btn-secondary";
+      quitar.textContent = "Quitar";
+      quitar.addEventListener("click", () => {
+        URL.revokeObjectURL(url);
+        tarjeta.remove();
+        syncDisenosVacio();
+      });
+      tarjeta.append(quitar);
+    }
+    disenos.prepend(tarjeta);
+  });
+  syncDisenosVacio();
+}
+
+function mostrarPestana(nombre) {
+  const pedidos = nombre === "pedidos";
+  pestanaActual = nombre;
+  pestanaPedidos.classList.toggle("is-active", pedidos);
+  pestanaDisenos.classList.toggle("is-active", !pedidos);
+  pestanaPedidos.setAttribute("aria-selected", String(pedidos));
+  pestanaDisenos.setAttribute("aria-selected", String(!pedidos));
+  vistaDisenos.hidden = pedidos;
+  subir.hidden = pedidos || !puedeSubir;
+  if (pedidos) {
+    cerrarRecibido();
+    return;
+  }
+  tablero.hidden = true;
+  lista.hidden = true;
+  form.hidden = true;
+  recibido.hidden = true;
+  aviso.hidden = true;
+  busqueda.hidden = true;
+  crear.hidden = true;
+  guardar.hidden = true;
+  descartar.hidden = true;
+  mostrarAcciones("");
+  volver.hidden = true;
+  pager.hidden = true;
+  breadcrumb.textContent = "Mis diseños";
+}
+
 function mostrarKanban() {
   lista.hidden = true;
   tablero.hidden = false;
@@ -837,12 +919,21 @@ descartar.addEventListener("click", () => {
   cerrarCuestionario();
 });
 document.getElementById("ver-kanban").addEventListener("click", () => {
-  if (!form.hidden) return;
+  if (pestanaActual !== "pedidos" || !form.hidden) return;
   mostrarKanban();
 });
 document.getElementById("ver-lista").addEventListener("click", () => {
-  if (!form.hidden) return;
+  if (pestanaActual !== "pedidos" || !form.hidden) return;
   mostrarLista();
+});
+pestanaPedidos.addEventListener("click", () => {
+  if (pestanaActual !== "pedidos") mostrarPestana("pedidos");
+});
+pestanaDisenos.addEventListener("click", () => mostrarPestana("disenos"));
+subir.addEventListener("click", () => archivoDiseno.click());
+archivoDiseno.addEventListener("change", () => {
+  agregarDisenos(archivoDiseno.files);
+  archivoDiseno.value = "";
 });
 form.addEventListener("input", syncPasos);
 form.addEventListener("change", syncPasos);
