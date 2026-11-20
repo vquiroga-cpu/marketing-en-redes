@@ -374,6 +374,80 @@
             </div>
           </form>
 
+          <form class="o_form_view" id="renovacion" hidden>
+            <div class="o_form_sheet_bg">
+              <div class="o_form_sheet">
+                <p class="oe_kicker">Renovación</p>
+                <h1 class="oe_title" id="renovacion-titulo"></h1>
+                <p class="hint">Es la misma placa. Decime qué querés cambiar.</p>
+                <div class="pedido-preguntas o_group">
+                  <div class="paso" id="reno-cambio">
+                    <fieldset>
+                      <legend>¿Qué querés cambiar?</legend>
+                      <div class="checks">
+                        <label class="o_radio"><input type="checkbox" name="cambio" value="El texto"> El texto</label>
+                        <label class="o_radio"><input type="checkbox" name="cambio" value="Los colores"> Los colores</label>
+                        <label class="o_radio"><input type="checkbox" name="cambio" value="El formato"> El formato</label>
+                        <label class="o_radio"><input type="checkbox" name="cambio" value="Mis datos"> Mis datos</label>
+                        <label class="o_radio"><input type="checkbox" name="cambio" value="Otra cosa"> Otra cosa</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="paso" id="reno-texto" hidden>
+                    <label>
+                      ¿Qué tiene que decir ahora?
+                      <textarea name="reno-texto" class="o_input" rows="3" placeholder="El mensaje nuevo, con tus palabras"></textarea>
+                    </label>
+                  </div>
+                  <div class="paso" id="reno-colores" hidden>
+                    <fieldset>
+                      <legend>¿Qué colores querés ahora?</legend>
+                      <p class="hint">Podés marcar más de uno.</p>
+                      <div class="swatches" id="reno-swatches"></div>
+                    </fieldset>
+                  </div>
+                  <div class="paso" id="reno-formato" hidden>
+                    <label>
+                      ¿En qué formato la necesitás ahora?
+                      <select name="reno-formato" class="o_input">
+                        <option value="">Elegí uno</option>
+                        <option value="Feed">Feed</option>
+                        <option value="Historia">Historia</option>
+                        <option value="Estado de WhatsApp">Estado de WhatsApp</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="paso" id="reno-datos" hidden>
+                    <label>
+                      ¿Cómo tiene que figurar tu nombre?
+                      <input name="reno-nombre-datos" type="text" class="o_input" placeholder="Nombre y apellido">
+                    </label>
+                    <label>
+                      Teléfono
+                      <input name="reno-telefono" type="tel" class="o_input">
+                    </label>
+                    <label>
+                      Matrícula
+                      <input name="reno-matricula" type="text" class="o_input">
+                    </label>
+                  </div>
+                  <div class="paso" id="reno-otra" hidden>
+                    <label>
+                      ¿Qué más querés cambiar?
+                      <textarea name="reno-otra" class="o_input" rows="3" placeholder="Lo que no está en las otras opciones"></textarea>
+                    </label>
+                  </div>
+                  <div class="paso" id="reno-quien" hidden>
+                    <label>
+                      ¿Cómo te llamás?
+                      <input name="reno-nombre" type="text" class="o_input" placeholder="Nombre y apellido">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
           <section id="vista-disenos" hidden>
             <p class="llegada">Buscá auto, ofertas o renovación y ves esas placas. Subir imágenes queda solo para Victoria Quiroga.</p>
             <p class="disenos-vacio" id="disenos-vacio" hidden>Todavía no subiste diseños.</p>
@@ -430,6 +504,7 @@
 const tablero = document.getElementById("tablero");
 const lista = document.getElementById("lista");
 const form = document.getElementById("cuestionario");
+const renovacion = document.getElementById("renovacion");
 const crear = document.getElementById("crear");
 const guardar = document.getElementById("guardar");
 const descartar = document.getElementById("descartar");
@@ -844,7 +919,7 @@ function ponerAcciones(tarjeta) {
   if (tarjeta.querySelector(".diseno-acciones")) return;
   const acciones = document.createElement("div");
   acciones.className = "diseno-acciones";
-  acciones.innerHTML = '<button type="button" class="icono" data-accion="descargar" title="Descargar" aria-label="Descargar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.3-3.3 1.4 1.4L12 16.9 7.3 11.3l1.4-1.4 3.3 3.3V3h2zM5 19h14v2H5z"/></svg><span>Descargar</span></button><button type="button" class="icono" data-accion="otra" title="Quiero otra" aria-label="Quiero otra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg><span>Quiero otra</span></button>';
+  acciones.innerHTML = '<button type="button" class="icono" data-accion="descargar" title="Descargar" aria-label="Descargar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.3-3.3 1.4 1.4L12 16.9 7.3 11.3l1.4-1.4 3.3 3.3V3h2zM5 19h14v2H5z"/></svg><span>Descargar</span></button><button type="button" class="icono" data-accion="renovacion" title="Renovación" aria-label="Renovación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6a6 6 0 0 1 5.7 4H16v2h5V7h-2v1.2A8 8 0 0 0 4 12h2a6 6 0 0 1 6-6zm0 12a6 6 0 0 1-5.7-4H8v-2H3v5h2v-1.2A8 8 0 0 0 20 12h-2a6 6 0 0 1-6 6z"/></svg><span>Renovación</span></button>';
   tarjeta.append(acciones);
 }
 
@@ -860,17 +935,88 @@ function descargarPlaca(tarjeta) {
   enlace.remove();
 }
 
-function quieroOtra(tarjeta) {
+function cambiosElegidos() {
+  return [...renovacion.querySelectorAll('input[name="cambio"]:checked')].map((input) => input.value);
+}
+
+function pasosRenovacion() {
+  const cambios = cambiosElegidos();
+  const pasos = [{ id: "reno-cambio", listo: () => cambios.length > 0 }];
+  if (cambios.includes("El texto")) {
+    pasos.push({ id: "reno-texto", listo: () => renovacion.elements["reno-texto"].value.trim() });
+  }
+  if (cambios.includes("Los colores")) {
+    pasos.push({ id: "reno-colores", listo: () => renovacion.querySelector('input[name="reno-color"]:checked') });
+  }
+  if (cambios.includes("El formato")) {
+    pasos.push({ id: "reno-formato", listo: () => renovacion.elements["reno-formato"].value });
+  }
+  if (cambios.includes("Mis datos")) {
+    pasos.push({
+      id: "reno-datos",
+      listo: () => renovacion.elements["reno-nombre-datos"].value.trim() && renovacion.elements["reno-telefono"].value.trim() && renovacion.elements["reno-matricula"].value.trim()
+    });
+  }
+  if (cambios.includes("Otra cosa")) {
+    pasos.push({ id: "reno-otra", listo: () => renovacion.elements["reno-otra"].value.trim() });
+  }
+  if (!cambios.includes("Mis datos")) {
+    pasos.push({ id: "reno-quien", listo: () => renovacion.elements["reno-nombre"].value.trim() });
+  }
+  return pasos;
+}
+
+function syncRenovacion(evento) {
+  const origen = evento && evento.target;
+  let puedeEnfocar = origen && origen.type !== "checkbox" && !esTexto(origen);
+  let abierto = true;
+  const activos = new Set(pasosRenovacion().map((paso) => paso.id));
+  ["reno-texto", "reno-colores", "reno-formato", "reno-datos", "reno-otra", "reno-quien"].forEach((id) => {
+    if (!activos.has(id)) document.getElementById(id).hidden = true;
+  });
+  pasosRenovacion().forEach((paso) => {
+    const nodo = document.getElementById(paso.id);
+    const estabaOculto = nodo.hidden;
+    nodo.hidden = !abierto;
+    if (abierto && estabaOculto && puedeEnfocar) {
+      const campo = nodo.querySelector("input:not(:disabled), select, textarea");
+      if (campo) campo.focus();
+      puedeEnfocar = false;
+    }
+    if (abierto && !paso.listo()) abierto = false;
+  });
+  guardar.disabled = !abierto;
+}
+
+function abrirRenovacion(tarjeta) {
   const titulo = tarjeta.querySelector("p") ? tarjeta.querySelector("p").textContent.trim() : "esta placa";
-  placaPendiente = {
-    placa: tarjeta.dataset.placa || "Otras",
-    otra: tarjeta.dataset.otra || titulo,
-    titulo: titulo
-  };
-  mostrarPestana("pedidos");
-  abrirCuestionario();
-  notaOtra.hidden = false;
-  notaOtra.textContent = "Pedís otra de: " + titulo + ". Cuando llegues a las plantillas, queda elegida.";
+  renovacion.dataset.titulo = titulo;
+  renovacion.dataset.placa = tarjeta.dataset.placa || titulo;
+  renovacion.dataset.tema = tarjeta.dataset.tema || "";
+  renovacion.reset();
+  document.getElementById("renovacion-titulo").textContent = titulo;
+  vistaDisenos.hidden = true;
+  form.hidden = true;
+  recibido.hidden = true;
+  tablero.hidden = true;
+  lista.hidden = true;
+  aviso.hidden = true;
+  busqueda.hidden = true;
+  subir.hidden = true;
+  crear.hidden = true;
+  guardar.hidden = false;
+  descartar.hidden = false;
+  volver.hidden = true;
+  pager.hidden = true;
+  renovacion.hidden = false;
+  breadcrumb.textContent = "Renovación";
+  syncRenovacion();
+}
+
+function cerrarRenovacion() {
+  renovacion.hidden = true;
+  renovacion.reset();
+  mostrarPestana("disenos");
 }
 
 function limpiarPedidoOtra() {
@@ -962,6 +1108,7 @@ function agregarDisenos(archivos) {
 }
 
 function mostrarPestana(nombre) {
+  renovacion.hidden = true;
   const pedidos = nombre === "pedidos";
   pestanaActual = nombre;
   pestanaPedidos.classList.toggle("is-active", pedidos);
@@ -1000,6 +1147,7 @@ function mostrarKanban() {
 
 function cerrarCuestionario() {
   form.hidden = true;
+  renovacion.hidden = true;
   aviso.hidden = false;
   busqueda.hidden = false;
   vistas.hidden = false;
@@ -1067,8 +1215,15 @@ aDiseno.addEventListener("click", () => {
   moverTarjeta("En diseño", "col-diseno", "El pedido de " + ficha.nombre + " volvió a En diseño.");
 });
 crear.addEventListener("click", abrirCuestionario);
-guardar.addEventListener("click", () => form.requestSubmit());
+guardar.addEventListener("click", () => {
+  if (!renovacion.hidden) renovacion.requestSubmit();
+  else form.requestSubmit();
+});
 descartar.addEventListener("click", () => {
+  if (!renovacion.hidden) {
+    cerrarRenovacion();
+    return;
+  }
   form.reset();
   limpiarPedidoOtra();
   syncPasos();
@@ -1096,7 +1251,69 @@ disenos.addEventListener("click", (event) => {
   const tarjeta = boton.closest(".diseno");
   if (!tarjeta) return;
   if (boton.dataset.accion === "descargar") descargarPlaca(tarjeta);
-  if (boton.dataset.accion === "otra") quieroOtra(tarjeta);
+  if (boton.dataset.accion === "renovacion") abrirRenovacion(tarjeta);
+});
+document.querySelectorAll("#paso-colores .swatch").forEach((swatch) => {
+  const copia = swatch.cloneNode(true);
+  const input = copia.querySelector("input");
+  input.name = "reno-color";
+  input.checked = false;
+  document.getElementById("reno-swatches").append(copia);
+});
+renovacion.addEventListener("input", syncRenovacion);
+renovacion.addEventListener("change", syncRenovacion);
+renovacion.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (guardar.disabled) return;
+  const titulo = renovacion.dataset.titulo || "Renovación";
+  const cambios = cambiosElegidos();
+  const nombre = cambios.includes("Mis datos") ? renovacion.elements["reno-nombre-datos"].value.trim() : renovacion.elements["reno-nombre"].value.trim();
+  const colores = [...renovacion.querySelectorAll('input[name="reno-color"]:checked')].map((input) => ({
+    nombre: input.value,
+    hex: input.dataset.hex
+  }));
+  const partes = ["Quiere cambiar: " + cambios.join(", ")];
+  if (renovacion.elements["reno-texto"].value.trim()) partes.push("Texto nuevo: " + renovacion.elements["reno-texto"].value.trim());
+  if (renovacion.elements["reno-otra"].value.trim()) partes.push(renovacion.elements["reno-otra"].value.trim());
+  const ticket = document.createElement("article");
+  ticket.className = "oe_kanban_color_0 oe_kanban_card oe_kanban_global_click o_kanban_record";
+  ticket.tabIndex = 0;
+  ticket.dataset.estado = "Pedido";
+  const strong = document.createElement("strong");
+  strong.className = "o_kanban_record_title";
+  strong.textContent = "Renovación: " + titulo;
+  const who = document.createElement("span");
+  who.className = "o_kanban_record_subtitle";
+  who.textContent = nombre;
+  const tag = document.createElement("span");
+  tag.className = "badge";
+  tag.textContent = renovacion.elements["reno-formato"].value || "Renovación";
+  ticket.append(strong, who, tag);
+  ticket.dataset.ficha = JSON.stringify({
+    titulo: "Renovación: " + titulo,
+    nombre: nombre,
+    camino: "Renovar la misma placa",
+    formato: renovacion.elements["reno-formato"].value,
+    ramo: renovacion.dataset.tema || "",
+    modelo: "",
+    fecha: "",
+    mensaje: renovacion.elements["reno-texto"].value.trim(),
+    colores: colores,
+    compania: "",
+    companiaModo: "",
+    falta: "",
+    placa: renovacion.dataset.placa || titulo,
+    preferencias: partes.join(". "),
+    matricula: renovacion.elements["reno-matricula"].value.trim(),
+    telefono: renovacion.elements["reno-telefono"].value.trim(),
+    estado: "Pedido"
+  });
+  document.getElementById("col-pedido").prepend(ticket);
+  contarColumnas();
+  pintarPager();
+  renovacion.reset();
+  mostrarPestana("pedidos");
+  aviso.textContent = "Te llegó la renovación de " + nombre + " sobre " + titulo + ". Está en Pedido.";
 });
 buscar.addEventListener("input", filtrar);
 subir.addEventListener("click", () => archivoDiseno.click());
