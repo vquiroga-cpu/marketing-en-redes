@@ -567,6 +567,21 @@ a.o_kanban_record:hover { border-color: var(--odoo); }
 .o_list_view .o_list_number { text-align: right; }
 .o_list_view .o_list_record_selector { width: 32px; padding-right: 0; }
 .o_list_view tfoot td { background: #f8f9fa; font-weight: 600; border-bottom: 0; }
+.o_list_scroll { overflow-x: auto; }
+.o_list_table { min-width: 960px; }
+.o_list_table th, .o_list_table td { white-space: nowrap; }
+.o_list_table tbody tr:nth-child(even) td { background: #fbfcfc; }
+.o_list_check {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+  border-radius: 4px;
+  background: #e9ecef;
+  color: #6c757d;
+  text-align: center;
+  line-height: 22px;
+}
+.o_list_download { margin-left: 4px; }
 
 .o_form_sheet_bg { padding: 16px 16px 32px; }
 
