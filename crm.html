@@ -39,7 +39,7 @@
         <div class="o-dropdown dropdown o-dropdown--no-caret">
           <button type="button" class="dropdown-toggle" title="Destinatarios" data-hotkey="shift+2" aria-expanded="false">Destinatarios</button>
           <div class="o-dropdown--menu dropdown-menu" role="menu">
-            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-listas" data-crumb="Listas de Destinatarios" data-pager="0 / 0">Listas de Destinatarios</a>
+            <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-listas" data-crumb="Listas de Destinatarios" data-pager="1-7 / 7">Listas de Destinatarios</a>
             <a class="dropdown-item" role="menuitem" href="#" data-vista="vista-importar" data-crumb="Importar Listado" data-pager="0 / 0">Importar Listado</a>
           </div>
         </div>
@@ -103,15 +103,103 @@
           </section>
 
           <section id="vista-listas" hidden>
-            <p class="llegada">Las listas de destinatarios abren acá. En el próximo paso definimos qué se ve en cada lista.</p>
-            <div class="o_kanban_view">
-              <section class="o_kanban_group">
-                <header class="o_kanban_header">
-                  <div class="o_column_title">Listas <span class="o_kanban_counter">0</span></div>
-                  <div class="o_kanban_progressbar" aria-hidden="true"><i class="is-todo"></i></div>
-                </header>
-                <p class="disenos-vacio">Todavía no hay listas.</p>
-              </section>
+            <p class="llegada">Las listas de destinatarios. Los datos son de prueba, para ver cómo queda el listado.</p>
+            <div class="o_list_view">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar todas"></th>
+                    <th>Lista de Destinatarios</th>
+                    <th>Productor</th>
+                    <th>Segmentación</th>
+                    <th class="o_list_number">Clientes</th>
+                    <th class="o_list_number">Con Email</th>
+                    <th class="o_list_number">Sin Email</th>
+                    <th>Creada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Autos de Joaquín"></td>
+                    <td>Autos de Joaquín</td>
+                    <td>Joaquín Vera</td>
+                    <td>Por Tipo de Seguro: Auto</td>
+                    <td class="o_list_number">124</td>
+                    <td class="o_list_number">120</td>
+                    <td class="o_list_number">4</td>
+                    <td>12/05/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Renovaciones de mayo"></td>
+                    <td>Renovaciones de mayo</td>
+                    <td>Carla Díaz</td>
+                    <td>Por Renovación/Vencimiento</td>
+                    <td class="o_list_number">86</td>
+                    <td class="o_list_number">79</td>
+                    <td class="o_list_number">7</td>
+                    <td>08/05/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Clientes con auto"></td>
+                    <td>Clientes con auto</td>
+                    <td>Ana Pérez</td>
+                    <td>Por Tipo de Seguro: Auto</td>
+                    <td class="o_list_number">212</td>
+                    <td class="o_list_number">198</td>
+                    <td class="o_list_number">14</td>
+                    <td>30/04/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Todos los clientes de Sofía"></td>
+                    <td>Todos los clientes de Sofía</td>
+                    <td>Sofía Rojas</td>
+                    <td>Todos los Clientes</td>
+                    <td class="o_list_number">340</td>
+                    <td class="o_list_number">301</td>
+                    <td class="o_list_number">39</td>
+                    <td>22/04/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Hogar de Martín"></td>
+                    <td>Hogar de Martín</td>
+                    <td>Martín Ruiz</td>
+                    <td>Por Tipo de Seguro: Hogar</td>
+                    <td class="o_list_number">57</td>
+                    <td class="o_list_number">54</td>
+                    <td class="o_list_number">3</td>
+                    <td>15/04/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Ex-clientes de Luis"></td>
+                    <td>Ex-clientes de Luis</td>
+                    <td>Luis Gómez</td>
+                    <td>Reactivación (Ex-clientes)</td>
+                    <td class="o_list_number">63</td>
+                    <td class="o_list_number">41</td>
+                    <td class="o_list_number">22</td>
+                    <td>02/04/2026</td>
+                  </tr>
+                  <tr>
+                    <td class="o_list_record_selector"><input type="checkbox" aria-label="Seleccionar Vida y Hogar de Carla"></td>
+                    <td>Vida y Hogar de Carla</td>
+                    <td>Carla Díaz</td>
+                    <td>Por Tipo de Seguro: Hogar, Vida</td>
+                    <td class="o_list_number">95</td>
+                    <td class="o_list_number">90</td>
+                    <td class="o_list_number">5</td>
+                    <td>27/03/2026</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td><td></td><td></td><td></td>
+                    <td class="o_list_number">977</td>
+                    <td class="o_list_number">883</td>
+                    <td class="o_list_number">94</td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </section>
 

@@ -564,6 +564,9 @@ a.o_kanban_record:hover { border-color: var(--odoo); }
 .o_list_view th, .o_list_view td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; }
 .o_list_view th { background: #f8f9fa; font-weight: 600; }
 .o_list_view tr:hover td { background: #f4f7f8; }
+.o_list_view .o_list_number { text-align: right; }
+.o_list_view .o_list_record_selector { width: 32px; padding-right: 0; }
+.o_list_view tfoot td { background: #f8f9fa; font-weight: 600; border-bottom: 0; }
 
 .o_form_sheet_bg { padding: 16px 16px 32px; }
 
